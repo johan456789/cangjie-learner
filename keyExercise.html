@@ -61,6 +61,7 @@
   </div>
 
   <div>
+    <span title="z" class="finger-pinkie">重</span>
     <span title="x" class="finger-ring">難</span>
     <span title="c" class="finger-middle">金</span>
     <span title="v" class="finger-left-index">女</span>
@@ -85,33 +86,24 @@
       }
     }
 
-    function setEnglishLayout() {
-      ensureOriginalMapperSnapshot();
-      const keys = document.querySelectorAll('#keyboardMap span[title]');
-      keys.forEach(key => { key.textContent = key.title; });
-      for (const alpha in keyboard.mapper) keyboard.mapper[alpha] = alpha;
-      isEnglishLayout = true;
-      const btn = document.getElementById('toggleLayout');
-      if (btn) btn.textContent = '倉頡鍵盤';
-    }
-
-    function setCangjieLayout() {
+    function applyLayout(toEnglish) {
       ensureOriginalMapperSnapshot();
       const keys = document.querySelectorAll('#keyboardMap span[title]');
       keys.forEach(key => {
         const alpha = key.title;
-        const label = originalMapper.hasOwnProperty(alpha) ? originalMapper[alpha] : '';
+        const label = toEnglish
+          ? alpha.toUpperCase()
+          : (originalMapper.hasOwnProperty(alpha) ? originalMapper[alpha] : '');
         key.textContent = label;
         keyboard.mapper[alpha] = label;
       });
-      isEnglishLayout = false;
+      isEnglishLayout = toEnglish;
       const btn = document.getElementById('toggleLayout');
-      if (btn) btn.textContent = '英文鍵盤';
+      if (btn) btn.textContent = toEnglish ? '倉頡鍵盤' : '英文鍵盤';
     }
 
     function toggleLayout() {
-      if (isEnglishLayout) setCangjieLayout();
-      else setEnglishLayout();
+      applyLayout(!isEnglishLayout);
     }
   </script>
 </div>
