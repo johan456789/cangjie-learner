@@ -99,6 +99,9 @@ var questCheck = (function() {
 		Math.floor( Math.random() * (characterArray.length-2) ) + 1
 	]);
 
+	// Apply initial hint for the first character
+	keyboard.hint(nowCharacter.charAt(indicate(0, 0)));
+
 	function check(string) {
 		var index = compare(string);
 
@@ -108,6 +111,9 @@ var questCheck = (function() {
 			) + 1]);
 			index = -1;
 			string = '';
+
+			// Apply hint for the new character's first key
+			keyboard.hint(nowCharacter.charAt(indicate(0, 0)));
 		}
 
 		keyboard.hint( nowCharacter.charAt(
