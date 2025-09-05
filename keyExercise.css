@@ -121,3 +121,9 @@ hr {
   position: relative;
   left: 1.5em;
 }
+
+/* Emphasize home row index keys (F/J or 倉頡 火/十) */
+#keyboardMap span[title="f"],
+#keyboardMap span[title="j"] {
+	font-weight: bold;
+}
