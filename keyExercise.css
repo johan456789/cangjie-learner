@@ -24,7 +24,8 @@ div#questAlphabet span.questCharacter {
 
 div#keyboardMap {
 	font-size: 2.5em;
-	text-align: center;
+	text-align: left;
+	display: inline-block;
 }
 
 #keyboardMap div {
@@ -36,6 +37,7 @@ div#keyboardMap {
 	display: inline-block;
 	border: black outset 0.2ex;
         width: 1em;
+	text-align: center;
 }
 
 /* Finger color groups */
@@ -108,4 +110,14 @@ hr {
 
 #menu {
 	text-align: center;
+}
+
+#keyboardMap div:nth-child(2) {
+  position: relative;
+  left: 0.75em;
+}
+
+#keyboardMap div:nth-child(3) {
+  position: relative;
+  left: 1.5em;
 }
