@@ -40,12 +40,6 @@ div#keyboardMap {
         width: 1em;
 }
 
-div#keyboardMap span.leftHand.foreFinger { background-color: #FF0; }
-div#keyboardMap span.leftHand { background-color: #FF8; }
-
-div#keyboardMap span.rightHand.foreFinger { background-color: #F55; }
-div#keyboardMap span.rightHand { background-color: #FAA; }
-
 div#keyboardMap span.hint, div#keyboardMap span.hint.foreFinger {
 	background-color: white;
 }
