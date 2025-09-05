@@ -32,6 +32,8 @@
 
 <hr>
 
+<textarea id="inputBar" placeholder="請在此輸入英文字母"></textarea>
+
 <div id="keyboardMap">
   <div>
     <span title="q" class="finger-pinkie">手</span>
@@ -69,27 +71,20 @@
 </div>
 
 <div id="menu">
-  <div id="fontPx">
-    <h2>字體大小</h2>
-    <input type="range" min="8" max="36" />
-    <button onclick="useEnglishLayout()">英文鍵盤</button>
-    <script>
-      function useEnglishLayout() {
-        const keys = document.querySelectorAll('#keyboardMap span[title]')
-        keys.forEach(key => key.textContent = key.title)
-      
-        for (const alpha in keyboard.mapper) {
-            keyboard.mapper[alpha] = alpha
-        }
+  <button onclick="useEnglishLayout()">英文鍵盤</button>
+  <script>
+    function useEnglishLayout() {
+      const keys = document.querySelectorAll('#keyboardMap span[title]')
+      keys.forEach(key => key.textContent = key.title)
+
+      for (const alpha in keyboard.mapper) {
+          keyboard.mapper[alpha] = alpha
       }
-    </script>
-  </div>
-  
-  <h2> <a href="index.html">回首頁</a> </h2>
-  <h2> <a href="key.html#exercise">使用說明</a> </h2>
+    }
+  </script>
 </div>
 
-<textarea id="inputBar" placeholder="請在此輸入英文字母"></textarea>
+
 
 <pre id="character">
 一m

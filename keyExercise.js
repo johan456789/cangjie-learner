@@ -133,9 +133,5 @@ document.getElementById('inputBar').oninput = function(){
 	if (questCheck(string)) this.value = '';
 };
 
-document.getElementById('fontPx').children[1].onchange = function(){
-	document.body.style.fontSize = this.value + 'px';
-};
-
 document.getElementById('inputBar').focus();
 document.getElementById('inputBar').select();
