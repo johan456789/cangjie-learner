@@ -95,7 +95,6 @@
           ? alpha.toUpperCase()
           : (originalMapper.hasOwnProperty(alpha) ? originalMapper[alpha] : '');
         key.textContent = label;
-        keyboard.mapper[alpha] = label;
       });
       isEnglishLayout = toEnglish;
       const btn = document.getElementById('toggleLayout');
