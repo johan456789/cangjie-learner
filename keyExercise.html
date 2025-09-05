@@ -71,15 +71,47 @@
 </div>
 
 <div id="menu">
-  <button onclick="useEnglishLayout()">英文鍵盤</button>
+  <button id="toggleLayout" onclick="toggleLayout()">英文鍵盤</button>
   <script>
-    function useEnglishLayout() {
-      const keys = document.querySelectorAll('#keyboardMap span[title]')
-      keys.forEach(key => key.textContent = key.title)
+    // lazy snapshot of original (倉頡) mapping
+    let isEnglishLayout = false;
+    let originalMapper = null;
 
+    function ensureOriginalMapperSnapshot() {
+      if (originalMapper) return;
+      originalMapper = {};
       for (const alpha in keyboard.mapper) {
-          keyboard.mapper[alpha] = alpha
+        originalMapper[alpha] = keyboard.mapper[alpha];
       }
+    }
+
+    function setEnglishLayout() {
+      ensureOriginalMapperSnapshot();
+      const keys = document.querySelectorAll('#keyboardMap span[title]');
+      keys.forEach(key => { key.textContent = key.title; });
+      for (const alpha in keyboard.mapper) keyboard.mapper[alpha] = alpha;
+      isEnglishLayout = true;
+      const btn = document.getElementById('toggleLayout');
+      if (btn) btn.textContent = '倉頡鍵盤';
+    }
+
+    function setCangjieLayout() {
+      ensureOriginalMapperSnapshot();
+      const keys = document.querySelectorAll('#keyboardMap span[title]');
+      keys.forEach(key => {
+        const alpha = key.title;
+        const label = originalMapper.hasOwnProperty(alpha) ? originalMapper[alpha] : '';
+        key.textContent = label;
+        keyboard.mapper[alpha] = label;
+      });
+      isEnglishLayout = false;
+      const btn = document.getElementById('toggleLayout');
+      if (btn) btn.textContent = '英文鍵盤';
+    }
+
+    function toggleLayout() {
+      if (isEnglishLayout) setCangjieLayout();
+      else setEnglishLayout();
     }
   </script>
 </div>
