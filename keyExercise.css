@@ -40,6 +40,29 @@ div#keyboardMap {
         width: 1em;
 }
 
+/* Finger color groups */
+/* Left index uses a warm yellow; right index uses a cool cyan. */
+div#keyboardMap span.finger-left-index {
+	background-color: #F7E79A;
+}
+
+div#keyboardMap span.finger-right-index {
+	background-color: #CFEFF7;
+}
+
+/* Shared colors for both hands: middle, ring, pinkie */
+div#keyboardMap span.finger-middle {
+	background-color: #DCEFE4;
+}
+
+div#keyboardMap span.finger-ring {
+	background-color: #F7D1D9;
+}
+
+div#keyboardMap span.finger-pinkie {
+	background-color: #D7E6FF;
+}
+
 div#keyboardMap span.hint, div#keyboardMap span.hint.foreFinger {
 	background-color: white;
 }
