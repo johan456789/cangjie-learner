@@ -242,7 +242,7 @@ var questCheck = (function() {
 		}
 	}
 
-	return { check: check, setMode: setMode };
+	return { check: check, setMode: setMode, isRadical: function(){ return isRadicalMode; } };
 })();
 
 document.getElementById('inputBar').oninput = function(){
@@ -253,9 +253,12 @@ document.getElementById('inputBar').oninput = function(){
 		string = '';
 	}
 
+	var inRadical = questCheck.isRadical ? questCheck.isRadical() : false;
+
 	string && keyboard.press(string.slice(-1));
 
-	if (questCheck.check ? questCheck.check(string) : questCheck(string)) this.value = '';
+	var isCompleted = questCheck.check ? questCheck.check(string) : questCheck(string);
+	if (inRadical || isCompleted) this.value = '';
 };
 
 document.getElementById('inputBar').focus();
