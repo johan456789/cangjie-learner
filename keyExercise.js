@@ -67,6 +67,15 @@ var RADICAL_POOLS = {
 	'shape': ['尸s','廿t','山u','女v','田w','卜y']
 };
 
+// Add combined 'all' pool programmatically, preserving order by groups
+RADICAL_POOLS.all = [].concat(
+	RADICAL_POOLS.philosophy,
+	RADICAL_POOLS.stroke,
+	RADICAL_POOLS.human,
+	RADICAL_POOLS.shape,
+	'難x'
+);
+
 
 var questCheck = (function() {
 	var characterTable =  document.getElementById("character");
