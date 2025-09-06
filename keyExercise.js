@@ -75,6 +75,24 @@ var questCheck = (function() {
 	var questBar = document.getElementById('questAlphabet').children,
 		nowCharacter;
 	var isRadicalMode = false;
+	var lastPickedCharacter = null;
+
+	function pickRandomCharacter(){
+		var start = 1;
+		var end = characterArray.length - 2;
+		var count = end - start + 1;
+		var idx;
+		if (count <= 0) return characterArray[0];
+		if (isRadicalMode && count > 1 && lastPickedCharacter !== null) {
+			do {
+				idx = Math.floor(Math.random() * count) + start;
+			} while (characterArray[idx] === lastPickedCharacter);
+		} else {
+			idx = Math.floor(Math.random() * count) + start;
+		}
+		lastPickedCharacter = characterArray[idx];
+		return characterArray[idx];
+	}
 
 	function clearHint(){
 		if (keyboard.key && keyboard.key.hint) {
@@ -129,9 +147,7 @@ var questCheck = (function() {
 		if (isRadicalMode) setQuestStatus('off');
 	}
 
-	setNewCharacter( characterArray[
-		Math.floor( Math.random() * (characterArray.length-2) ) + 1
-	]);
+	setNewCharacter( pickRandomCharacter() );
 
 	// Apply initial hint for the first character (單字模式)
 	keyboard.hint(nowCharacter.charAt(indicate(0, 0)));
@@ -140,9 +156,7 @@ var questCheck = (function() {
 		var index = compare(string);
 
 		if (index >= nowCharacter.length){
-			setNewCharacter( characterArray[Math.floor(
-				Math.random() * (characterArray.length-2)
-			) + 1]);
+			setNewCharacter( pickRandomCharacter() );
 			index = -1;
 			string = '';
 
@@ -174,6 +188,7 @@ var questCheck = (function() {
 
 	function setMode(newIsRadicalMode, categoryKey) {
 		isRadicalMode = !!newIsRadicalMode;
+		lastPickedCharacter = null;
 		if (isRadicalMode) {
 			var pool = RADICAL_POOLS[categoryKey] || RADICAL_POOLS.philosophy;
 			characterArray = [''].concat(pool).concat(['']);
@@ -181,9 +196,7 @@ var questCheck = (function() {
 			characterArray = defaultCharacterArray.slice();
 		}
 
-		setNewCharacter( characterArray[Math.floor(
-			Math.random() * (characterArray.length-2)
-		) + 1]);
+		setNewCharacter( pickRandomCharacter() );
 
 		if (isRadicalMode) {
 			setQuestStatus('off');
