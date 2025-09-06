@@ -189,12 +189,39 @@ var questCheck = (function() {
 	function setMode(newIsRadicalMode, categoryKey) {
 		isRadicalMode = !!newIsRadicalMode;
 		lastPickedCharacter = null;
+
+		// Update the available character pool
 		if (isRadicalMode) {
 			var pool = RADICAL_POOLS[categoryKey] || RADICAL_POOLS.philosophy;
 			characterArray = [''].concat(pool).concat(['']);
 		} else {
 			characterArray = defaultCharacterArray.slice();
 		}
+
+		// Toggle disabled state on keyboard keys based on radical pool
+		(function updateDisabledKeys(){
+			var allowed = {};
+			if (isRadicalMode) {
+				var selectedPool = RADICAL_POOLS[categoryKey] || RADICAL_POOLS.philosophy;
+				for (var i = 0; i < selectedPool.length; i++) {
+					var entry = selectedPool[i];
+					var alpha = entry.charAt(entry.length - 1);
+					allowed[alpha] = true;
+				}
+			}
+
+			for (var alpha in keyboard.key) {
+				if (!keyboard.key.hasOwnProperty(alpha)) continue;
+				var node = keyboard.key[alpha];
+				if (!node) continue;
+				if (isRadicalMode) {
+					if (allowed[alpha]) changeClass(node, "-disabled");
+					else changeClass(node, "+disabled");
+				} else {
+					changeClass(node, "-disabled");
+				}
+			}
+		})();
 
 		setNewCharacter( pickRandomCharacter() );
 

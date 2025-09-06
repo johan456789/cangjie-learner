@@ -74,6 +74,14 @@ div#keyboardMap span.press, div#keyboardMap span.press.foreFinger {
 	background-color: #444;
 }
 
+/* Dimmed state for non-active keys (e.g., in radical mode) */
+div#keyboardMap span.disabled {
+	opacity: 0.4;
+	filter: grayscale(20%);
+	border-color: #999;
+	cursor: default;
+}
+
 div#chat {
 	background-color: #DDD;
 	float: left;
