@@ -66,7 +66,8 @@ div#keyboardMap span.finger-pinkie {
 }
 
 div#keyboardMap span.hint, div#keyboardMap span.hint.foreFinger {
-	background-color: white;
+	color: white;
+	background-color: black;
 }
 
 div#keyboardMap span.press, div#keyboardMap span.press.foreFinger {
