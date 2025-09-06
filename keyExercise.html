@@ -72,6 +72,19 @@
 </div>
 
 <div id="menu">
+  <label for="modeSelect">模式：</label>
+  <select id="modeSelect">
+    <option value="char">單字</option>
+    <option value="radical">字根</option>
+  </select>
+
+  <label for="categorySelect">字根類別：</label>
+  <select id="categorySelect" disabled>
+    <option value="philosophy">哲理類</option>
+    <option value="stroke">筆畫類</option>
+    <option value="human">人體類</option>
+    <option value="shape">字形類</option>
+  </select>
   <button id="toggleLayout" onclick="toggleLayout()">英文鍵盤</button>
   <script>
     // lazy snapshot of original (倉頡) mapping

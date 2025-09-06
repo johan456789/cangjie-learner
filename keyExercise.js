@@ -56,11 +56,29 @@ var keyboard = (function (){
 	};
 })();
 
+// 字根類別資料集（字 + 代碼字母）
+var RADICAL_POOLS = {
+	'philosophy': ['日a','月b','金c','木d','水e','火f','土g'],
+	'stroke': ['竹h','戈i','十j','大k','中l','一m','弓n'],
+	'human': ['人o','心p','手q','口r'],
+	'shape': ['尸s','廿t','山u','女v','田w','卜y']
+};
+
+
 var questCheck = (function() {
 	var characterTable =  document.getElementById("character");
-	var characterArray = characterTable.textContent.split('\n');
+	var defaultCharacterArray = characterTable.textContent.split('\n');
+	var characterArray = defaultCharacterArray.slice();
 	var questBar = document.getElementById('questAlphabet').children,
 		nowCharacter;
+	var isRadicalMode = false;
+
+	function clearHint(){
+		if (keyboard.key && keyboard.key.hint) {
+			changeClass(keyboard.key[keyboard.key.hint], "-hint");
+			keyboard.key.hint = null;
+		}
+	}
 
 	function compare(string) {
 		for (var i=0, l=nowCharacter.length; i<l; i++) {
@@ -87,9 +105,14 @@ var questCheck = (function() {
 		nowCharacter = characterString.slice(1);
 		questBar[0].textContent = characterString.charAt(0);
 		for (var i=1, l=questBar.length; i<l; i++) {
-			questBar[i].textContent = keyboard.mapper[
-				characterString.charAt(i) || ' '
-			];
+			if (isRadicalMode) {
+				questBar[i].textContent = '';
+			}
+			else {
+				questBar[i].textContent = keyboard.mapper[
+					characterString.charAt(i) || ' '
+				];
+			}
 
 			changeClass(questBar[i], "");
 		}
@@ -99,7 +122,7 @@ var questCheck = (function() {
 		Math.floor( Math.random() * (characterArray.length-2) ) + 1
 	]);
 
-	// Apply initial hint for the first character
+	// Apply initial hint for the first character (單字模式)
 	keyboard.hint(nowCharacter.charAt(indicate(0, 0)));
 
 	function check(string) {
@@ -113,17 +136,51 @@ var questCheck = (function() {
 			string = '';
 
 			// Apply hint for the new character's first key
-			keyboard.hint(nowCharacter.charAt(indicate(0, 0)));
+			if (!isRadicalMode) {
+				keyboard.hint(nowCharacter.charAt(indicate(0, 0)));
+			} else {
+				indicate(0, 0);
+				clearHint();
+			}
 		}
 
-		keyboard.hint( nowCharacter.charAt(
-			indicate(index, string.length)
-		));
+		if (!isRadicalMode) {
+			keyboard.hint( nowCharacter.charAt(
+				indicate(index, string.length)
+			));
+		} else {
+			indicate(index, string.length);
+			if (string && string.length > index) {
+				questBar[1].textContent = keyboard.mapper[nowCharacter.charAt(0)];
+				keyboard.hint(nowCharacter.charAt(0));
+			}
+		}
 
 		return index == -1;
 	}
 
-	return check;
+	function setMode(newIsRadicalMode, categoryKey) {
+		isRadicalMode = !!newIsRadicalMode;
+		if (isRadicalMode) {
+			var pool = RADICAL_POOLS[categoryKey] || RADICAL_POOLS.philosophy;
+			characterArray = [''].concat(pool).concat(['']);
+		} else {
+			characterArray = defaultCharacterArray.slice();
+		}
+
+		setNewCharacter( characterArray[Math.floor(
+			Math.random() * (characterArray.length-2)
+		) + 1]);
+
+		if (isRadicalMode) {
+			indicate(0, 0);
+			clearHint();
+		} else {
+			keyboard.hint(nowCharacter.charAt(indicate(0, 0)));
+		}
+	}
+
+	return { check: check, setMode: setMode };
 })();
 
 document.getElementById('inputBar').oninput = function(){
@@ -136,8 +193,28 @@ document.getElementById('inputBar').oninput = function(){
 
 	string && keyboard.press(string.slice(-1));
 
-	if (questCheck(string)) this.value = '';
+	if (questCheck.check ? questCheck.check(string) : questCheck(string)) this.value = '';
 };
 
 document.getElementById('inputBar').focus();
 document.getElementById('inputBar').select();
+
+// 模式/類別下拉初始化
+(function(){
+	var modeSelect = document.getElementById('modeSelect');
+	var categorySelect = document.getElementById('categorySelect');
+	if (!modeSelect || !categorySelect) return;
+
+	function applyMode(){
+		var isRoot = modeSelect.value === 'radical';
+		categorySelect.disabled = !isRoot;
+		var cat = categorySelect.value || 'philosophy';
+		if (questCheck.setMode) questCheck.setMode(isRoot, cat);
+		var input = document.getElementById('inputBar');
+		if (input) input.value = '';
+	}
+
+	modeSelect.addEventListener('change', applyMode);
+	categorySelect.addEventListener('change', applyMode);
+	applyMode();
+})();
