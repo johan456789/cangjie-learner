@@ -20,7 +20,9 @@ div#questAlphabet span.questCharacter {
 	margin-right: 1ex;
 }
 
-/*div#questAlphabet span {*/
+div#questAlphabet span.radical-wrong {
+	background-color: rgba(229,57,53,0.5);
+}
 
 div#keyboardMap {
 	font-size: 2.5em;

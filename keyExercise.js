@@ -9,8 +9,11 @@ function changeClass(node, command) {
 		node.className = oldClass.join(' ');
 	}
 	else if (operator == '-') {
-		do oldClass.splice( oldClass.indexOf(newClass), 1 );
-		while (oldClass.indexOf(newClass) != -1)
+		var idx = oldClass.indexOf(newClass);
+		while (idx !== -1) {
+			oldClass.splice(idx, 1);
+			idx = oldClass.indexOf(newClass);
+		}
 		node.className = oldClass.join(' ');
 	}
 	else node.className = command;
@@ -80,6 +83,12 @@ var questCheck = (function() {
 		}
 	}
 
+	function setQuestStatus(status){
+		var qc = questBar[0];
+		changeClass(qc, "-radical-wrong");
+		if (status === 'wrong') changeClass(qc, "+radical-wrong");
+	}
+
 	function compare(string) {
 		for (var i=0, l=nowCharacter.length; i<l; i++) {
 			if (string.charAt(i) !== nowCharacter.charAt(i)) break;
@@ -116,6 +125,8 @@ var questCheck = (function() {
 
 			changeClass(questBar[i], "");
 		}
+
+		if (isRadicalMode) setQuestStatus('off');
 	}
 
 	setNewCharacter( characterArray[
@@ -149,10 +160,12 @@ var questCheck = (function() {
 				indicate(index, string.length)
 			));
 		} else {
-			indicate(index, string.length);
+			// Radical mode: only keyboard highlight when wrong; no neutral/correct state
 			if (string && string.length > index) {
-				questBar[1].textContent = keyboard.mapper[nowCharacter.charAt(0)];
+				setQuestStatus('wrong');
 				keyboard.hint(nowCharacter.charAt(0));
+			} else if (!string) {
+				setQuestStatus('off');
 			}
 		}
 
@@ -173,7 +186,7 @@ var questCheck = (function() {
 		) + 1]);
 
 		if (isRadicalMode) {
-			indicate(0, 0);
+			setQuestStatus('off');
 			clearHint();
 		} else {
 			keyboard.hint(nowCharacter.charAt(indicate(0, 0)));
