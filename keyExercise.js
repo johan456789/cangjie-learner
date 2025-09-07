@@ -276,10 +276,19 @@ document.getElementById('inputBar').select();
 		var cat = categorySelect.value || 'philosophy';
 		if (questCheck.setMode) questCheck.setMode(isRoot, cat);
 		var input = document.getElementById('inputBar');
-		if (input) input.value = '';
+		if (input) {
+			input.value = '';
+			input.focus();
+		}
 	}
 
 	modeSelect.addEventListener('change', applyMode);
 	categorySelect.addEventListener('change', applyMode);
 	applyMode();
 })();
+
+document.body.addEventListener('click', function(e) {
+    if (e.target.tagName !== 'SELECT' && e.target.tagName !== 'BUTTON' && e.target.id !== 'inputBar') {
+        document.getElementById('inputBar').focus();
+    }
+});
