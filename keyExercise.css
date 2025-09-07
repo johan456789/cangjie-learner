@@ -139,6 +139,6 @@ hr {
 	font-weight: bold;
 }
 
-.hidden {
+#keyboardMap.hidden {
     display: none;
 }
