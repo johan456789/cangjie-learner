@@ -283,3 +283,15 @@ document.getElementById('inputBar').select();
 	categorySelect.addEventListener('change', applyMode);
 	applyMode();
 })();
+
+document.addEventListener('DOMContentLoaded', () => {
+  const toggleVisibilityBtn = document.getElementById('toggleVisibilityBtn');
+  const keyboardMap = document.getElementById('keyboardMap');
+
+  if (toggleVisibilityBtn && keyboardMap) {
+    toggleVisibilityBtn.addEventListener('click', () => {
+      const isHidden = keyboardMap.classList.toggle('hidden');
+      toggleVisibilityBtn.textContent = isHidden ? '顯示鍵盤' : '隱藏鍵盤';
+    });
+  }
+});
