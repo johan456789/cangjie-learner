@@ -64,23 +64,19 @@
       }
     }
 
-    function applyLayout(toEnglish) {
+    function toggleLayout() {
       ensureOriginalMapperSnapshot();
       const keys = document.querySelectorAll('#keyboardMap span[title]');
       keys.forEach(key => {
         const alpha = key.title;
-        const label = toEnglish
+        const label = !isEnglishLayout
           ? alpha.toUpperCase()
           : (originalMapper.hasOwnProperty(alpha) ? originalMapper[alpha] : '');
         key.textContent = label;
       });
-      isEnglishLayout = toEnglish;
+      isEnglishLayout = !isEnglishLayout;
       const btn = document.getElementById('toggleLayout');
-      if (btn) btn.textContent = toEnglish ? '倉頡鍵盤' : '英文鍵盤';
-    }
-
-    function toggleLayout() {
-      applyLayout(!isEnglishLayout);
+      if (btn) btn.textContent = isEnglishLayout ? '倉頡鍵盤' : '英文鍵盤';
     }
   </script>
 </div>
