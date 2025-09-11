@@ -1,5 +1,5 @@
 function changeClass(node, command) {
-	let operator = command.charAt(0),
+	const operator = command.charAt(0),
 		newClass = command.slice(1),
 		oldClass = (node.className || '').split(' ');
 
@@ -18,18 +18,18 @@ function changeClass(node, command) {
 	else node.className = command;
 }
 
-let keyboard = (function (){
-	let keyboard = document.getElementById('keyboardMap');
+const keyboard = (function (){
+	const keyboard = document.getElementById('keyboardMap');
 
-	let key = {};
+	const key = {};
 
-	let mapper = { ' ': ' ' };
+	const mapper = { ' ': ' ' };
 
 	for (let i=0; i<3; i++) {
-		let row = keyboard.children[i].children;
+		const row = keyboard.children[i].children;
 
 		for (let j=0, l=row.length; j<l; j++) {
-			let alphabet = row[j].title;
+			const alphabet = row[j].title;
 			key[alphabet]  =  row[j];
 			mapper[alphabet] = row[j].textContent;
 		}
@@ -62,7 +62,7 @@ let keyboard = (function (){
 window.keyboard = keyboard;
 
 // 字根類別資料集（字 + 代碼字母）
-let RADICAL_POOLS = {
+const RADICAL_POOLS = {
 	'philosophy': ['日a','月b','金c','木d','水e','火f','土g'],
 	'stroke': ['竹h','戈i','十j','大k','中l','一m','弓n'],
 	'human': ['人o','心p','手q','口r'],
@@ -78,19 +78,20 @@ RADICAL_POOLS.all = [].concat(
 	'難x'
 );
 
-let questCheck = (function() {
-	let characterTable =  document.getElementById("character");
-	let defaultCharacterArray = characterTable.textContent.split('\n');
+
+const questCheck = (function() {
+	const characterTable =  document.getElementById("character");
+	const defaultCharacterArray = characterTable.textContent.split('\n');
 	let characterArray = defaultCharacterArray.slice();
-	let questBar = document.getElementById('questAlphabet').children,
-		nowCharacter;
+	const questBar = document.getElementById('questAlphabet').children;
+	let nowCharacter;
 	let isRadicalMode = false;
 	let lastPickedCharacter = null;
 
 	function pickRandomCharacter(){
-		let start = 1;
-		let end = characterArray.length - 2;
-		let count = end - start + 1;
+		const start = 1;
+		const end = characterArray.length - 2;
+		const count = end - start + 1;
 		let idx;
 		if (count <= 0) return characterArray[0];
 		if (isRadicalMode && count > 1 && lastPickedCharacter !== null) {
@@ -112,7 +113,7 @@ let questCheck = (function() {
 	}
 
 	function setQuestStatus(status){
-		let qc = questBar[0];
+		const qc = questBar[0];
 		changeClass(qc, "-radical-wrong");
 		if (status === 'wrong') changeClass(qc, "+radical-wrong");
 	}
@@ -126,14 +127,14 @@ let questCheck = (function() {
 	}
 
 	function indicate(index, wrong) {
-		let l = nowCharacter.length;
+		const l = nowCharacter.length;
 		let i = 0;
 		while (i<index) {
 			changeClass(questBar[i+1], "right");
 			i++;
 		}
 
-		let hintCharIndex = i;
+		const hintCharIndex = i;
 		while (i<wrong) {
 			changeClass(questBar[i+1], "wrong");
 			i++;
@@ -211,7 +212,7 @@ let questCheck = (function() {
 
 		// Update the available character pool
 		if (isRadicalMode) {
-			let pool = RADICAL_POOLS[categoryKey] || RADICAL_POOLS.philosophy;
+			const pool = RADICAL_POOLS[categoryKey] || RADICAL_POOLS.philosophy;
 			characterArray = [''].concat(pool).concat(['']);
 		} else {
 			characterArray = defaultCharacterArray.slice();
@@ -219,19 +220,19 @@ let questCheck = (function() {
 
 		// Toggle disabled state on keyboard keys based on radical pool
 		(function updateDisabledKeys(){
-			let allowed = {};
+			const allowed = {};
 			if (isRadicalMode) {
-				let selectedPool = RADICAL_POOLS[categoryKey] || RADICAL_POOLS.philosophy;
+				const selectedPool = RADICAL_POOLS[categoryKey] || RADICAL_POOLS.philosophy;
 				for (let i = 0; i < selectedPool.length; i++) {
-					let entry = selectedPool[i];
-					let alpha = entry.charAt(entry.length - 1);
+					const entry = selectedPool[i];
+					const alpha = entry.charAt(entry.length - 1);
 					allowed[alpha] = true;
 				}
 			}
 
 			for (let alpha in keyboard.key) {
 				if (!keyboard.key.hasOwnProperty(alpha)) continue;
-				let node = keyboard.key[alpha];
+				const node = keyboard.key[alpha];
 				if (!node) continue;
 				if (isRadicalMode) {
 					if (allowed[alpha]) changeClass(node, "-disabled");
@@ -266,11 +267,11 @@ document.getElementById('inputBar').oninput = function(){
 		string = '';
 	}
 
-	let inRadical = questCheck.isRadical ? questCheck.isRadical() : false;
+	const inRadical = questCheck.isRadical ? questCheck.isRadical() : false;
 
 	string && keyboard.press(string.slice(-1));
 
-	let isCompleted = questCheck.check ? questCheck.check(string) : questCheck(string);
+	const isCompleted = questCheck.check ? questCheck.check(string) : questCheck(string);
 	if (inRadical || isCompleted) this.value = '';
 };
 
@@ -284,11 +285,11 @@ document.getElementById('inputBar').select();
 	if (!modeSelect || !categorySelect) return;
 
 	function applyMode(){
-		let isRoot = modeSelect.value === 'radical';
+		const isRoot = modeSelect.value === 'radical';
 		categorySelect.disabled = !isRoot;
-		let cat = categorySelect.value || 'philosophy';
+		const cat = categorySelect.value || 'philosophy';
 		if (questCheck.setMode) questCheck.setMode(isRoot, cat);
-		let input = document.getElementById('inputBar');
+		const input = document.getElementById('inputBar');
 		if (input) input.value = '';
 	}
 
