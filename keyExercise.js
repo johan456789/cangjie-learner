@@ -253,6 +253,12 @@ const questCheck = (function() {
 	return { check: check, setMode: setMode, isRadical: function(){ return isRadicalMode; } };
 })();
 
+function focusOnKeyboard(){
+	const input = document.getElementById('inputBar');
+	if (!input) return;
+	if (document.activeElement !== input) input.focus();
+}
+
 document.getElementById('inputBar').oninput = function(){
 
 	let string = this.value;
@@ -269,8 +275,7 @@ document.getElementById('inputBar').oninput = function(){
 	if (inRadical || isCompleted) this.value = '';
 };
 
-document.getElementById('inputBar').focus();
-document.getElementById('inputBar').select();
+focusOnKeyboard();
 
 // 模式/類別下拉初始化
 (function(){
@@ -285,6 +290,7 @@ document.getElementById('inputBar').select();
 		if (questCheck.setMode) questCheck.setMode(isRoot, cat);
 		const input = document.getElementById('inputBar');
 		if (input) input.value = '';
+		focusOnKeyboard();
 	}
 
 	modeSelect.addEventListener('change', applyMode);
@@ -296,6 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const toggleVisibilityBtn = document.getElementById('toggleVisibilityBtn');
   const keyboardMap = document.getElementById('keyboardMap');
   const toggleLayoutBtn = document.getElementById('toggleLayout');
+  const inputBar = document.getElementById('inputBar');
 
   // Layout toggle state moved from inline HTML <script>
   let isEnglishLayout = false;
@@ -323,6 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     isEnglishLayout = !isEnglishLayout;
     if (toggleLayoutBtn) toggleLayoutBtn.textContent = isEnglishLayout ? '倉頡鍵盤' : '英文鍵盤';
+    focusOnKeyboard();
   }
 
   if (toggleLayoutBtn) {
@@ -342,6 +350,71 @@ document.addEventListener('DOMContentLoaded', () => {
     toggleVisibilityBtn.addEventListener('click', () => {
       keyboardMap.classList.toggle('hidden');
       syncVisibilityState();
+      focusOnKeyboard();
     });
+  }
+
+  // Overlay for focus-lost state with delayed show to avoid flashes
+  if (keyboardMap) {
+    let overlay = keyboardMap.querySelector('.focus-overlay');
+    if (!overlay) {
+      overlay = document.createElement('div');
+      overlay.className = 'focus-overlay';
+      overlay.innerHTML = '點擊這裡以繼續輸入';
+      keyboardMap.appendChild(overlay);
+    }
+
+    let overlayShowTimer = null;
+
+    function showOverlayIfStillBlurred() {
+      const isFocused = document.activeElement === inputBar;
+      keyboardMap.classList.toggle('no-focus', !isFocused);
+    }
+
+    function scheduleOverlayShow() {
+      if (overlayShowTimer) {
+        clearTimeout(overlayShowTimer);
+        overlayShowTimer = null;
+      }
+      overlayShowTimer = setTimeout(function(){
+        overlayShowTimer = null;
+        showOverlayIfStillBlurred();
+      }, 200);
+    }
+
+    if (inputBar) {
+      inputBar.addEventListener('focus', function(){
+        if (overlayShowTimer) {
+          clearTimeout(overlayShowTimer);
+          overlayShowTimer = null;
+        }
+        keyboardMap.classList.remove('no-focus');
+      });
+      inputBar.addEventListener('blur', scheduleOverlayShow);
+    }
+
+    // Any focus elsewhere cancels pending show to avoid a flash
+    document.addEventListener('focusin', function(){
+      if (overlayShowTimer) {
+        clearTimeout(overlayShowTimer);
+        overlayShowTimer = null;
+      }
+      // Hide overlay while interacting with any control
+      if (document.activeElement && document.activeElement !== inputBar) {
+        keyboardMap.classList.remove('no-focus');
+      }
+    });
+
+    overlay.addEventListener('click', function(){
+      if (overlayShowTimer) {
+        clearTimeout(overlayShowTimer);
+        overlayShowTimer = null;
+      }
+      focusOnKeyboard();
+      keyboardMap.classList.remove('no-focus');
+    });
+
+    // initialize overlay state
+    showOverlayIfStillBlurred();
   }
 });
