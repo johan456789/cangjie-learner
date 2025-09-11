@@ -287,11 +287,21 @@ document.getElementById('inputBar').select();
 document.addEventListener('DOMContentLoaded', () => {
   const toggleVisibilityBtn = document.getElementById('toggleVisibilityBtn');
   const keyboardMap = document.getElementById('keyboardMap');
+  const toggleLayoutBtn = document.getElementById('toggleLayout');
 
   if (toggleVisibilityBtn && keyboardMap) {
-    toggleVisibilityBtn.addEventListener('click', () => {
-      const isHidden = keyboardMap.classList.toggle('hidden');
+    const syncVisibilityState = () => {
+      const isHidden = keyboardMap.classList.contains('hidden');
       toggleVisibilityBtn.textContent = isHidden ? '顯示鍵盤' : '隱藏鍵盤';
+      if (toggleLayoutBtn) toggleLayoutBtn.disabled = isHidden;
+    };
+
+    // initialize state on load
+    syncVisibilityState();
+
+    toggleVisibilityBtn.addEventListener('click', () => {
+      keyboardMap.classList.toggle('hidden');
+      syncVisibilityState();
     });
   }
 });
