@@ -58,6 +58,9 @@ let keyboard = (function (){
 	};
 })();
 
+// Ensure global access for inline handlers
+window.keyboard = keyboard;
+
 // 字根類別資料集（字 + 代碼字母）
 let RADICAL_POOLS = {
 	'philosophy': ['日a','月b','金c','木d','水e','火f','土g'],
@@ -116,22 +119,31 @@ let questCheck = (function() {
 
 	function compare(string) {
 		for (let i=0, l=nowCharacter.length; i<l; i++) {
-			if (string.charAt(i) !== nowCharacter.charAt(i)) break;
+			if (string.charAt(i) !== nowCharacter.charAt(i))
+				return i;
 		}
-		return i;
+		return nowCharacter.length;
 	}
 
 	function indicate(index, wrong) {
 		let l = nowCharacter.length;
-		for (let i=0; i<index; i++) {
+		let i = 0;
+		while (i<index) {
 			changeClass(questBar[i+1], "right");
+			i++;
 		}
 
 		let hintCharIndex = i;
-		for (; i<wrong; i++) changeClass(questBar[i+1], "wrong");
+		while (i<wrong) {
+			changeClass(questBar[i+1], "wrong");
+			i++;
+		}
 		changeClass(questBar[++i], "cursor");
 
-		for (; i<l; i++) changeClass(questBar[i+1], "");
+		while (i<l) {
+			changeClass(questBar[i+1], "");
+			i++;
+		}
 		return hintCharIndex;
 	}
 
@@ -243,6 +255,9 @@ let questCheck = (function() {
 	return { check: check, setMode: setMode, isRadical: function(){ return isRadicalMode; } };
 })();
 
+// Ensure global access for inline or external references
+window.questCheck = questCheck;
+
 document.getElementById('inputBar').oninput = function(){
 
 	let string = this.value;
@@ -286,6 +301,38 @@ document.addEventListener('DOMContentLoaded', () => {
   const toggleVisibilityBtn = document.getElementById('toggleVisibilityBtn');
   const keyboardMap = document.getElementById('keyboardMap');
   const toggleLayoutBtn = document.getElementById('toggleLayout');
+
+  // Layout toggle state moved from inline HTML <script>
+  let isEnglishLayout = false;
+  let originalMapper = null;
+
+  function ensureOriginalMapperSnapshot() {
+    if (originalMapper) return;
+    originalMapper = {};
+    for (const alpha in keyboard.mapper) {
+      if (Object.prototype.hasOwnProperty.call(keyboard.mapper, alpha)) {
+        originalMapper[alpha] = keyboard.mapper[alpha];
+      }
+    }
+  }
+
+  function toggleLayout() {
+    ensureOriginalMapperSnapshot();
+    const keys = document.querySelectorAll('#keyboardMap span[title]');
+    keys.forEach(key => {
+      const alpha = key.title;
+      const label = !isEnglishLayout
+        ? alpha.toUpperCase()
+        : (originalMapper.hasOwnProperty(alpha) ? originalMapper[alpha] : '');
+      key.textContent = label;
+    });
+    isEnglishLayout = !isEnglishLayout;
+    if (toggleLayoutBtn) toggleLayoutBtn.textContent = isEnglishLayout ? '倉頡鍵盤' : '英文鍵盤';
+  }
+
+  if (toggleLayoutBtn) {
+    toggleLayoutBtn.addEventListener('click', toggleLayout);
+  }
 
   if (toggleVisibilityBtn && keyboardMap) {
     const syncVisibilityState = () => {

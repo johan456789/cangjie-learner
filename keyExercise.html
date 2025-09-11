@@ -50,35 +50,7 @@
     <option value="shape">字形類</option>
   </select>
   <button id="toggleVisibilityBtn">隱藏鍵盤</button>
-  <button id="toggleLayout" onclick="toggleLayout()">英文鍵盤</button>
-  <script>
-    // lazy snapshot of original (倉頡) mapping
-    let isEnglishLayout = false;
-    let originalMapper = null;
-
-    function ensureOriginalMapperSnapshot() {
-      if (originalMapper) return;
-      originalMapper = {};
-      for (const alpha in keyboard.mapper) {
-        originalMapper[alpha] = keyboard.mapper[alpha];
-      }
-    }
-
-    function toggleLayout() {
-      ensureOriginalMapperSnapshot();
-      const keys = document.querySelectorAll('#keyboardMap span[title]');
-      keys.forEach(key => {
-        const alpha = key.title;
-        const label = !isEnglishLayout
-          ? alpha.toUpperCase()
-          : (originalMapper.hasOwnProperty(alpha) ? originalMapper[alpha] : '');
-        key.textContent = label;
-      });
-      isEnglishLayout = !isEnglishLayout;
-      const btn = document.getElementById('toggleLayout');
-      if (btn) btn.textContent = isEnglishLayout ? '倉頡鍵盤' : '英文鍵盤';
-    }
-  </script>
+  <button id="toggleLayout">英文鍵盤</button>
 </div>
 
 <div id="keyboardMap">
