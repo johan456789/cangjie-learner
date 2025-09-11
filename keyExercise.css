@@ -138,3 +138,7 @@ hr {
 #keyboardMap span[title="j"] {
 	font-weight: bold;
 }
+
+#keyboardMap.hidden {
+    display: none;
+}

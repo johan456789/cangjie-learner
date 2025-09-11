@@ -1,6 +1,5 @@
-
 function changeClass(node, command) {
-	var operator = command.charAt(0),
+	const operator = command.charAt(0),
 		newClass = command.slice(1),
 		oldClass = (node.className || '').split(' ');
 
@@ -9,7 +8,7 @@ function changeClass(node, command) {
 		node.className = oldClass.join(' ');
 	}
 	else if (operator == '-') {
-		var idx = oldClass.indexOf(newClass);
+		let idx = oldClass.indexOf(newClass);
 		while (idx !== -1) {
 			oldClass.splice(idx, 1);
 			idx = oldClass.indexOf(newClass);
@@ -19,18 +18,18 @@ function changeClass(node, command) {
 	else node.className = command;
 }
 
-var keyboard = (function (){
-	var keyboard = document.getElementById('keyboardMap');
+const keyboard = (function (){
+	const keyboard = document.getElementById('keyboardMap');
 
-	var key = {};
+	const key = {};
 
-	var mapper = { ' ': ' ' };
+	const mapper = { ' ': ' ' };
 
-	for (var i=0; i<3; i++) {
-		var row = keyboard.children[i].children;
+	for (let i=0; i<3; i++) {
+		const row = keyboard.children[i].children;
 
-		for (var j=0, l=row.length; j<l; j++) {
-			var alphabet = row[j].title;
+		for (let j=0, l=row.length; j<l; j++) {
+			const alphabet = row[j].title;
 			key[alphabet]  =  row[j];
 			mapper[alphabet] = row[j].textContent;
 		}
@@ -60,7 +59,7 @@ var keyboard = (function (){
 })();
 
 // 字根類別資料集（字 + 代碼字母）
-var RADICAL_POOLS = {
+const RADICAL_POOLS = {
 	'philosophy': ['日a','月b','金c','木d','水e','火f','土g'],
 	'stroke': ['竹h','戈i','十j','大k','中l','一m','弓n'],
 	'human': ['人o','心p','手q','口r'],
@@ -77,20 +76,20 @@ RADICAL_POOLS.all = [].concat(
 );
 
 
-var questCheck = (function() {
-	var characterTable =  document.getElementById("character");
-	var defaultCharacterArray = characterTable.textContent.split('\n');
-	var characterArray = defaultCharacterArray.slice();
-	var questBar = document.getElementById('questAlphabet').children,
-		nowCharacter;
-	var isRadicalMode = false;
-	var lastPickedCharacter = null;
+const questCheck = (function() {
+	const characterTable =  document.getElementById("character");
+	const defaultCharacterArray = characterTable.textContent.split('\n');
+	let characterArray = defaultCharacterArray.slice();
+	const questBar = document.getElementById('questAlphabet').children;
+	let nowCharacter;
+	let isRadicalMode = false;
+	let lastPickedCharacter = null;
 
 	function pickRandomCharacter(){
-		var start = 1;
-		var end = characterArray.length - 2;
-		var count = end - start + 1;
-		var idx;
+		const start = 1;
+		const end = characterArray.length - 2;
+		const count = end - start + 1;
+		let idx;
 		if (count <= 0) return characterArray[0];
 		if (isRadicalMode && count > 1 && lastPickedCharacter !== null) {
 			do {
@@ -111,36 +110,45 @@ var questCheck = (function() {
 	}
 
 	function setQuestStatus(status){
-		var qc = questBar[0];
+		const qc = questBar[0];
 		changeClass(qc, "-radical-wrong");
 		if (status === 'wrong') changeClass(qc, "+radical-wrong");
 	}
 
 	function compare(string) {
-		for (var i=0, l=nowCharacter.length; i<l; i++) {
-			if (string.charAt(i) !== nowCharacter.charAt(i)) break;
+		for (let i=0, l=nowCharacter.length; i<l; i++) {
+			if (string.charAt(i) !== nowCharacter.charAt(i))
+				return i;
 		}
-		return i;
+		return nowCharacter.length;
 	}
 
 	function indicate(index, wrong) {
-		var l = nowCharacter.length;
-		for (var i=0; i<index; i++) {
+		const l = nowCharacter.length;
+		let i = 0;
+		while (i<index) {
 			changeClass(questBar[i+1], "right");
+			i++;
 		}
 
-		var hintCharIndex = i;
-		for (; i<wrong; i++) changeClass(questBar[i+1], "wrong");
+		const hintCharIndex = i;
+		while (i<wrong) {
+			changeClass(questBar[i+1], "wrong");
+			i++;
+		}
 		changeClass(questBar[++i], "cursor");
 
-		for (; i<l; i++) changeClass(questBar[i+1], "");
+		while (i<l) {
+			changeClass(questBar[i+1], "");
+			i++;
+		}
 		return hintCharIndex;
 	}
 
 	function setNewCharacter(characterString) {
 		nowCharacter = characterString.slice(1);
 		questBar[0].textContent = characterString.charAt(0);
-		for (var i=1, l=questBar.length; i<l; i++) {
+		for (let i=1, l=questBar.length; i<l; i++) {
 			if (isRadicalMode) {
 				questBar[i].textContent = '';
 			}
@@ -162,7 +170,7 @@ var questCheck = (function() {
 	keyboard.hint(nowCharacter.charAt(indicate(0, 0)));
 
 	function check(string) {
-		var index = compare(string);
+		let index = compare(string);
 
 		if (index >= nowCharacter.length){
 			setNewCharacter( pickRandomCharacter() );
@@ -201,7 +209,7 @@ var questCheck = (function() {
 
 		// Update the available character pool
 		if (isRadicalMode) {
-			var pool = RADICAL_POOLS[categoryKey] || RADICAL_POOLS.philosophy;
+			const pool = RADICAL_POOLS[categoryKey] || RADICAL_POOLS.philosophy;
 			characterArray = [''].concat(pool).concat(['']);
 		} else {
 			characterArray = defaultCharacterArray.slice();
@@ -209,19 +217,19 @@ var questCheck = (function() {
 
 		// Toggle disabled state on keyboard keys based on radical pool
 		(function updateDisabledKeys(){
-			var allowed = {};
+			const allowed = {};
 			if (isRadicalMode) {
-				var selectedPool = RADICAL_POOLS[categoryKey] || RADICAL_POOLS.philosophy;
-				for (var i = 0; i < selectedPool.length; i++) {
-					var entry = selectedPool[i];
-					var alpha = entry.charAt(entry.length - 1);
+				const selectedPool = RADICAL_POOLS[categoryKey] || RADICAL_POOLS.philosophy;
+				for (let i = 0; i < selectedPool.length; i++) {
+					const entry = selectedPool[i];
+					const alpha = entry.charAt(entry.length - 1);
 					allowed[alpha] = true;
 				}
 			}
 
-			for (var alpha in keyboard.key) {
+			for (let alpha in keyboard.key) {
 				if (!keyboard.key.hasOwnProperty(alpha)) continue;
-				var node = keyboard.key[alpha];
+				const node = keyboard.key[alpha];
 				if (!node) continue;
 				if (isRadicalMode) {
 					if (allowed[alpha]) changeClass(node, "-disabled");
@@ -247,17 +255,17 @@ var questCheck = (function() {
 
 document.getElementById('inputBar').oninput = function(){
 
-	var string = this.value;
+	let string = this.value;
 	if (/[^a-y]/.test(string)) {
 		this.value = '';
 		string = '';
 	}
 
-	var inRadical = questCheck.isRadical ? questCheck.isRadical() : false;
+	const inRadical = questCheck.isRadical ? questCheck.isRadical() : false;
 
 	string && keyboard.press(string.slice(-1));
 
-	var isCompleted = questCheck.check ? questCheck.check(string) : questCheck(string);
+	const isCompleted = questCheck.check ? questCheck.check(string) : questCheck(string);
 	if (inRadical || isCompleted) this.value = '';
 };
 
@@ -266,16 +274,16 @@ document.getElementById('inputBar').select();
 
 // 模式/類別下拉初始化
 (function(){
-	var modeSelect = document.getElementById('modeSelect');
-	var categorySelect = document.getElementById('categorySelect');
+	let modeSelect = document.getElementById('modeSelect');
+	let categorySelect = document.getElementById('categorySelect');
 	if (!modeSelect || !categorySelect) return;
 
 	function applyMode(){
-		var isRoot = modeSelect.value === 'radical';
+		const isRoot = modeSelect.value === 'radical';
 		categorySelect.disabled = !isRoot;
-		var cat = categorySelect.value || 'philosophy';
+		const cat = categorySelect.value || 'philosophy';
 		if (questCheck.setMode) questCheck.setMode(isRoot, cat);
-		var input = document.getElementById('inputBar');
+		const input = document.getElementById('inputBar');
 		if (input) input.value = '';
 	}
 
@@ -283,3 +291,57 @@ document.getElementById('inputBar').select();
 	categorySelect.addEventListener('change', applyMode);
 	applyMode();
 })();
+
+document.addEventListener('DOMContentLoaded', () => {
+  const toggleVisibilityBtn = document.getElementById('toggleVisibilityBtn');
+  const keyboardMap = document.getElementById('keyboardMap');
+  const toggleLayoutBtn = document.getElementById('toggleLayout');
+
+  // Layout toggle state moved from inline HTML <script>
+  let isEnglishLayout = false;
+  let originalMapper = null;
+
+  function ensureOriginalMapperSnapshot() {
+    if (originalMapper) return;
+    originalMapper = {};
+    for (const alpha in keyboard.mapper) {
+      if (Object.prototype.hasOwnProperty.call(keyboard.mapper, alpha)) {
+        originalMapper[alpha] = keyboard.mapper[alpha];
+      }
+    }
+  }
+
+  function toggleLayout() {
+    ensureOriginalMapperSnapshot();
+    const keys = document.querySelectorAll('#keyboardMap span[title]');
+    keys.forEach(key => {
+      const alpha = key.title;
+      const label = !isEnglishLayout
+        ? alpha.toUpperCase()
+        : (originalMapper.hasOwnProperty(alpha) ? originalMapper[alpha] : '');
+      key.textContent = label;
+    });
+    isEnglishLayout = !isEnglishLayout;
+    if (toggleLayoutBtn) toggleLayoutBtn.textContent = isEnglishLayout ? '倉頡鍵盤' : '英文鍵盤';
+  }
+
+  if (toggleLayoutBtn) {
+    toggleLayoutBtn.addEventListener('click', toggleLayout);
+  }
+
+  if (toggleVisibilityBtn && keyboardMap) {
+    const syncVisibilityState = () => {
+      const isHidden = keyboardMap.classList.contains('hidden');
+      toggleVisibilityBtn.textContent = isHidden ? '顯示鍵盤' : '隱藏鍵盤';
+      if (toggleLayoutBtn) toggleLayoutBtn.disabled = isHidden;
+    };
+
+    // initialize state on load
+    syncVisibilityState();
+
+    toggleVisibilityBtn.addEventListener('click', () => {
+      keyboardMap.classList.toggle('hidden');
+      syncVisibilityState();
+    });
+  }
+});

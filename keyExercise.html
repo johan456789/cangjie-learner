@@ -34,6 +34,25 @@
 
 <textarea id="inputBar" placeholder="請在此輸入英文字母"></textarea>
 
+<div id="menu">
+  <label for="modeSelect">模式：</label>
+  <select id="modeSelect">
+    <option value="char">單字</option>
+    <option value="radical">字根</option>
+  </select>
+
+  <label for="categorySelect">字根類別：</label>
+  <select id="categorySelect" disabled>
+    <option value="all">全部</option>
+    <option value="philosophy">哲理類</option>
+    <option value="stroke">筆畫類</option>
+    <option value="human">人體類</option>
+    <option value="shape">字形類</option>
+  </select>
+  <button id="toggleVisibilityBtn">隱藏鍵盤</button>
+  <button id="toggleLayout">英文鍵盤</button>
+</div>
+
 <div id="keyboardMap">
   <div>
     <span title="q" class="finger-pinkie">手</span>
@@ -69,56 +88,6 @@
     <span title="n" class="finger-right-index">弓</span>
     <span title="m" class="finger-right-index">一</span>
   </div>
-</div>
-
-<div id="menu">
-  <label for="modeSelect">模式：</label>
-  <select id="modeSelect">
-    <option value="char">單字</option>
-    <option value="radical">字根</option>
-  </select>
-
-  <label for="categorySelect">字根類別：</label>
-  <select id="categorySelect" disabled>
-    <option value="all">全部</option>
-    <option value="philosophy">哲理類</option>
-    <option value="stroke">筆畫類</option>
-    <option value="human">人體類</option>
-    <option value="shape">字形類</option>
-  </select>
-  <button id="toggleLayout" onclick="toggleLayout()">英文鍵盤</button>
-  <script>
-    // lazy snapshot of original (倉頡) mapping
-    let isEnglishLayout = false;
-    let originalMapper = null;
-
-    function ensureOriginalMapperSnapshot() {
-      if (originalMapper) return;
-      originalMapper = {};
-      for (const alpha in keyboard.mapper) {
-        originalMapper[alpha] = keyboard.mapper[alpha];
-      }
-    }
-
-    function applyLayout(toEnglish) {
-      ensureOriginalMapperSnapshot();
-      const keys = document.querySelectorAll('#keyboardMap span[title]');
-      keys.forEach(key => {
-        const alpha = key.title;
-        const label = toEnglish
-          ? alpha.toUpperCase()
-          : (originalMapper.hasOwnProperty(alpha) ? originalMapper[alpha] : '');
-        key.textContent = label;
-      });
-      isEnglishLayout = toEnglish;
-      const btn = document.getElementById('toggleLayout');
-      if (btn) btn.textContent = toEnglish ? '倉頡鍵盤' : '英文鍵盤';
-    }
-
-    function toggleLayout() {
-      applyLayout(!isEnglishLayout);
-    }
-  </script>
 </div>
 
 
