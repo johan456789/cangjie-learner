@@ -58,9 +58,6 @@ const keyboard = (function (){
 	};
 })();
 
-// Ensure global access for inline handlers
-window.keyboard = keyboard;
-
 // 字根類別資料集（字 + 代碼字母）
 const RADICAL_POOLS = {
 	'philosophy': ['日a','月b','金c','木d','水e','火f','土g'],
@@ -255,9 +252,6 @@ const questCheck = (function() {
 
 	return { check: check, setMode: setMode, isRadical: function(){ return isRadicalMode; } };
 })();
-
-// Ensure global access for inline or external references
-window.questCheck = questCheck;
 
 document.getElementById('inputBar').oninput = function(){
 
