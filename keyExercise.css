@@ -144,8 +144,8 @@ hr {
 }
 
 /* Emphasize home row index keys (F/J or 倉頡 火/十) */
-#keyboardMap span[title="f"],
-#keyboardMap span[title="j"] {
+#keyboardMap span#key-f,
+#keyboardMap span#key-j {
 	font-weight: bold;
 }
 

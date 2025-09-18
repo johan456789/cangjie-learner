@@ -27,9 +27,9 @@ const keyboard = (function () {
     const row = keyboard.children[i].children;
 
     for (let j = 0, l = row.length; j < l; j++) {
-      const alphabet = row[j].title;
-      key[alphabet] = row[j];
-      mapper[alphabet] = row[j].textContent;
+      const keyName = (row[j].id || "").slice(-1);
+      key[keyName] = row[j];
+      mapper[keyName] = row[j].textContent;
     }
   }
 
@@ -319,9 +319,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function toggleLayout() {
     ensureOriginalMapperSnapshot();
-    const keys = document.querySelectorAll("#keyboardMap span[title]");
+    const keys = document.querySelectorAll('#keyboardMap span[id^="key-"]');
     keys.forEach((key) => {
-      const alpha = key.title;
+      const alpha = (key.id || "").slice(4);
       const label = !isEnglishLayout
         ? alpha.toUpperCase()
         : originalMapper.hasOwnProperty(alpha)
