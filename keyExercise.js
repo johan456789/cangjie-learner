@@ -1,27 +1,13 @@
-function changeClass(node, command) {
-  if (!node || !node.classList) return;
-  const operator = command.charAt(0);
-  const value = command.slice(1);
-
-  if (operator === "+") {
-    if (!value) return; // no-op
-    const cl = node.classList;
-    if (cl.contains(value)) return; // avoid duplicate & DOM write
-    cl.add(value);
-    return;
-  }
-
-  if (operator === "-") {
-    if (!value) return; // no-op
-    const cl = node.classList;
-    if (!cl.contains(value)) return; // already absent
-    cl.remove(value);
-    return;
-  }
-
-  if (node.className === command) return; // no change
-  node.className = command; // set exact class tokens (e.g., "right", "wrong", "")
-}
+const classOps = {
+  add: function (node, token) {
+    if (!node || !node.classList || !token) return;
+    node.classList.add(token);
+  },
+  remove: function (node, token) {
+    if (!node || !node.classList || !token) return;
+    node.classList.remove(token);
+  },
+};
 
 const keyboard = (function () {
   const keyboard = document.getElementById("keyboardMap");
@@ -42,15 +28,15 @@ const keyboard = (function () {
 
   function press(keyName) {
     setTimeout(function () {
-      changeClass(key[keyName], "-press");
+      classOps.remove(key[keyName], "press");
     }, 150);
 
-    changeClass(key[keyName], "+press");
+    classOps.add(key[keyName], "press");
   }
 
   function hint(keyName) {
-    key.hint && changeClass(key[key.hint], "-hint");
-    changeClass(key[keyName], "+hint");
+    if (key.hint) classOps.remove(key[key.hint], "hint");
+    classOps.add(key[keyName], "hint");
     key.hint = keyName;
   }
 
@@ -107,15 +93,15 @@ const questCheck = (function () {
 
   function clearHint() {
     if (keyboard.key && keyboard.key.hint) {
-      changeClass(keyboard.key[keyboard.key.hint], "-hint");
+      classOps.remove(keyboard.key[keyboard.key.hint], "hint");
       keyboard.key.hint = null;
     }
   }
 
   function setQuestStatus(status) {
     const qc = questBar[0];
-    changeClass(qc, "-radical-wrong");
-    if (status === "wrong") changeClass(qc, "+radical-wrong");
+    classOps.remove(qc, "radical-wrong");
+    if (status === "wrong") classOps.add(qc, "radical-wrong");
   }
 
   function compare(string) {
@@ -129,19 +115,33 @@ const questCheck = (function () {
     const l = nowCharacter.length;
     let i = 0;
     while (i < index) {
-      changeClass(questBar[i + 1], "right");
+      const el = questBar[i + 1];
+      classOps.remove(el, "wrong");
+      classOps.remove(el, "cursor");
+      classOps.add(el, "right");
       i++;
     }
 
     const hintCharIndex = i;
     while (i < wrong) {
-      changeClass(questBar[i + 1], "wrong");
+      const el = questBar[i + 1];
+      classOps.remove(el, "right");
+      classOps.remove(el, "cursor");
+      classOps.add(el, "wrong");
       i++;
     }
-    changeClass(questBar[++i], "cursor");
+    {
+      const el = questBar[++i];
+      classOps.remove(el, "right");
+      classOps.remove(el, "wrong");
+      classOps.add(el, "cursor");
+    }
 
     while (i < l) {
-      changeClass(questBar[i + 1], "");
+      const el = questBar[i + 1];
+      classOps.remove(el, "right");
+      classOps.remove(el, "wrong");
+      classOps.remove(el, "cursor");
       i++;
     }
     return hintCharIndex;
@@ -158,7 +158,10 @@ const questCheck = (function () {
           keyboard.mapper[characterString.charAt(i) || " "];
       }
 
-      changeClass(questBar[i], "");
+      const el = questBar[i];
+      classOps.remove(el, "right");
+      classOps.remove(el, "wrong");
+      classOps.remove(el, "cursor");
     }
 
     if (isRadicalMode) setQuestStatus("off");
@@ -231,10 +234,10 @@ const questCheck = (function () {
         const node = keyboard.key[alpha];
         if (!node) continue;
         if (isRadicalMode) {
-          if (allowed[alpha]) changeClass(node, "-disabled");
-          else changeClass(node, "+disabled");
+          if (allowed[alpha]) classOps.remove(node, "disabled");
+          else classOps.add(node, "disabled");
         } else {
-          changeClass(node, "-disabled");
+          classOps.remove(node, "disabled");
         }
       }
     })();
@@ -326,19 +329,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function toggleLayout() {
     ensureOriginalMapperSnapshot();
+    isEnglishLayout = !isEnglishLayout;
+
+    // Update keyboard visuals
     const keys = document.querySelectorAll('#keyboardMap span[id^="key-"]');
     keys.forEach((key) => {
       const alpha = (key.id || "").slice(4);
-      const label = !isEnglishLayout
+      const label = isEnglishLayout
         ? alpha.toUpperCase()
-        : originalMapper.hasOwnProperty(alpha)
-        ? originalMapper[alpha]
-        : "";
+        : originalMapper[alpha];
       key.textContent = label;
     });
-    isEnglishLayout = !isEnglishLayout;
-    if (toggleLayoutBtn)
+    if (toggleLayoutBtn) {
       toggleLayoutBtn.textContent = isEnglishLayout ? "倉頡鍵盤" : "英文鍵盤";
+    }
     focusOnKeyboard();
   }
 
