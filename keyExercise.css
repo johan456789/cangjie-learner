@@ -1,5 +1,12 @@
-body, html { height: 100%; }
-body { padding: 1em; text-align: center; }
+body,
+html {
+	height: 100%;
+}
+
+body {
+	padding: 1em;
+	text-align: center;
+}
 
 div#questAlphabet {
 	font-size: 4em;
@@ -21,7 +28,7 @@ div#questAlphabet span.questCharacter {
 }
 
 div#questAlphabet span.radical-wrong {
-	background-color: rgba(229,57,53,0.5);
+	background-color: rgba(229, 57, 53, 0.5);
 }
 
 div#keyboardMap {
@@ -39,7 +46,7 @@ div#keyboardMap {
 	background-color: grey;
 	display: inline-block;
 	border: black outset 0.2ex;
-        width: 1em;
+	width: 1em;
 	text-align: center;
 }
 
@@ -66,12 +73,14 @@ div#keyboardMap span.finger-pinkie {
 	background-color: #D7E6FF;
 }
 
-div#keyboardMap span.hint, div#keyboardMap span.hint.foreFinger {
+div#keyboardMap span.hint,
+div#keyboardMap span.hint.foreFinger {
 	color: white;
 	background-color: black;
 }
 
-div#keyboardMap span.press, div#keyboardMap span.press.foreFinger {
+div#keyboardMap span.press,
+div#keyboardMap span.press.foreFinger {
 	color: white;
 	background-color: #444;
 }
@@ -91,15 +100,15 @@ div#chat {
 	overflow-y: scroll;
 }
 
-span.right{
+span.right {
 	border-bottom: green solid 0.4ex;
 }
 
-span.wrong{
+span.wrong {
 	border-bottom: red solid 0.4ex;
 }
 
-span.cursor{
+span.cursor {
 	border-bottom: grey solid 0.2ex;
 }
 
@@ -125,13 +134,13 @@ hr {
 }
 
 #keyboardMap div:nth-child(2) {
-  position: relative;
-  left: 0.75em;
+	position: relative;
+	left: 0.75em;
 }
 
 #keyboardMap div:nth-child(3) {
-  position: relative;
-  left: 1.5em;
+	position: relative;
+	left: 1.5em;
 }
 
 /* Emphasize home row index keys (F/J or 倉頡 火/十) */
@@ -141,13 +150,16 @@ hr {
 }
 
 #keyboardMap.hidden {
-    display: none;
+	display: none;
 }
 
 /* Overlay shown when input is not focused */
 #keyboardMap .focus-overlay {
 	position: absolute;
-	left: 0; right: 0; top: 0; bottom: 0;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
 	background: rgba(255, 255, 255, 0.7);
 	color: #000;
 	display: none;
