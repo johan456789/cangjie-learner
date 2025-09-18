@@ -362,7 +362,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!overlay) {
       overlay = document.createElement("div");
       overlay.className = "focus-overlay";
-      overlay.innerHTML = "點擊這裡以繼續輸入";
+      overlay.textContent = "點擊這裡以繼續輸入";
       keyboardMap.appendChild(overlay);
     }
 
