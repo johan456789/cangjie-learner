@@ -1,0 +1,1551 @@
+{
+  "A": {
+    "cangjie_char": "日",
+    "rows": [
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-a0.svg|30px]]",
+          "[[Image:cjrm-a1.svg|30px]]",
+          "[[Image:cjrm-a2.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-a0-1.svg|30px|明]]",
+          "[[Image:cjem-a0-2.svg|30px|早]]",
+          "[[Image:cjem-a0-3.svg|30px|良]]",
+          "[[Image:cjem-a1-1.svg|30px|書]]",
+          "[[Image:cjem-a2-1.svg|30px|冒]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-a0.svg|22px]]」的原形。或輕微改變筆形。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-a3.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-a3-1.svg|30px|巴]]",
+          "[[Image:cjem-a3-2.svg|30px|眉]]",
+          "[[Image:cjem-a3-3.svg|30px|色]]",
+          "[[Image:cjem-a3-4.svg|30px|免]]",
+          "[[Image:cjem-a3-5.svg|30px|象]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-a0.svg|22px]]」90度躺臥。"
+      }
+    ]
+  },
+  "B": {
+    "cangjie_char": "月",
+    "rows": [
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-b0.svg|30px]]",
+          "[[Image:cjrm-b1.svg|30px]]",
+          "[[Image:cjrm-b2.svg|30px]]",
+          "[[Image:cjrm-b3.svg|30px]]",
+          "[[Image:cjrm-b4.svg|30px]]",
+          "[[Image:cjrm-b5.svg|30px]]",
+          "[[Image:cjrm-b6.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-b1-1.svg|30px|朕]]",
+          "[[Image:cjem-b2-1.svg|30px|肝]]",
+          "[[Image:cjem-b3-1.svg|30px|胃]]",
+          "[[Image:cjem-b6-1.svg|30px|目]]",
+          "[[Image:cjem-b6-2.svg|30px|助]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-b0.svg|22px]]」的原形。或輕微改變筆形。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-b9.svg|30px]]",
+          "[[Image:cjrm-b7.svg|30px]]",
+          "[[Image:cjrm-b10.svg|30px]]",
+          "[[Image:cjrm-b8.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-b9-1.svg|30px|用]]",
+          "[[Image:cjem-b7-1.svg|30px|同]]",
+          "[[Image:cjem-b10-1.svg|30px|禺]]",
+          "[[Image:cjem-b8-2.svg|30px|奧]]",
+          "[[Image:cjem-b8-1.svg|30px|皿]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-b0.svg|22px]]」或「[[Image:cjrm-b3.svg|22px]]」的外框。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-b11.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-b11-1.svg|30px|冠]]",
+          "[[Image:cjem-b11-2.svg|30px|罕]]",
+          "[[Image:cjem-b11-3.svg|30px|骨]]",
+          "[[Image:cjem-b11-4.svg|30px|旁]]",
+          "[[Image:cjem-b11-5.svg|30px|雷]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-b8.svg|22px]]」變矮的形狀。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-b19.svg|30px]]",
+          "[[Image:cjrm-b20.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-b19-1.svg|30px|冎]]",
+          "[[Image:cjem-b19-2.svg|30px|渦]]",
+          "[[Image:cjem-b19-3.svg|30px|骨]]",
+          "[[Image:cjem-b19-4.svg|30px|體]]",
+          "[[Image:cjem-b20-1.svg|30px|冎（大陸寫法）]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-b8.svg|22px]]」內作累增式衍生，即內有重影。<ref>《第五代倉頡輸入法手冊》未列出此輔助字形，但實際編碼如「冎」（月月）、「卨」（卜月月口）反映了此輔助字形的存在。三代倉頡手冊未列出此輔助字形也未收「-{冎}-」字，但「-{咼}-」及其衍生字皆取「月月口」，由於與「-{咼}-」相似之「商」、「啇」等字形官方皆視為整體字，若「-{咼}-」視為整體字，取碼「月月口」只能用此輔助字形解釋；加上五代倉頡手冊並未提及此輔助字型之更動，視為三代倉頡支援此輔助字形可使規則較一致。有網友去信詢問，沈紅蓮亦回答在三代及五代確實都有此輔助字形[https://github.com/mrhso/Cangjie_Note/blob/master/%E4%B8%BB%E8%A7%80%E4%BA%BA%E5%A3%AB%E5%80%89%E9%A0%A1%E6%8E%A2%E6%A1%88%E9%9B%86/%E7%AC%AC%E4%BA%8C%E5%BD%88.md]。注意非官方三代倉頡編碼表可能未完全遵循，例如微軟倉頡把「冎」編碼作「月一中月」。</ref>"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-b12.svg|30px]]",
+          "[[Image:cjrm-b14.svg|30px]]",
+          "[[Image:cjrm-b23.svg|30px]]",
+          "[[Image:cjrm-b13.svg|30px]]",
+          "[[Image:cjrm-b15.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-b12-1.svg|30px|望]]",
+          "[[Image:cjem-b14-1.svg|30px|亙]]",
+          "[[Image:cjem-b13-1.svg|30px|炙]]",
+          "[[Image:cjem-b13-2.svg|30px|然]]",
+          "[[Image:cjem-b15-1.svg|30px|豹]]"
+        ],
+        "shuo_ming": "斜「[[Image:cjrm-b0.svg|22px]]」形。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-b16.svg|30px]]",
+          "[[Image:cjrm-b17.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-b16-1.svg|30px|愛]]",
+          "[[Image:cjem-b17-1.svg|30px|采]]",
+          "[[Image:cjem-b17-2.svg|30px|受]]",
+          "[[Image:cjem-b17-3.svg|30px|溪]]",
+          "[[Image:cjem-b17-4.svg|30px|菜]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-b15.svg|22px]]」的整形。"
+      }
+    ]
+  },
+  "C": {
+    "cangjie_char": "金",
+    "rows": [
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-c0.svg|30px]]",
+          "[[Image:cjrm-c1.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-c0-1.svg|30px|鑒]]",
+          "[[Image:cjem-c0-2.svg|30px|淦]]",
+          "[[Image:cjem-c1-1.svg|30px|銅]]",
+          "[[Image:cjem-c1-3.svg|30px|劉]]",
+          "[[Image:cjem-c1-2.svg|30px|鏡]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-c0.svg|22px]]」的原形。或輕微改變筆形。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-c2.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-c2-1.svg|30px|丫]]",
+          "[[Image:cjem-c2-2.svg|30px|弟]]",
+          "[[Image:cjem-c2-3.svg|30px|-{业}-]]",
+          "[[Image:cjem-c2-4.svg|30px|僕]]",
+          "[[Image:cjem-c2-5.svg|30px|尞]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-c0.svg|22px]]」下方的兩點。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-c3.svg|30px]]",
+          "[[Image:cjrm-c4.svg|30px]]",
+          "[[Image:cjrm-c5.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-c3-1.svg|30px|只]]",
+          "[[Image:cjem-c3-2.svg|30px|谷]]",
+          "[[Image:cjem-c4-1.svg|30px|亦]]",
+          "[[Image:cjem-c5-1.svg|30px|扒]]",
+          "[[Image:cjem-c5-2.svg|30px|巷]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-c2.svg|22px]]」倒轉的形狀。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-c6.svg|30px]]",
+          "[[Image:cjrm-c9.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-c6-1.svg|30px|四]]",
+          "[[Image:cjem-c6-2.svg|30px|西]]",
+          "[[Image:cjem-c6-3.svg|30px|空]]",
+          "[[Image:cjem-c6-4.svg|30px|詹]]",
+          "[[Image:cjem-c6-5.svg|30px|沿]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-c3.svg|22px]]」的變形。"
+      }
+    ]
+  },
+  "D": {
+    "cangjie_char": "木",
+    "rows": [
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-d0.svg|30px]]",
+          "[[Image:cjrm-d1.svg|30px]]",
+          "[[Image:cjrm-d2.svg|30px]]",
+          "[[Image:cjrm-d7.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-d0-1.svg|30px|-{來}-]]",
+          "[[Image:cjem-d1-1.svg|30px|-{困}-]]",
+          "[[Image:cjem-d1-2.svg|30px|-{相}-]]",
+          "[[Image:cjem-d2-2.svg|30px|-{茶}-]]",
+          "[[Image:cjem-d7-1.svg|30px|-{东}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-d0.svg|22px]]」的原形。或輕微改變筆形。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-d3.svg|30px]]",
+          "[[Image:cjrm-d4.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-d3-1.svg|30px|-{才}-]]",
+          "[[Image:cjem-d3-2.svg|30px|-{子}-]]",
+          "[[Image:cjem-d3-3.svg|30px|-{乎}-]]",
+          "[[Image:cjem-d3-4.svg|30px|-{爭}-]]",
+          "[[Image:cjem-d4-1.svg|30px|-{孩}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-d7.svg|22px]]」的主榦。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-d5.svg|30px]]",
+          "[[Image:cjrm-d6.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-d5-1.svg|30px|-{皮}-]]",
+          "[[Image:cjem-d6-1.svg|30px|-{也}-]]",
+          "[[Image:cjem-d6-2.svg|30px|-{五}-]]",
+          "[[Image:cjem-d6-3.svg|30px|-{韋}-]]",
+          "[[Image:cjem-d6-4.svg|30px|-{決}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-d3.svg|22px]]」90度躺臥。"
+      }
+    ]
+  },
+  "E": {
+    "cangjie_char": "水",
+    "rows": [
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-e0.svg|30px]]",
+          "[[Image:cjrm-e1.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-e0-1.svg|30px|-{冰}-]]",
+          "[[Image:cjem-e0-2.svg|30px|-{永}-]]",
+          "[[Image:cjem-e0-3.svg|30px|-{丞}-]]",
+          "[[Image:cjem-e0-4.svg|30px|-{踏}-]]",
+          "[[Image:cjem-e1-1.svg|30px|-{氹}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-e0.svg|22px]]」的原形。或輕微改變筆形。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-e3.svg|30px]]",
+          "[[Image:cjrm-e4.svg|30px]]",
+          "[[Image:cjrm-e5.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-e4-1.svg|30px|-{支}-]]",
+          "[[Image:cjem-e4-2.svg|30px|-{叉}-]]",
+          "[[Image:cjem-e4-3.svg|30px|-{各}-]]",
+          "[[Image:cjem-e4-4.svg|30px|-{厦}-]]",
+          "[[Image:cjem-e4-5.svg|30px|-{及}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-e0.svg|22px]]」的左右兩邊筆畫相疊。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-e2.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-e2-1.svg|30px|-{沿}-]]",
+          "[[Image:cjem-e2-2.svg|30px|-{溪}-]]",
+          "[[Image:cjem-e2-3.svg|30px|-{塗}-]]",
+          "[[Image:cjem-e2-4.svg|30px|-{衍}-]]",
+          "[[Image:cjem-e2-5.svg|30px|-{匯}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-e0.svg|22px]]」偏旁的形狀。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-e7.svg|30px]]",
+          "[[Image:cjrm-e6.svg|30px]]",
+          "[[Image:cjrm-e8.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-e7-1.svg|30px|求]]",
+          "[[Image:cjem-e7-2.svg|30px|錄]]",
+          "[[Image:cjem-e7-3.svg|30px|康]]",
+          "[[Image:cjem-e6-1.svg|30px|黎]]",
+          "[[Image:cjem-e8-1.svg|30px|鰥]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-e0.svg|22px]]」字底的形狀。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjr5m-e1.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-5e-1.svg|30px|犀]]",
+          "[[Image:cjem-5e-2.svg|30px|遲]]",
+          "[[Image:cjem-5e-3.svg|30px|屬]]",
+          "[[Image:cjem-5e-4.svg|30px|矚]]",
+          "[[Image:cjem-5e-5.svg|30px|皐]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-e8.svg|22px]]」的變形。（五代新增）"
+      }
+    ]
+  },
+  "F": {
+    "cangjie_char": "火",
+    "rows": [
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-f0.svg|30px]]",
+          "[[Image:cjrm-f1.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-f0-1.svg|30px|-{灰}-]]",
+          "[[Image:cjem-f0-2.svg|30px|-{秋}-]]",
+          "[[Image:cjem-f0-3.svg|30px|-{焚}-]]",
+          "[[Image:cjem-f1-1.svg|30px|-{灶}-]]",
+          "[[Image:cjem-f1-2.svg|30px|-{炎}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-f0.svg|22px]]」的原形。或輕微改變筆形。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-f2.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-f2-1.svg|30px|-{照}-]]",
+          "[[Image:cjem-f2-2.svg|30px|-{鯉}-]]",
+          "[[Image:cjem-f2-3.svg|30px|-{鳥}-]]",
+          "[[Image:cjem-f2-4.svg|30px|-{盡}-]]",
+          "[[Image:cjem-f2-5.svg|30px|-{駒}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-f0.svg|22px]]」字底的形狀。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-f3.svg|30px]]",
+          "[[Image:cjrm-f5.svg|30px]]",
+          "[[Image:cjrm-f7.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-f3-2.svg|30px|-{絲}-]]",
+          "[[Image:cjem-f5-5.svg|30px|-{係}-]]",
+          "[[Image:cjem-f5-1.svg|30px|-{平}-]]",
+          "[[Image:cjem-f5-2.svg|30px|-{尚}-]]",
+          "[[Image:cjem-f7-1.svg|30px|-{示}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-f2.svg|22px]]」減一點。或輕微改變筆形。「[[Image:cjrm-f5.svg|22px]]」也是「[[Image:cjrm-f0.svg|22px]]」的上半部。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-f4.svg|30px]]",
+          "[[Image:cjrm-f6.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-f4-1.svg|30px|-{桜}-]]",
+          "[[Image:cjem-f4-2.svg|30px|-{覚}-]]",
+          "[[Image:cjem-f4-3.svg|30px|-{戦}-]]",
+          "[[Image:cjem-f4-4.svg|30px|-{佥}-]]",
+          "[[Image:cjem-f6-1.svg|30px|-{米}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-f3.svg|22px]]」或「[[Image:cjrm-f5.svg|22px]]」倒轉的形狀。「[[Image:cjrm-f6.svg|22px]]」也是「[[Image:cjrm-f0.svg|22px]]」的上半部。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-f8.svg|30px]]",
+          "[[Image:cjrm-f9.svg|30px]]",
+          "[[Image:cjrm-f11.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-f8-1.svg|30px|-{不}-]]",
+          "[[Image:cjem-f8-2.svg|30px|-{祈}-]]",
+          "[[Image:cjem-f8-3.svg|30px|-{否}-]]",
+          "[[Image:cjem-f8-4.svg|30px|-{社}-]]",
+          "[[Image:cjem-f9-1.svg|30px|-{𣎴（dǔnㄉㄨㄣˇ）}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-f5.svg|22px]]」的衍生形。"
+      }
+    ]
+  },
+  "G": {
+    "cangjie_char": "土",
+    "rows": [
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-g0.svg|30px]]",
+          "[[Image:cjrm-g1.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-g0-1.svg|30px|-{走}-]]",
+          "[[Image:cjem-g0-2.svg|30px|-{再}-]]",
+          "[[Image:cjem-g0-3.svg|30px|-{里}-]]",
+          "[[Image:cjem-g1-1.svg|30px|-{球}-]]",
+          "[[Image:cjem-g1-2.svg|30px|-{動}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-g0.svg|22px]]」的原形。或輕微改變筆形。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-g2.svg|30px]]",
+          "[[Image:cjrm-g3.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-g2-1.svg|30px|-{仕}-]]",
+          "[[Image:cjem-g2-2.svg|30px|-{吉}-]]",
+          "[[Image:cjem-g2-3.svg|30px|-{款}-]]",
+          "[[Image:cjem-g2-4.svg|30px|-{樹}-]]",
+          "[[Image:cjem-g3-1.svg|30px|-{壻}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-g0.svg|22px]]」的變形。"
+      }
+    ]
+  },
+  "H": {
+    "cangjie_char": "竹",
+    "rows": [
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-h0.svg|30px]]",
+          "[[Image:cjrm-h1.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-h0-1.svg|30px|-{𢎉（U+22389）}-]]",
+          "[[Image:cjem-h1-1.svg|30px|-{竺}-]]",
+          "[[Image:cjem-h1-2.svg|30px|-{簡}-]]",
+          "[[Image:cjem-h1-3.svg|30px|-{符}-]]",
+          "[[Image:cjem-h1-4.svg|30px|-{噬}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-h0.svg|22px]]」的原形。或「竹字頭」。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-h2.svg|30px]]",
+          "[[Image:cjrm-h3.svg|30px]]",
+          "[[Image:cjrm-h4.svg|30px]]",
+          "[[Image:cjrm-h5.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-h2-1.svg|30px|-{乃}-]]",
+          "[[Image:cjem-h2-2.svg|30px|-{亢}-]]",
+          "[[Image:cjem-h3-1.svg|30px|-{牛}-]]",
+          "[[Image:cjem-h3-2.svg|30px|-{白}-]]",
+          "[[Image:cjem-h5-1.svg|30px|-{千}-]]"
+        ],
+        "shuo_ming": "「斜」形，「[[Image:cjrm-h0.svg|22px]]」的首筆。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-h6.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-h6-1.svg|30px|-{后}-]]",
+          "[[Image:cjem-h6-2.svg|30px|-{反}-]]",
+          "[[Image:cjem-h6-3.svg|30px|-{爪}-]]",
+          "[[Image:cjem-h6-4.svg|30px|-{析}-]]",
+          "[[Image:cjem-h6-5.svg|30px|-{爬}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-h5.svg|22px]]」的衍生形。"
+      }
+    ]
+  },
+  "I": {
+    "cangjie_char": "戈",
+    "rows": [
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-i0.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-i0-1.svg|30px|-{戒}-]]",
+          "[[Image:cjem-i0-2.svg|30px|-{戚}-]]",
+          "[[Image:cjem-i0-3.svg|30px|-{越}-]]",
+          "[[Image:cjem-i0-4.svg|30px|-{幾}-]]",
+          "[[Image:cjem-i0-5.svg|30px|-{我}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-i0.svg|22px]]」的原形。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-i1.svg|30px]]",
+          "[[Image:cjrm-i4.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-i1-1.svg|30px|-{冰}-]]",
+          "[[Image:cjem-i1-3.svg|30px|-{尤}-]]",
+          "[[Image:cjem-i1-4.svg|30px|-{刃}-]]",
+          "[[Image:cjem-i4-2.svg|30px|-{社}-]]",
+          "[[Image:cjem-i4-1.svg|30px|-{之}-]]"
+        ],
+        "shuo_ming": "「點」形，「[[Image:cjrm-i0.svg|22px]]」的最頂一筆。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-i2.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-i2-1.svg|30px|-{庫}-]]",
+          "[[Image:cjem-i2-2.svg|30px|-{廁}-]]",
+          "[[Image:cjem-i2-3.svg|30px|-{廈}-]]",
+          "[[Image:cjem-i2-4.svg|30px|-{鷓}-]]",
+          "[[Image:cjem-i2-5.svg|30px|-{渡}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-i4.svg|22px]]」向下衍生。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-i3.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-i3-1.svg|30px|-{台}-]]",
+          "[[Image:cjem-i3-2.svg|30px|-{去}-]]",
+          "[[Image:cjem-i3-3.svg|30px|-{糸}-]]",
+          "[[Image:cjem-i3-4.svg|30px|-{充}-]]",
+          "[[Image:cjem-i3-5.svg|30px|-{芸}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-i1.svg|22px]]」向左衍生。"
+      }
+    ]
+  },
+  "J": {
+    "cangjie_char": "十",
+    "rows": [
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-j0.svg|30px]]",
+          "[[Image:cjrm-j1.svg|30px]]",
+          "[[Image:cjrm-j3.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-j0-1.svg|30px|-{古}-]]",
+          "[[Image:cjem-j0-2.svg|30px|-{車}-]]",
+          "[[Image:cjem-j0-3.svg|30px|-{哉}-]]",
+          "[[Image:cjem-j1-1.svg|30px|-{辦}-]]",
+          "[[Image:cjem-j1-2.svg|30px|-{刊}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-j0.svg|22px]]」的原形，橫豎相「交」之形。包括書法上爲美化而輕微左撇者。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-j2.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-j2-1.svg|30px|-{安}-]]",
+          "[[Image:cjem-j2-2.svg|30px|-{宋}-]]",
+          "[[Image:cjem-j2-3.svg|30px|-{空}-]]",
+          "[[Image:cjem-j2-4.svg|30px|-{佇}-]]",
+          "[[Image:cjem-j2-5.svg|30px|-{萱}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-j0.svg|22px]]」的左右兩端向下垂，中間向上縮。"
+      }
+    ]
+  },
+  "K": {
+    "cangjie_char": "大",
+    "rows": [
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-k0.svg|30px]]",
+          "[[Image:cjrm-k1.svg|30px]]",
+          "[[Image:cjrm-k11.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-k0-1.svg|30px|-{爽}-]]",
+          "[[Image:cjem-k0-2.svg|30px|-{淹}-]]",
+          "[[Image:cjem-k0-3.svg|30px|-{器}-]]",
+          "[[Image:cjem-k0-4.svg|30px|-{決}-]]",
+          "[[Image:cjem-k1-1.svg|30px|-{奇}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-k0.svg|22px]]」的原形。或輕微改變筆形。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-k2.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-k2-1.svg|30px|-{右}-]]",
+          "[[Image:cjem-k2-2.svg|30px|-{力}-]]",
+          "[[Image:cjem-k2-3.svg|30px|-{九}-]]",
+          "[[Image:cjem-k2-4.svg|30px|-{老}-]]",
+          "[[Image:cjem-k2-5.svg|30px|-{希}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-k0.svg|22px]]」的左上角。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-k4.svg|30px]]",
+          "[[Image:cjrm-k5.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-k4-1.svg|30px|-{文}-]]",
+          "[[Image:cjem-k4-2.svg|30px|-{丈}-]]",
+          "[[Image:cjem-k5-1.svg|30px|-{希}-]]",
+          "[[Image:cjem-k5-2.svg|30px|-{敎}-]]",
+          "[[Image:cjem-k5-3.svg|30px|-{狗}-]]"
+        ],
+        "shuo_ming": "撇捺交「叉」之形，「[[Image:cjrm-k2.svg|22px]]」改變角度。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-k3.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-k3-1.svg|30px|-{病}-]]",
+          "[[Image:cjem-k3-2.svg|30px|-{痛}-]]",
+          "[[Image:cjem-k3-3.svg|30px|-{痊}-]]",
+          "[[Image:cjem-k3-4.svg|30px|-{痴}-]]",
+          "[[Image:cjem-k3-5.svg|30px|-{嫉}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-k2.svg|22px]]」的變形衍生。"
+      }
+    ]
+  },
+  "L": {
+    "cangjie_char": "中",
+    "rows": [
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-l0.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-l0-1.svg|30px|-{忠}-]]",
+          "[[Image:cjem-l0-2.svg|30px|-{仲}-]]",
+          "[[Image:cjem-l0-3.svg|30px|-{史}-]]",
+          "[[Image:cjem-l0-4.svg|30px|-{事}-]]",
+          "[[Image:cjem-l0-5.svg|30px|-{虫}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-l0.svg|22px]]」的原形。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-l1.svg|30px]]",
+          "[[Image:cjrm-l2.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-l1-1.svg|30px|-{引}-]]",
+          "[[Image:cjem-l2-1.svg|30px|-{川}-]]",
+          "[[Image:cjem-l2-2.svg|30px|-{介}-]]",
+          "[[Image:cjem-l2-3.svg|30px|-{亦}-]]",
+          "[[Image:cjem-l2-4.svg|30px|-{冘}-]]"
+        ],
+        "shuo_ming": "「縱」形，「[[Image:cjrm-l0.svg|22px]]」的中間。包括書法上爲美化而輕微左撇者。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-l3.svg|30px]]",
+          "[[Image:cjrm-l4.svg|30px]]",
+          "[[Image:cjrm-l5.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-l3-1.svg|30px|-{書}-]]",
+          "[[Image:cjem-l3-2.svg|30px|-{盡}-]]",
+          "[[Image:cjem-l3-3.svg|30px|-{事}-]]",
+          "[[Image:cjem-l3-4.svg|30px|-{唐}-]]",
+          "[[Image:cjem-l4-1.svg|30px|-{庚}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-l0.svg|22px]]」的變形，上下皆豎。或輕微改變筆形。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-l6.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-l6-1.svg|30px|-{衫}-]]",
+          "[[Image:cjem-l6-2.svg|30px|-{褲}-]]",
+          "[[Image:cjem-l6-3.svg|30px|-{被}-]]",
+          "[[Image:cjem-l6-4.svg|30px|-{裇}-]]",
+          "[[Image:cjem-l6-5.svg|30px|-{襪}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-l3.svg|22px]]」的變形，上下皆豎。"
+      }
+    ]
+  },
+  "M": {
+    "cangjie_char": "一",
+    "rows": [
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-m0.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-m0-1.svg|30px|-{旦}-]]",
+          "[[Image:cjem-m0-2.svg|30px|-{低}-]]",
+          "[[Image:cjem-m0-3.svg|30px|-{天}-]]",
+          "[[Image:cjem-m0-4.svg|30px|-{不}-]]",
+          "[[Image:cjem-m0-5.svg|30px|-{合}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-m0.svg|22px]]」的原形，「橫」形。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-m1.svg|30px]]",
+          "[[Image:cjrm-m6.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-m1-1.svg|30px|-{刁}-]]",
+          "[[Image:cjem-m6-1.svg|30px|-{冰}-]]",
+          "[[Image:cjem-m1-3.svg|30px|-{匀}-]]",
+          "[[Image:cjem-m1-6.svg|30px|-{羽}-]]",
+          "[[Image:cjem-m1-4.svg|30px|-{劃}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-m0.svg|22px]]」的整形。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-m2.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-m2-1.svg|30px|-{原}-]]",
+          "[[Image:cjem-m2-2.svg|30px|-{歷}-]]",
+          "[[Image:cjem-m2-3.svg|30px|-{炭}-]]",
+          "[[Image:cjem-m2-4.svg|30px|-{危}-]]",
+          "[[Image:cjem-m2-5.svg|30px|-{釐}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-m0.svg|22px]]」左端向下衍生。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-m3.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-m3-1.svg|30px|-{石}-]]",
+          "[[Image:cjem-m3-2.svg|30px|-{百}-]]",
+          "[[Image:cjem-m3-3.svg|30px|-{豚}-]]",
+          "[[Image:cjem-m3-4.svg|30px|-{光}-]]",
+          "[[Image:cjem-m3-5.svg|30px|-{狀}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-m2.svg|22px]]」的變形。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-m4.svg|30px]]",
+          "[[Image:cjrm-m5.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-m4-1.svg|30px|-{空}-]]",
+          "[[Image:cjem-m4-2.svg|30px|-{巫}-]]",
+          "[[Image:cjem-m4-3.svg|30px|-{丘}-]]",
+          "[[Image:cjem-m4-4.svg|30px|-{哥}-]]",
+          "[[Image:cjem-m5-1.svg|30px|-{功}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-m0.svg|22px]]」累增式向下衍生，有如下方連着了重影。"
+      }
+    ]
+  },
+  "N": {
+    "cangjie_char": "弓",
+    "rows": [
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-n0.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-n0-1.svg|30px|-{弦}-]]",
+          "[[Image:cjem-n0-2.svg|30px|-{窮}-]]",
+          "[[Image:cjem-n0-3.svg|30px|-{疆}-]]",
+          "[[Image:cjem-n0-4.svg|30px|-{弟}-]]",
+          "[[Image:cjem-n0-5.svg|30px|-{夷}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-n0.svg|22px]]」的原形。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-n1.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-n1-1.svg|30px|-{丁}-]]",
+          "[[Image:cjem-n1-2.svg|30px|-{了}-]]",
+          "[[Image:cjem-n1-3.svg|30px|-{予}-]]",
+          "[[Image:cjem-n1-4.svg|30px|-{到}-]]",
+          "[[Image:cjem-n1-5.svg|30px|-{赤}-]]"
+        ],
+        "shuo_ming": "豎「鉤」形，「[[Image:cjrm-n0.svg|22px]]」的末尾。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-n2.svg|30px]]",
+          "[[Image:cjrm-n3.svg|30px]]",
+          "[[Image:cjrm-n12.svg|30px]]",
+          "[[Image:cjrm-n11.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-n2-1.svg|30px|-{乃}-]]",
+          "[[Image:cjem-n3-1.svg|30px|-{承}-]]",
+          "[[Image:cjem-n12-1.svg|30px|-{今}-]]",
+          "[[Image:cjem-n11-2.svg|30px|-{丑}-]]",
+          "[[Image:cjem-n11-1.svg|30px|-{吳}-]]"
+        ],
+        "shuo_ming": "橫「鉤」形，「[[Image:cjrm-n1.svg|22px]]」90度躺臥，「[[Image:cjrm-n0.svg|22px]]」的首筆。或輕微改變筆形。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-n4.svg|30px]]",
+          "[[Image:cjrm-n5.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-n4-1.svg|30px|-{你}-]]",
+          "[[Image:cjem-n4-2.svg|30px|-{色}-]]",
+          "[[Image:cjem-n4-3.svg|30px|-{陷}-]]",
+          "[[Image:cjem-n5-1.svg|30px|-{久}-]]",
+          "[[Image:cjem-n5-2.svg|30px|-{夕}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-n2.svg|22px]]」向左衍生。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-n7.svg|30px]]",
+          "[[Image:cjrm-n8.svg|30px]]",
+          "[[Image:cjrm-n9.svg|30px]]",
+          "[[Image:cjrm-n10.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-n7-1.svg|30px|-{乞}-]]",
+          "[[Image:cjem-n8-1.svg|30px|-{亢}-]]",
+          "[[Image:cjem-n9-1.svg|30px|-{役}-]]",
+          "[[Image:cjem-n10-1.svg|30px|-{飛}-]]",
+          "[[Image:cjem-n10-2.svg|30px|-{佩}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-n2.svg|22px]]」向下衍生。"
+      }
+    ]
+  },
+  "O": {
+    "cangjie_char": "人",
+    "rows": [
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-o0.svg|30px]]",
+          "[[Image:cjrm-o2.svg|30px]]",
+          "[[Image:cjrm-o3.svg|30px]]",
+          "[[Image:cjrm-o4.svg|30px]]",
+          "[[Image:cjrm-o5.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-o1-1.svg|30px|-{走}-]]",
+          "[[Image:cjem-o2-1.svg|30px|-{以}-]]",
+          "[[Image:cjem-o3-1.svg|30px|-{舍}-]]",
+          "[[Image:cjem-o4-1.svg|30px|-{內}-]]",
+          "[[Image:cjem-o5-1.svg|30px|-{陝}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-o0.svg|22px]]」的原形。或輕微改變筆形。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-o6.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-o6-1.svg|30px|-{氣}-]]",
+          "[[Image:cjem-o6-2.svg|30px|-{海}-]]",
+          "[[Image:cjem-o6-3.svg|30px|-{知}-]]",
+          "[[Image:cjem-o6-4.svg|30px|-{攻}-]]",
+          "[[Image:cjem-o6-5.svg|30px|-{御}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-o0.svg|22px]]」的末筆變形。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-o7.svg|30px]]",
+          "[[Image:cjrm-o8.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-o7-1.svg|30px|-{仁}-]]",
+          "[[Image:cjem-o7-3.svg|30px|-{確}-]]",
+          "[[Image:cjem-o7-4.svg|30px|-{眾}-]]",
+          "[[Image:cjem-o8-1.svg|30px|-{丘}-]]",
+          "[[Image:cjem-o8-3.svg|30px|-{岳}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-o0.svg|22px]]」偏旁的形狀。或首筆略爲整形。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-o9.svg|30px]]",
+          "[[Image:cjrm-o10.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-o9-1.svg|30px|-{啄}-]]",
+          "[[Image:cjem-o9-2.svg|30px|-{象}-]]",
+          "[[Image:cjem-o10-1.svg|30px|-{飞}-]]",
+          "[[Image:cjem-o10-2.svg|30px|-{飛}-]]",
+          "[[Image:cjem-o10-3.svg|30px|-{兆}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-o0.svg|22px]]」的右邊。或輕微改變筆形。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-o11.svg|30px]]",
+          "[[Image:cjrm-o12.svg|30px]]",
+          "[[Image:cjrm-o13.svg|30px]]",
+          "[[Image:cjrm-o14.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-o11-1.svg|30px|-{尺}-]]",
+          "[[Image:cjem-o11-3.svg|30px|-{夫}-]]",
+          "[[Image:cjem-o12-1.svg|30px|-{規}-]]",
+          "[[Image:cjem-o12-2.svg|30px|-{迭}-]]",
+          "[[Image:cjem-o14-1.svg|30px|-{之}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-o0.svg|22px]]」的末筆。包括書法上讓右縮點者。"
+      }
+    ]
+  },
+  "P": {
+    "cangjie_char": "心",
+    "rows": [
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-p0.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-p0-1.svg|30px|-{思}-]]",
+          "[[Image:cjem-p0-2.svg|30px|-{沁}-]]",
+          "[[Image:cjem-p0-3.svg|30px|-{悶}-]]",
+          "[[Image:cjem-p0-4.svg|30px|-{寧}-]]",
+          "[[Image:cjem-p0-5.svg|30px|-{必}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-p0.svg|22px]]」的原形。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-p1.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-p1-1.svg|30px|-{怕}-]]",
+          "[[Image:cjem-p1-2.svg|30px|-{怡}-]]",
+          "[[Image:cjem-p1-3.svg|30px|-{恆}-]]",
+          "[[Image:cjem-p1-4.svg|30px|-{慳}-]]",
+          "[[Image:cjem-p1-5.svg|30px|-{筷}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-p0.svg|22px]]」偏旁的形狀。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-p2.svg|30px]]",
+          "[[Image:cjrm-p3.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-p2-1.svg|30px|-{恭}-]]",
+          "[[Image:cjem-p2-2.svg|30px|-{慕}-]]",
+          "[[Image:cjem-p2-3.svg|30px|-{忝}-]]",
+          "[[Image:cjem-p2-4.svg|30px|-{添}-]]",
+          "[[Image:cjem-p2-5.svg|30px|-{隳}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-p0.svg|22px]]」字底的形狀。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-p4.svg|30px]]",
+          "[[Image:cjrm-p5.svg|30px]]",
+          "[[Image:cjrm-p6.svg|30px]]",
+          "[[Image:cjrm-p7.svg|30px]]",
+          "[[Image:cjrm-p8.svg|30px]]",
+          "[[Image:cjrm-p9.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-p4-1.svg|30px|-{旨}-]]",
+          "[[Image:cjem-p5-1.svg|30px|-{老}-]]",
+          "[[Image:cjem-p6-1.svg|30px|-{化}-]]",
+          "[[Image:cjem-p6-2.svg|30px|-{屯}-]]",
+          "[[Image:cjem-p9-1.svg|30px|-{頃}-]]"
+        ],
+        "shuo_ming": "取「[[Image:cjrm-p0.svg|22px]]」的中央形。或輕微改變筆形。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-p10.svg|30px]]",
+          "[[Image:cjrm-p11.svg|30px]]",
+          "[[Image:cjrm-p12.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-p10-1.svg|30px|-{託}-]]",
+          "[[Image:cjem-p10-2.svg|30px|-{虐}-]]",
+          "[[Image:cjem-p10-3.svg|30px|-{也}-]]",
+          "[[Image:cjem-p11-1.svg|30px|-{世}-]]",
+          "[[Image:cjem-p12-1.svg|30px|-{切}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-p7.svg|22px]]」的變形。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-p13.svg|30px]]",
+          "[[Image:cjrm-p14.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-p13-1.svg|30px|-{代}-]]",
+          "[[Image:cjem-p13-2.svg|30px|-{民}-]]",
+          "[[Image:cjem-p13-3.svg|30px|-{低}-]]",
+          "[[Image:cjem-p13-4.svg|30px|-{式}-]]",
+          "[[Image:cjem-p14-1.svg|30px|-{曳}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-p10.svg|22px]]」的變形。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-p15.svg|30px]]",
+          "[[Image:cjrm-p17.svg|30px]]",
+          "[[Image:cjrm-p16.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-p15-3.svg|30px|-{砲}-]]",
+          "[[Image:cjem-p15-2.svg|30px|-{渴}-]]",
+          "[[Image:cjem-p17-1.svg|30px|-{鸟}-]]",
+          "[[Image:cjem-p16-1.svg|30px|-{隊}-]]",
+          "[[Image:cjem-p16-2.svg|30px|-{象}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-p0.svg|22px]]」中央的倒轉。"
+      }
+    ]
+  },
+  "Q": {
+    "cangjie_char": "手",
+    "rows": [
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-q0.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-q0-1.svg|30px|-{拿}-]]",
+          "[[Image:cjem-q0-2.svg|30px|-{掰}-]]",
+          "[[Image:cjem-q0-3.svg|30px|-{擧}-]]",
+          "[[Image:cjem-q0-4.svg|30px|-{挙}-]]",
+          "[[Image:cjem-q0-5.svg|30px|-{罉}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-q0.svg|22px]]」的原形。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-q1.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-q1-1.svg|30px|-{打}-]]",
+          "[[Image:cjem-q1-2.svg|30px|-{浙}-]]",
+          "[[Image:cjem-q1-3.svg|30px|-{誓}-]]",
+          "[[Image:cjem-q1-4.svg|30px|-{找}-]]",
+          "[[Image:cjem-q1-5.svg|30px|-{我}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-q0.svg|22px]]」偏旁的形狀。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-q2.svg|30px]]",
+          "[[Image:cjrm-q3.svg|30px]]",
+          "[[Image:cjrm-q4.svg|30px]]",
+          "[[Image:cjrm-q9.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-q3-1.svg|30px|-{淸}-]]",
+          "[[Image:cjem-q3-2.svg|30px|-{承}-]]",
+          "[[Image:cjem-q3-3.svg|30px|-{羊}-]]",
+          "[[Image:cjem-q4-1.svg|30px|-{耘}-]]",
+          "[[Image:cjem-q4-2.svg|30px|-{扥}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-q0.svg|22px]]」的主榦。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-q5.svg|30px]]",
+          "[[Image:cjrm-q6.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-q5-1.svg|30px|-{夫}-]]",
+          "[[Image:cjem-q5-2.svg|30px|-{那}-]]",
+          "[[Image:cjem-q5-3.svg|30px|-{专}-]]",
+          "[[Image:cjem-q5-4.svg|30px|-{看}-]]",
+          "[[Image:Cjem-q5-5.svg|30px|-{着}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-q3.svg|22px]]」的變形。或輕微改變筆形。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-q7.svg|30px]]",
+          "[[Image:cjrm-q8.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-q7-1.svg|30px|-{降}-]]",
+          "[[Image:cjem-q7-2.svg|30px|-{韋}-]]",
+          "[[Image:cjem-q7-3.svg|30px|-{桀}-]]",
+          "[[Image:cjem-q8-1.svg|30px|-{年}-]]",
+          "[[Image:cjem-q8-2.svg|30px|-{鵇}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-q3.svg|22px]]」的變形。或輕微改變筆形。"
+      }
+    ]
+  },
+  "R": {
+    "cangjie_char": "口",
+    "rows": [
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-r0.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-r0-1.svg|30px|-{吹}-]]",
+          "[[Image:cjem-r0-2.svg|30px|-{石}-]]",
+          "[[Image:cjem-r0-3.svg|30px|-{區}-]]",
+          "[[Image:cjem-r0-4.svg|30px|-{巳}-]]",
+          "[[Image:cjem-r0-5.svg|30px|-{官}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-r0.svg|22px]]」的原形。內部不含其他筆畫。"
+      }
+    ]
+  },
+  "S": {
+    "cangjie_char": "尸",
+    "rows": [
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-s0.svg|30px]]",
+          "[[Image:cjrm-s1.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-s0-1.svg|30px|-{尺}-]]",
+          "[[Image:cjem-s0-2.svg|30px|-{局}-]]",
+          "[[Image:cjem-s0-3.svg|30px|-{旎}-]]",
+          "[[Image:cjem-s0-4.svg|30px|-{戶}-]]",
+          "[[Image:cjem-s0-5.svg|30px|-{房}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-s0.svg|22px]]」的原形。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-s2.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-s2-1.svg|30px|-{己}-]]",
+          "[[Image:cjem-s2-2.svg|30px|-{巨}-]]",
+          "[[Image:cjem-s2-3.svg|30px|-{彗}-]]",
+          "[[Image:cjem-s2-4.svg|30px|-{尹}-]]",
+          "[[Image:cjem-s2-5.svg|30px|-{刍}-]]"
+        ],
+        "shuo_ming": "「側」形，「[[Image:cjrm-s1.svg|22px]]」的上半部。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-s3.svg|30px]]",
+          "[[Image:cjrm-s4.svg|30px]]",
+          "[[Image:cjrm-s5.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-s3-1.svg|30px|-{司}-]]",
+          "[[Image:cjem-s4-1.svg|30px|-{局}-]]",
+          "[[Image:cjem-s4-2.svg|30px|-{成}-]]",
+          "[[Image:cjem-s5-1.svg|30px|-{豕}-]]",
+          "[[Image:cjem-s5-2.svg|30px|-{犭}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-s2.svg|22px]]」的末尾縮短。或輕微改變筆形。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-s6.svg|30px]]",
+          "[[Image:cjrm-s7.svg|30px]]",
+          "[[Image:cjrm-s8.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-s6-1.svg|30px|-{臣}-]]",
+          "[[Image:cjem-s6-2.svg|30px|-{虐}-]]",
+          "[[Image:cjem-s6-3.svg|30px|-{姬}-]]",
+          "[[Image:cjem-s7-1.svg|30px|-{區}-]]",
+          "[[Image:cjem-s8-1.svg|30px|-{巨}-]]"
+        ],
+        "shuo_ming": "「側」形，「[[Image:cjrm-s2.svg|22px]]」的反轉。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-s9.svg|30px]]",
+          "[[Image:cjrm-s10.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-s9-1.svg|30px|-{耳}-]]",
+          "[[Image:cjem-s9-2.svg|30px|-{耶}-]]",
+          "[[Image:cjem-s10-1.svg|30px|-{長}-]]",
+          "[[Image:cjem-s10-2.svg|30px|-{套}-]]",
+          "[[Image:cjem-s10-3.svg|30px|-{髮}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-s6.svg|22px]]」的半累增式衍生形，有如在形塊當中疊着半個重影。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjr5m-s1.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-5s-1.svg|30px|-{乍}-]]",
+          "[[Image:cjem-5s-2.svg|30px|-{非}-]]",
+          "[[Image:cjem-5s-3.svg|30px|-{假}-]]",
+          "[[Image:cjem-5s-4.svg|30px|-{面}-]]",
+          "[[Image:cjem-5s-5.svg|30px|-{高}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-s6.svg|22px]]」的豎筆上下延伸。（五代新增）"
+      }
+    ]
+  },
+  "T": {
+    "cangjie_char": "廿",
+    "rows": [
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-t0.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-t0-1.svg|30px|-{甘}-]]",
+          "[[Image:cjem-t0-2.svg|30px|-{庶}-]]",
+          "[[Image:cjem-t0-3.svg|30px|-{燕}-]]",
+          "[[Image:cjem-t0-4.svg|30px|-{革}-]]",
+          "[[Image:cjem-t0-5.svg|30px|-{難}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-t0.svg|22px]]」的原形。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-t1.svg|30px]]",
+          "[[Image:cjrm-t2.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-t1-1.svg|30px|-{昔}-]]",
+          "[[Image:cjem-t1-2.svg|30px|-{共}-]]",
+          "[[Image:cjem-t1-3.svg|30px|-{其}-]]",
+          "[[Image:cjem-t1-4.svg|30px|-{典}-]]",
+          "[[Image:cjem-t1-5.svg|30px|-{畢}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-t0.svg|22px]]」的末筆伸長。或輕微改變筆形。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-t3.svg|30px]]",
+          "[[Image:cjrm-t4.svg|30px]]",
+          "[[Image:cjrm-t5.svg|30px]]",
+          "[[Image:cjrm-t6.svg|30px]]",
+          "[[Image:cjrm-t7.svg|30px]]",
+          "[[Image:cjrm-t8.svg|30px]]",
+          "[[Image:cjrm-t9.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-t3-1.svg|30px|-{曲}-]]",
+          "[[Image:cjem-t5-1.svg|30px|-{草}-]]",
+          "[[Image:cjem-t7-1.svg|30px|-{雚}-]]",
+          "[[Image:cjem-t8-1.svg|30px|-{卅}-]]",
+          "[[Image:cjem-t9-1.svg|30px|-{卉}-]]"
+        ],
+        "shuo_ming": "「並」形，兩側對稱，「[[Image:cjrm-t0.svg|22px]]」的主榦。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-t10.svg|30px]]",
+          "[[Image:cjrm-t11.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-t10-1.svg|30px|-{虛}-]]",
+          "[[Image:cjem-t10-2.svg|30px|-{墟}-]]",
+          "[[Image:cjem-t10-3.svg|30px|-{噓}-]]",
+          "[[Image:cjem-t11-1.svg|30px|-{聯}-]]",
+          "[[Image:cjem-t11-2.svg|30px|-{關}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-t6.svg|22px]]」的變形。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-t12.svg|30px]]",
+          "[[Image:cjrm-t15.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-t12-1.svg|30px|-{业}-]]",
+          "[[Image:cjem-t12-3.svg|30px|-{虚}-]]",
+          "[[Image:cjem-t12-2.svg|30px|-{並}-]]",
+          "[[Image:cjem-t12-4.svg|30px|-{皿}-]]",
+          "[[Image:cjem-t15-1.svg|30px|-{卹}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-t1.svg|22px]]」的主榦。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-t13.svg|30px]]",
+          "[[Image:cjrm-t16.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-t13-1.svg|30px|-{豆}-]]",
+          "[[Image:cjem-t13-2.svg|30px|-{益}-]]",
+          "[[Image:cjem-t13-3.svg|30px|-{立}-]]",
+          "[[Image:cjem-t13-4.svg|30px|-{并}-]]",
+          "[[Image:cjem-t16-1.svg|30px|-{站}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-t12.svg|22px]]」的變形。"
+      }
+    ]
+  },
+  "U": {
+    "cangjie_char": "山",
+    "rows": [
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-u0.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-u0-1.svg|30px|-{仙}-]]",
+          "[[Image:cjem-u0-2.svg|30px|-{茁}-]]",
+          "[[Image:cjem-u0-3.svg|30px|-{崑}-]]",
+          "[[Image:cjem-u0-4.svg|30px|-{幽}-]]",
+          "[[Image:cjem-u0-5.svg|30px|-{峽}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-u0.svg|22px]]」的原形。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-u1.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-u1-1.svg|30px|-{齒}-]]",
+          "[[Image:cjem-u1-2.svg|30px|-{凶}-]]",
+          "[[Image:cjem-u1-3.svg|30px|-{目}-]]",
+          "[[Image:cjem-u1-4.svg|30px|-{息}-]]",
+          "[[Image:cjem-u1-6.svg|30px|-{画}-]]"
+        ],
+        "shuo_ming": "「仰」形，「[[Image:cjrm-u0.svg|22px]]」的主要部份。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-u2.svg|30px]]",
+          "[[Image:cjrm-u5.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-u2-1.svg|30px|-{孔}-]]",
+          "[[Image:cjem-u2-2.svg|30px|-{光}-]]",
+          "[[Image:cjem-u2-3.svg|30px|-{己}-]]",
+          "[[Image:cjem-u5-1.svg|30px|-{輝}-]]",
+          "[[Image:cjem-u5-2.svg|30px|-{改}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-u1.svg|22px]]」的末尾縮短。包括書法上讓右屈鉤者。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-u3.svg|30px]]",
+          "[[Image:cjrm-u4.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-u3-1.svg|30px|-{嗤}-]]",
+          "[[Image:cjem-u4-4.svg|30px|-{艸}-]]",
+          "[[Image:cjem-u4-1.svg|30px|-{逆}-]]",
+          "[[Image:cjem-u4-2.svg|30px|-{朔}-]]",
+          "[[Image:cjem-u4-3.svg|30px|-{芻}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-u0.svg|22px]]」的豎筆伸長。"
+      }
+    ]
+  },
+  "V": {
+    "cangjie_char": "女",
+    "rows": [
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-v0.svg|30px]]",
+          "[[Image:cjrm-v1.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-v0-1.svg|30px|-{汝}-]]",
+          "[[Image:cjem-v0-2.svg|30px|-{娶}-]]",
+          "[[Image:cjem-v1-1.svg|30px|-{好}-]]",
+          "[[Image:cjem-v1-2.svg|30px|-{魏}-]]",
+          "[[Image:cjem-v1-3.svg|30px|-{威}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-v0.svg|22px]]」的原形。或輕微改變筆形。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-v2.svg|30px]]",
+          "[[Image:cjrm-v3.svg|30px]]",
+          "[[Image:cjrm-v4.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-v2-1.svg|30px|-{巡}-]]",
+          "[[Image:cjem-v2-2.svg|30px|-{兪}-]]",
+          "[[Image:cjem-v2-3.svg|30px|-{糸}-]]",
+          "[[Image:cjem-v4-1.svg|30px|-{互}-]]",
+          "[[Image:cjem-v4-2.svg|30px|-{彔}-]]"
+        ],
+        "shuo_ming": "「紐」形，「[[Image:cjrm-v0.svg|22px]]」的主榦。或輕微改變筆形。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-v5.svg|30px]]",
+          "[[Image:cjrm-v6.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-v5-1.svg|30px|-{県}-]]",
+          "[[Image:cjem-v5-2.svg|30px|-{吳}-]]",
+          "[[Image:cjem-v6-1.svg|30px|-{亡}-]]",
+          "[[Image:cjem-v6-2.svg|30px|-{曷}-]]",
+          "[[Image:cjem-v6-3.svg|30px|-{甚}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-v2.svg|22px]]」改變角度。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-v7.svg|30px]]",
+          "[[Image:cjrm-v8.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-v7-1.svg|30px|-{收}-]]",
+          "[[Image:cjem-v8-1.svg|30px|-{以}-]]",
+          "[[Image:cjem-v8-2.svg|30px|-{氏}-]]",
+          "[[Image:cjem-v8-3.svg|30px|-{民}-]]",
+          "[[Image:cjem-v8-4.svg|30px|-{瓜}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-v4.svg|22px]]」改變角度。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-v9.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-v9-1.svg|30px|-{鼠}-]]",
+          "[[Image:cjem-v9-2.svg|30px|-{鼬}-]]",
+          "[[Image:cjem-v9-3.svg|30px|-{巤}-]]",
+          "[[Image:cjem-v9-4.svg|30px|-{獵}-]]",
+          "[[Image:cjem-v9-5.svg|30px|-{邋}-]]"
+        ],
+        "shuo_ming": "把「[[Image:cjrm-v7.svg|22px]]」打斜。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-v10.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-v10-1.svg|30px|-{很}-]]",
+          "[[Image:cjem-v10-2.svg|30px|-{展}-]]",
+          "[[Image:cjem-v10-3.svg|30px|-{衣}-]]",
+          "[[Image:cjem-v10-4.svg|30px|-{衷}-]]",
+          "[[Image:cjem-v10-5.svg|30px|-{表}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-v7.svg|22px]]」向右衍生。"
+      }
+    ]
+  },
+  "W": {
+    "cangjie_char": "田",
+    "rows": [
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-w0.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-w0-1.svg|30px|-{畦}-]]",
+          "[[Image:cjem-w0-2.svg|30px|-{車}-]]",
+          "[[Image:cjem-w0-3.svg|30px|-{畢}-]]",
+          "[[Image:cjem-w0-4.svg|30px|-{宙}-]]",
+          "[[Image:cjem-w0-5.svg|30px|-{伸}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-w0.svg|22px]]」的原形。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-w1.svg|30px]]",
+          "[[Image:cjrm-w2.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-w1-1.svg|30px|-{國}-]]",
+          "[[Image:cjem-w2-1.svg|30px|-{罪}-]]",
+          "[[Image:cjem-w2-2.svg|30px|-{黑}-]]",
+          "[[Image:cjem-w2-3.svg|30px|-{衰}-]]",
+          "[[Image:cjem-w1-2.svg|30px|-{貫}-]]"
+        ],
+        "shuo_ming": "「方」形，「[[Image:cjrm-w0.svg|22px]]」的外框。內部含有其他筆畫。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-w3.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-w3-1.svg|30px|-{母}-]]",
+          "[[Image:cjem-w3-2.svg|30px|-{毋}-]]",
+          "[[Image:cjem-w3-3.svg|30px|-{海}-]]",
+          "[[Image:cjem-w3-4.svg|30px|-{莓}-]]",
+          "[[Image:cjem-w3-5.svg|30px|-{敏}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-w1.svg|22px]]」的變形。"
+      }
+    ]
+  },
+  "Y": {
+    "cangjie_char": "卜",
+    "rows": [
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-y0.svg|30px]]",
+          "[[Image:cjrm-y1.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-y0-1.svg|30px|-{下}-]]",
+          "[[Image:cjem-y0-2.svg|30px|-{外}-]]",
+          "[[Image:cjem-y1-1.svg|30px|-{上}-]]",
+          "[[Image:cjem-y1-2.svg|30px|-{真}-]]",
+          "[[Image:cjem-y1-3.svg|30px|-{正}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-y0.svg|22px]]」的原形。或輕微改變筆形。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-y2.svg|30px]]",
+          "[[Image:cjrm-y3.svg|30px]]",
+          "[[Image:cjrm-y4.svg|30px]]",
+          "[[Image:cjrm-y5.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-y2-1.svg|30px|-{充}-]]",
+          "[[Image:cjem-y2-2.svg|30px|-{文}-]]",
+          "[[Image:cjem-y2-3.svg|30px|-{亡}-]]",
+          "[[Image:cjem-y3-1.svg|30px|-{母}-]]",
+          "[[Image:cjem-y4-1.svg|30px|-{言}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-y0.svg|22px]]」或「[[Image:cjrm-y1.svg|22px]]」90度躺臥。或輕微改變筆形。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-y6.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-y6-1.svg|30px|-{斗}-]]",
+          "[[Image:cjem-y6-7.svg|30px|-{雨}-]]",
+          "[[Image:cjem-y6-3.svg|30px|-{於}-]]",
+          "[[Image:cjem-y6-4.svg|30px|-{冬}-]]",
+          "[[Image:cjem-y6-5.svg|30px|-{尽}-]]"
+        ],
+        "shuo_ming": "把「[[Image:cjrm-y3.svg|22px]]」的橫縮成點。"
+      },
+      {
+        "fuzhu_zixing": [
+          "[[Image:cjrm-y7.svg|30px]]",
+          "[[Image:cjrm-y8.svg|30px]]",
+          "[[Image:cjrm-y11.svg|30px]]"
+        ],
+        "zili": [
+          "[[Image:cjem-y7-1.svg|30px|-{連}-]]",
+          "[[Image:cjem-y7-2.svg|30px|-{追}-]]",
+          "[[Image:cjem-y7-3.svg|30px|-{逆}-]]",
+          "[[Image:cjem-y7-4.svg|30px|-{巡}-]]",
+          "[[Image:cjem-y7-5.svg|30px|-{漣}-]]"
+        ],
+        "shuo_ming": "「[[Image:cjrm-y6.svg|22px]]」向下衍生。"
+      }
+    ]
+  }
+}
