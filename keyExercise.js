@@ -1,14 +1,32 @@
+/**
+ * Utility functions for DOM class operations with safety checks
+ * @type {Object}
+ */
 const classOps = {
+  /**
+   * Adds a CSS class to a DOM element if it exists
+   * @param {HTMLElement} node - The DOM element to modify
+   * @param {string} token - The CSS class name to add
+   */
   add: function (node, token) {
     if (!node || !node.classList || !token) return;
     node.classList.add(token);
   },
+  /**
+   * Removes a CSS class from a DOM element if it exists
+   * @param {HTMLElement} node - The DOM element to modify
+   * @param {string} token - The CSS class name to remove
+   */
   remove: function (node, token) {
     if (!node || !node.classList || !token) return;
     node.classList.remove(token);
   },
 };
 
+/**
+ * Keyboard module for managing Cangjie keyboard interactions and visual feedback
+ * @returns {Object} Public API for keyboard operations
+ */
 const keyboard = (function () {
   const keyboard = document.getElementById("keyboardMap");
 
@@ -26,6 +44,10 @@ const keyboard = (function () {
     }
   }
 
+  /**
+   * Visually presses a key on the keyboard for a short duration
+   * @param {string} keyName - The key identifier to press
+   */
   function press(keyName) {
     setTimeout(function () {
       classOps.remove(key[keyName], "press");
@@ -34,6 +56,10 @@ const keyboard = (function () {
     classOps.add(key[keyName], "press");
   }
 
+  /**
+   * Shows a hint by highlighting a specific key on the keyboard
+   * @param {string} keyName - The key identifier to highlight
+   */
   function hint(keyName) {
     if (key.hint) classOps.remove(key[key.hint], "hint");
     classOps.add(key[keyName], "hint");
@@ -48,7 +74,11 @@ const keyboard = (function () {
   };
 })();
 
-// 字根類別資料集（字 + 代碼字母）
+/**
+ * Radical categories and their Cangjie code mappings for practice modes
+ * Each entry contains a Chinese character radical and its corresponding Cangjie code
+ * @type {Object.<string, string[]>}
+ */
 const RADICAL_POOLS = {
   philosophy: ["日a", "月b", "金c", "木d", "水e", "火f", "土g"],
   stroke: ["竹h", "戈i", "十j", "大k", "中l", "一m", "弓n"],
@@ -65,6 +95,10 @@ RADICAL_POOLS.all = [].concat(
   "難x"
 );
 
+/**
+ * Main quiz checking module that handles character practice and input validation
+ * @returns {Object} Public API for quiz operations
+ */
 const questCheck = (function () {
   const characterTable = document.getElementById("character");
   const defaultCharacterArray = characterTable.textContent.split("\n");
@@ -74,6 +108,11 @@ const questCheck = (function () {
   let isRadicalMode = false;
   let lastPickedCharacter = null;
 
+  /**
+   * Selects a random character from the current character array
+   * In radical mode, avoids repeating the last picked character
+   * @returns {string} The selected character string
+   */
   function pickRandomCharacter() {
     const start = 1;
     const end = characterArray.length - 2;
@@ -91,6 +130,9 @@ const questCheck = (function () {
     return characterArray[idx];
   }
 
+  /**
+   * Clears any active keyboard hint
+   */
   function clearHint() {
     if (keyboard.key && keyboard.key.hint) {
       classOps.remove(keyboard.key[keyboard.key.hint], "hint");
@@ -98,12 +140,21 @@ const questCheck = (function () {
     }
   }
 
+  /**
+   * Sets the visual status of the quest display for radical mode
+   * @param {string} status - The status to set ("wrong" or "off")
+   */
   function setQuestStatus(status) {
     const qc = questBar[0];
     classOps.remove(qc, "radical-wrong");
     if (status === "wrong") classOps.add(qc, "radical-wrong");
   }
 
+  /**
+   * Compares the user's input string with the current character
+   * @param {string} string - The user's input to compare
+   * @returns {number} The index where the first mismatch occurs, or the length if fully correct
+   */
   function compare(string) {
     for (let i = 0, l = nowCharacter.length; i < l; i++) {
       if (string.charAt(i) !== nowCharacter.charAt(i)) return i;
@@ -111,6 +162,12 @@ const questCheck = (function () {
     return nowCharacter.length;
   }
 
+  /**
+   * Updates the visual indicators on the quest bar based on input progress
+   * @param {number} index - The current correct position in the character
+   * @param {number} wrong - The position where user input differs from correct answer
+   * @returns {number} The hint character index for keyboard highlighting
+   */
   function indicate(index, wrong) {
     const l = nowCharacter.length;
     let i = 0;
@@ -147,6 +204,10 @@ const questCheck = (function () {
     return hintCharIndex;
   }
 
+  /**
+   * Sets up a new character for practice in the quest bar
+   * @param {string} characterString - The character string (radical + code) to display
+   */
   function setNewCharacter(characterString) {
     nowCharacter = characterString.slice(1);
     questBar[0].textContent = characterString.charAt(0);
@@ -172,6 +233,11 @@ const questCheck = (function () {
   // Apply initial hint for the first character (單字模式)
   keyboard.hint(nowCharacter.charAt(indicate(0, 0)));
 
+  /**
+   * Checks user input against the current character and updates UI accordingly
+   * @param {string} string - The user's input string
+   * @returns {boolean} True if the character was completed successfully
+   */
   function check(string) {
     let index = compare(string);
 
@@ -204,6 +270,11 @@ const questCheck = (function () {
     return index == -1;
   }
 
+  /**
+   * Switches between normal character mode and radical practice mode
+   * @param {boolean} newIsRadicalMode - Whether to enable radical mode
+   * @param {string} categoryKey - The radical category key (philosophy, stroke, human, shape, all)
+   */
   function setMode(newIsRadicalMode, categoryKey) {
     isRadicalMode = !!newIsRadicalMode;
     lastPickedCharacter = null;
@@ -261,12 +332,18 @@ const questCheck = (function () {
   };
 })();
 
+/**
+ * Ensures the input bar has focus for keyboard input
+ */
 function focusOnKeyboard() {
   const input = document.getElementById("inputBar");
   if (!input) return;
   if (document.activeElement !== input) input.focus();
 }
 
+/**
+ * Input event handler for the main input bar - processes Cangjie input
+ */
 document.getElementById("inputBar").oninput = function () {
   let string = this.value;
   if (/[^a-y]/.test(string)) {
@@ -286,12 +363,17 @@ document.getElementById("inputBar").oninput = function () {
 
 focusOnKeyboard();
 
-// 模式/類別下拉初始化
+/**
+ * Initialization for mode and category dropdown selectors
+ */
 (function () {
   let modeSelect = document.getElementById("modeSelect");
   let categorySelect = document.getElementById("categorySelect");
   if (!modeSelect || !categorySelect) return;
 
+  /**
+   * Applies the selected mode and category to the quiz system
+   */
   function applyMode() {
     const isRoot = modeSelect.value === "radical";
     categorySelect.disabled = !isRoot;
@@ -307,6 +389,9 @@ focusOnKeyboard();
   applyMode();
 })();
 
+/**
+ * DOMContentLoaded event handler - initializes UI controls and event listeners
+ */
 document.addEventListener("DOMContentLoaded", () => {
   const toggleVisibilityBtn = document.getElementById("toggleVisibilityBtn");
   const keyboardMap = document.getElementById("keyboardMap");
@@ -317,6 +402,9 @@ document.addEventListener("DOMContentLoaded", () => {
   let isEnglishLayout = false;
   let originalMapper = null;
 
+  /**
+   * Creates a snapshot of the original keyboard mapper for layout switching
+   */
   function ensureOriginalMapperSnapshot() {
     if (originalMapper) return;
     originalMapper = {};
@@ -327,6 +415,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  /**
+   * Toggles between Cangjie and English keyboard layouts
+   */
   function toggleLayout() {
     ensureOriginalMapperSnapshot();
     isEnglishLayout = !isEnglishLayout;
@@ -351,6 +442,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (toggleVisibilityBtn && keyboardMap) {
+    /**
+     * Synchronizes the visibility button text and layout button state with keyboard visibility
+     */
     const syncVisibilityState = () => {
       const isHidden = keyboardMap.classList.contains("hidden");
       toggleVisibilityBtn.textContent = isHidden ? "顯示鍵盤" : "隱藏鍵盤";
@@ -379,11 +473,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let overlayShowTimer = null;
 
+    /**
+     * Shows the focus overlay if the input bar is not currently focused
+     */
     function showOverlayIfStillBlurred() {
       const isFocused = document.activeElement === inputBar;
       keyboardMap.classList.toggle("no-focus", !isFocused);
     }
 
+    /**
+     * Schedules the overlay to show after a delay to avoid flashes
+     */
     function scheduleOverlayShow() {
       if (overlayShowTimer) {
         clearTimeout(overlayShowTimer);
