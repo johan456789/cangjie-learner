@@ -41,7 +41,7 @@
    - Run via `uv run` as part of a simple preflight.
 
 5) Document conventions
-   - Create `CONTRIBUTING.md` section listing naming rules and constants guidelines.
+   - update `AGENTS.md` section listing naming rules and constants guidelines.
 
 ---
 
@@ -63,5 +63,4 @@
 
 **Rollback plan**
 - Keep a branch with only docs and constants. If issues arise, revert Python script changes to previous version; JS can continue using old strings until fixed.
-
 

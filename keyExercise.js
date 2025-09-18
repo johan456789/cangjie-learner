@@ -28,50 +28,14 @@ const classOps = {
  * @returns {Object} Public API for keyboard operations
  */
 const keyboard = (function () {
-  const keyboard = document.getElementById("keyboardMap");
-
-  const key = {};
-
-  const mapper = { " ": " " };
-
-  for (let i = 0; i < 3; i++) {
-    const row = keyboard.children[i].children;
-
-    for (let j = 0, l = row.length; j < l; j++) {
-      const keyName = (row[j].id || "").slice(-1);
-      key[keyName] = row[j];
-      mapper[keyName] = row[j].textContent;
-    }
-  }
-
-  /**
-   * Visually presses a key on the keyboard for a short duration
-   * @param {string} keyName - The key identifier to press
-   */
-  function press(keyName) {
-    setTimeout(function () {
-      classOps.remove(key[keyName], "press");
-    }, 150);
-
-    classOps.add(key[keyName], "press");
-  }
-
-  /**
-   * Shows a hint by highlighting a specific key on the keyboard
-   * @param {string} keyName - The key identifier to highlight
-   */
-  function hint(keyName) {
-    if (key.hint) classOps.remove(key[key.hint], "hint");
-    classOps.add(key[keyName], "hint");
-    key.hint = keyName;
-  }
-
-  return {
-    press: press,
-    hint: hint,
-    mapper: mapper,
-    key: key,
-  };
+  const mapper =
+    (window.CJL &&
+      window.CJL.keyboardView &&
+      window.CJL.keyboardView.getOriginalLabels()) ||
+    {};
+  function press() {}
+  function hint() {}
+  return { press: press, hint: hint, mapper: mapper, key: {} };
 })();
 
 /**
@@ -100,234 +64,16 @@ RADICAL_POOLS.all = [].concat(
  * @returns {Object} Public API for quiz operations
  */
 const questCheck = (function () {
-  const characterTable = document.getElementById("character");
-  const defaultCharacterArray = characterTable.textContent.split("\n");
-  let characterArray = defaultCharacterArray.slice();
-  const questBar = document.getElementById("questAlphabet").children;
-  let nowCharacter;
-  let isRadicalMode = false;
-  let lastPickedCharacter = null;
-
-  /**
-   * Selects a random character from the current character array
-   * In radical mode, avoids repeating the last picked character
-   * @returns {string} The selected character string
-   */
-  function pickRandomCharacter() {
-    const start = 1;
-    const end = characterArray.length - 2;
-    const count = end - start + 1;
-    let idx;
-    if (count <= 0) return characterArray[0];
-    if (isRadicalMode && count > 1 && lastPickedCharacter !== null) {
-      do {
-        idx = Math.floor(Math.random() * count) + start;
-      } while (characterArray[idx] === lastPickedCharacter);
-    } else {
-      idx = Math.floor(Math.random() * count) + start;
-    }
-    lastPickedCharacter = characterArray[idx];
-    return characterArray[idx];
-  }
-
-  /**
-   * Clears any active keyboard hint
-   */
-  function clearHint() {
-    if (keyboard.key && keyboard.key.hint) {
-      classOps.remove(keyboard.key[keyboard.key.hint], "hint");
-      keyboard.key.hint = null;
-    }
-  }
-
-  /**
-   * Sets the visual status of the quest display for radical mode
-   * @param {string} status - The status to set ("wrong" or "off")
-   */
-  function setQuestStatus(status) {
-    const qc = questBar[0];
-    classOps.remove(qc, "radical-wrong");
-    if (status === "wrong") classOps.add(qc, "radical-wrong");
-  }
-
-  /**
-   * Compares the user's input string with the current character
-   * @param {string} string - The user's input to compare
-   * @returns {number} The index where the first mismatch occurs, or the length if fully correct
-   */
-  function compare(string) {
-    for (let i = 0, l = nowCharacter.length; i < l; i++) {
-      if (string.charAt(i) !== nowCharacter.charAt(i)) return i;
-    }
-    return nowCharacter.length;
-  }
-
-  /**
-   * Updates the visual indicators on the quest bar based on input progress
-   * @param {number} index - The current correct position in the character
-   * @param {number} wrong - The position where user input differs from correct answer
-   * @returns {number} The hint character index for keyboard highlighting
-   */
-  function indicate(index, wrong) {
-    const l = nowCharacter.length;
-    let i = 0;
-    while (i < index) {
-      const el = questBar[i + 1];
-      classOps.remove(el, "wrong");
-      classOps.remove(el, "cursor");
-      classOps.add(el, "right");
-      i++;
-    }
-
-    const hintCharIndex = i;
-    while (i < wrong) {
-      const el = questBar[i + 1];
-      classOps.remove(el, "right");
-      classOps.remove(el, "cursor");
-      classOps.add(el, "wrong");
-      i++;
-    }
-    {
-      const el = questBar[++i];
-      classOps.remove(el, "right");
-      classOps.remove(el, "wrong");
-      classOps.add(el, "cursor");
-    }
-
-    while (i < l) {
-      const el = questBar[i + 1];
-      classOps.remove(el, "right");
-      classOps.remove(el, "wrong");
-      classOps.remove(el, "cursor");
-      i++;
-    }
-    return hintCharIndex;
-  }
-
-  /**
-   * Sets up a new character for practice in the quest bar
-   * @param {string} characterString - The character string (radical + code) to display
-   */
-  function setNewCharacter(characterString) {
-    nowCharacter = characterString.slice(1);
-    questBar[0].textContent = characterString.charAt(0);
-    for (let i = 1, l = questBar.length; i < l; i++) {
-      if (isRadicalMode) {
-        questBar[i].textContent = "";
-      } else {
-        questBar[i].textContent =
-          keyboard.mapper[characterString.charAt(i) || " "];
-      }
-
-      const el = questBar[i];
-      classOps.remove(el, "right");
-      classOps.remove(el, "wrong");
-      classOps.remove(el, "cursor");
-    }
-
-    if (isRadicalMode) setQuestStatus("off");
-  }
-
-  setNewCharacter(pickRandomCharacter());
-
-  // Apply initial hint for the first character (單字模式)
-  keyboard.hint(nowCharacter.charAt(indicate(0, 0)));
-
-  /**
-   * Checks user input against the current character and updates UI accordingly
-   * @param {string} string - The user's input string
-   * @returns {boolean} True if the character was completed successfully
-   */
-  function check(string) {
-    let index = compare(string);
-
-    if (index >= nowCharacter.length) {
-      setNewCharacter(pickRandomCharacter());
-      index = -1;
-      string = "";
-
-      // Apply hint for the new character's first key
-      if (!isRadicalMode) {
-        keyboard.hint(nowCharacter.charAt(indicate(0, 0)));
-      } else {
-        indicate(0, 0);
-        clearHint();
-      }
-    }
-
-    if (!isRadicalMode) {
-      keyboard.hint(nowCharacter.charAt(indicate(index, string.length)));
-    } else {
-      // Radical mode: only keyboard highlight when wrong; no neutral/correct state
-      if (string && string.length > index) {
-        setQuestStatus("wrong");
-        keyboard.hint(nowCharacter.charAt(0));
-      } else if (!string) {
-        setQuestStatus("off");
-      }
-    }
-
-    return index == -1;
-  }
-
-  /**
-   * Switches between normal character mode and radical practice mode
-   * @param {boolean} newIsRadicalMode - Whether to enable radical mode
-   * @param {string} categoryKey - The radical category key (philosophy, stroke, human, shape, all)
-   */
-  function setMode(newIsRadicalMode, categoryKey) {
-    isRadicalMode = !!newIsRadicalMode;
-    lastPickedCharacter = null;
-
-    // Update the available character pool
-    if (isRadicalMode) {
-      const pool = RADICAL_POOLS[categoryKey] || RADICAL_POOLS.philosophy;
-      characterArray = [""].concat(pool).concat([""]);
-    } else {
-      characterArray = defaultCharacterArray.slice();
-    }
-
-    // Toggle disabled state on keyboard keys based on radical pool
-    (function updateDisabledKeys() {
-      const allowed = {};
-      if (isRadicalMode) {
-        const selectedPool =
-          RADICAL_POOLS[categoryKey] || RADICAL_POOLS.philosophy;
-        for (let i = 0; i < selectedPool.length; i++) {
-          const entry = selectedPool[i];
-          const alpha = entry.charAt(entry.length - 1);
-          allowed[alpha] = true;
-        }
-      }
-
-      for (let alpha in keyboard.key) {
-        if (!keyboard.key.hasOwnProperty(alpha)) continue;
-        const node = keyboard.key[alpha];
-        if (!node) continue;
-        if (isRadicalMode) {
-          if (allowed[alpha]) classOps.remove(node, "disabled");
-          else classOps.add(node, "disabled");
-        } else {
-          classOps.remove(node, "disabled");
-        }
-      }
-    })();
-
-    setNewCharacter(pickRandomCharacter());
-
-    if (isRadicalMode) {
-      setQuestStatus("off");
-      clearHint();
-    } else {
-      keyboard.hint(nowCharacter.charAt(indicate(0, 0)));
-    }
-  }
-
+  const controller = (window.CJL && window.CJL.controller) || null;
   return {
-    check: check,
-    setMode: setMode,
+    check: function (string) {
+      return controller ? controller.check(string) : false;
+    },
+    setMode: function (newIsRadicalMode, categoryKey) {
+      if (controller) controller.setMode(!!newIsRadicalMode, categoryKey);
+    },
     isRadical: function () {
-      return isRadicalMode;
+      return controller ? controller.isRadical() : false;
     },
   };
 })();
@@ -346,18 +92,18 @@ function focusOnKeyboard() {
  */
 document.getElementById("inputBar").oninput = function () {
   let string = this.value;
-  if (/[^a-y]/.test(string)) {
+  const INVALID =
+    (window.CJL &&
+      window.CJL.constants &&
+      window.CJL.constants.INVALID_KEY_REGEX) ||
+    /[^a-y]/;
+  if (INVALID.test(string)) {
     this.value = "";
     string = "";
   }
 
+  const isCompleted = questCheck.check(string);
   const inRadical = questCheck.isRadical ? questCheck.isRadical() : false;
-
-  string && keyboard.press(string.slice(-1));
-
-  const isCompleted = questCheck.check
-    ? questCheck.check(string)
-    : questCheck(string);
   if (inRadical || isCompleted) this.value = "";
 };
 
@@ -419,20 +165,12 @@ document.addEventListener("DOMContentLoaded", () => {
    * Toggles between Cangjie and English keyboard layouts
    */
   function toggleLayout() {
-    ensureOriginalMapperSnapshot();
-    isEnglishLayout = !isEnglishLayout;
-
-    // Update keyboard visuals
-    const keys = document.querySelectorAll('#keyboardMap span[id^="key-"]');
-    keys.forEach((key) => {
-      const alpha = (key.id || "").slice(4);
-      const label = isEnglishLayout
-        ? alpha.toUpperCase()
-        : originalMapper[alpha];
-      key.textContent = label;
-    });
-    if (toggleLayoutBtn) {
-      toggleLayoutBtn.textContent = isEnglishLayout ? "倉頡鍵盤" : "英文鍵盤";
+    if (
+      window.CJL &&
+      window.CJL.controller &&
+      window.CJL.controller.toggleLayout
+    ) {
+      window.CJL.controller.toggleLayout();
     }
     focusOnKeyboard();
   }
