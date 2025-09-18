@@ -1,19 +1,26 @@
 function changeClass(node, command) {
-  const operator = command.charAt(0),
-    newClass = command.slice(1),
-    oldClass = (node.className || "").split(" ");
+  if (!node || !node.classList) return;
+  const operator = command.charAt(0);
+  const value = command.slice(1);
 
-  if (operator == "+") {
-    oldClass.push(newClass);
-    node.className = oldClass.join(" ");
-  } else if (operator == "-") {
-    let idx = oldClass.indexOf(newClass);
-    while (idx !== -1) {
-      oldClass.splice(idx, 1);
-      idx = oldClass.indexOf(newClass);
-    }
-    node.className = oldClass.join(" ");
-  } else node.className = command;
+  if (operator === "+") {
+    if (!value) return; // no-op
+    const cl = node.classList;
+    if (cl.contains(value)) return; // avoid duplicate & DOM write
+    cl.add(value);
+    return;
+  }
+
+  if (operator === "-") {
+    if (!value) return; // no-op
+    const cl = node.classList;
+    if (!cl.contains(value)) return; // already absent
+    cl.remove(value);
+    return;
+  }
+
+  if (node.className === command) return; // no change
+  node.className = command; // set exact class tokens (e.g., "right", "wrong", "")
 }
 
 const keyboard = (function () {
