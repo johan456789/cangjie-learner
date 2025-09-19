@@ -76,11 +76,18 @@
     var index = compareInput(state, input);
     var right = [];
     var wrong = [];
-    // Cursor should advance to the next position after the latest input in normal mode.
-    // In radical mode, keep cursor at the first slot (like original behavior).
-    var cursorIndex = state.isRadicalMode
-      ? Math.min(1, code.length)
-      : Math.min((input ? input.length : 0) + 1, code.length);
+    // Cursor behavior:
+    // - Normal mode: cursor moves to one position after current input.
+    //   If input exceeds code length, do NOT clamp to the last slot, since that would
+    //   visually override the wrong indicator. Instead, signal "no cursor" with -1.
+    // - Radical mode: keep cursor at the first slot (like original behavior).
+    var cursorIndex;
+    if (state.isRadicalMode) {
+      cursorIndex = Math.min(1, code.length);
+    } else {
+      var desired = (input ? input.length : 0) + 1;
+      cursorIndex = desired > code.length ? -1 : desired;
+    }
     var hintKey = null;
     var radicalWrong = false;
 
