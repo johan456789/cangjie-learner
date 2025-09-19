@@ -2,12 +2,19 @@
 (function () {
   const root = typeof window !== "undefined" ? window : globalThis;
   if (!root.CJL) root.CJL = {};
-  const constants = root.CJL.constants;
-  const stateApi = root.CJL.questState;
-  const keyboardView = root.CJL.keyboardView;
-  const questBarView = root.CJL.questBarView;
+  let constants = null;
+  let stateApi = null;
+  let keyboardView = null;
+  let questBarView = null;
 
-  if (!constants || !stateApi || !keyboardView || !questBarView) return;
+  function loadDeps() {
+    const cj = root.CJL || {};
+    constants = cj.constants;
+    stateApi = cj.questState;
+    keyboardView = cj.keyboardView;
+    questBarView = cj.questBarView;
+    return !!(constants && stateApi && keyboardView && questBarView);
+  }
 
   // Build initial state from DOM source list
   function readDefaultCharacters() {
@@ -297,17 +304,22 @@
   }
 
   root.CJL.controller = controller;
-  // Auto-init on DOM ready
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init);
-  } else {
-    init();
+
+  function startWhenReady() {
+    if (!loadDeps()) {
+      setTimeout(startWhenReady, 0);
+      return;
+    }
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", function () {
+        init();
+        wireEvents();
+      });
+    } else {
+      init();
+      wireEvents();
+    }
   }
 
-  // After init, wire events
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", wireEvents);
-  } else {
-    wireEvents();
-  }
+  startWhenReady();
 })();

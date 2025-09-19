@@ -1,62 +1,63 @@
 // Global constants and selectors for Cangjie Learner (no side effects)
-(function () {
-  const root = typeof window !== "undefined" ? window : globalThis;
-  if (!root.CJL) root.CJL = {};
+// Converted to ES module with backward-compat shim
 
-  // Class names used across views
-  const CLASSES = {
-    press: "press",
-    hint: "hint",
-    disabled: "disabled",
-    right: "right",
-    wrong: "wrong",
-    cursor: "cursor",
-    radicalWrong: "radical-wrong",
-    hidden: "hidden",
-    noFocus: "no-focus",
-  };
+// Class names used across views
+export const CLASSES = {
+  press: "press",
+  hint: "hint",
+  disabled: "disabled",
+  right: "right",
+  wrong: "wrong",
+  cursor: "cursor",
+  radicalWrong: "radical-wrong",
+  hidden: "hidden",
+  noFocus: "no-focus",
+};
 
-  // DOM selectors used by views/controllers
-  const SELECTORS = {
-    keyboardMap: "#keyboardMap",
-    questAlphabet: "#questAlphabet",
-    inputBar: "#inputBar",
-    characterList: "#character",
-    modeSelect: "#modeSelect",
-    categorySelect: "#categorySelect",
-    toggleLayout: "#toggleLayout",
-    toggleVisibilityBtn: "#toggleVisibilityBtn",
-  };
+// DOM selectors used by views/controllers
+export const SELECTORS = {
+  keyboardMap: "#keyboardMap",
+  questAlphabet: "#questAlphabet",
+  inputBar: "#inputBar",
+  characterList: "#character",
+  modeSelect: "#modeSelect",
+  categorySelect: "#categorySelect",
+  toggleLayout: "#toggleLayout",
+  toggleVisibilityBtn: "#toggleVisibilityBtn",
+};
 
-  // Valid key regex (only a..y)
-  const INVALID_KEY_REGEX = /[^a-y]/;
+// Valid key regex (only a..y)
+export const INVALID_KEY_REGEX = /[^a-y]/;
 
-  // Timings (ms)
-  const TIMINGS = {
-    pressMs: 150,
-    overlayDelayMs: 200,
-  };
+// Timings (ms)
+export const TIMINGS = {
+  pressMs: 150,
+  overlayDelayMs: 200,
+};
 
-  // Radical pools (kept identical to original logic)
-  const RADICAL_POOLS = {
-    philosophy: ["日a", "月b", "金c", "木d", "水e", "火f", "土g"],
-    stroke: ["竹h", "戈i", "十j", "大k", "中l", "一m", "弓n"],
-    human: ["人o", "心p", "手q", "口r"],
-    shape: ["尸s", "廿t", "山u", "女v", "田w", "卜y"],
-  };
-  RADICAL_POOLS.all = [
-    ...RADICAL_POOLS.philosophy,
-    ...RADICAL_POOLS.stroke,
-    ...RADICAL_POOLS.human,
-    ...RADICAL_POOLS.shape,
-    "難x",
-  ];
+// Radical pools (kept identical to original logic)
+export const RADICAL_POOLS = {
+  philosophy: ["日a", "月b", "金c", "木d", "水e", "火f", "土g"],
+  stroke: ["竹h", "戈i", "十j", "大k", "中l", "一m", "弓n"],
+  human: ["人o", "心p", "手q", "口r"],
+  shape: ["尸s", "廿t", "山u", "女v", "田w", "卜y"],
+};
+RADICAL_POOLS.all = [
+  ...RADICAL_POOLS.philosophy,
+  ...RADICAL_POOLS.stroke,
+  ...RADICAL_POOLS.human,
+  ...RADICAL_POOLS.shape,
+  "難x",
+];
 
-  root.CJL.constants = {
+// Backward-compatibility shim for legacy controller
+if (typeof window !== "undefined") {
+  window.CJL = window.CJL || {};
+  window.CJL.constants = {
     CLASSES: CLASSES,
     SELECTORS: SELECTORS,
     INVALID_KEY_REGEX: INVALID_KEY_REGEX,
     TIMINGS: TIMINGS,
     RADICAL_POOLS: RADICAL_POOLS,
   };
-})();
+}
