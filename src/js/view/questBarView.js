@@ -5,6 +5,12 @@
   var constants = root.CJL.constants || { CLASSES: {}, SELECTORS: {} };
 
   var dom = null;
+  var prevState = {
+    right: [],
+    wrong: [],
+    cursorIndex: null,
+    radicalWrong: false,
+  };
   function ensureDomCache() {
     if (dom) return dom;
     var container = document.querySelector(constants.SELECTORS.questAlphabet);
@@ -35,6 +41,12 @@
       );
       el.textContent = isRadicalMode ? "" : mappedLabels[i - 1] || "";
     }
+
+    // Reset previous indicator cache when a new character is rendered
+    prevState.right = [];
+    prevState.wrong = [];
+    prevState.cursorIndex = null;
+    prevState.radicalWrong = false;
   }
 
   /**
@@ -45,38 +57,67 @@
     ensureDomCache();
     var right = (data && data.right) || [];
     var wrong = (data && data.wrong) || [];
-    var cursorIndex = (data && data.cursorIndex) || 0;
+    var cursorIndex = data && data.cursorIndex;
     var radicalWrong = !!(data && data.radicalWrong);
 
-    // Reset radical wrong status
+    // Radical wrong diff
     var first = dom.slots && dom.slots[0];
-    if (first) first.classList.remove(constants.CLASSES.radicalWrong);
-    if (radicalWrong && first)
-      first.classList.add(constants.CLASSES.radicalWrong);
+    if (first) {
+      if (prevState.radicalWrong && !radicalWrong)
+        first.classList.remove(constants.CLASSES.radicalWrong);
+      else if (!prevState.radicalWrong && radicalWrong)
+        first.classList.add(constants.CLASSES.radicalWrong);
+    }
 
-    // Clear all
+    // Build sets for prev and next
+    var prevRightSet = {};
+    for (var pr = 0; pr < prevState.right.length; pr++)
+      prevRightSet[prevState.right[pr]] = true;
+    var prevWrongSet = {};
+    for (var pw = 0; pw < prevState.wrong.length; pw++)
+      prevWrongSet[prevState.wrong[pw]] = true;
+    var nextRightSet = {};
+    for (var nr = 0; nr < right.length; nr++) nextRightSet[right[nr]] = true;
+    var nextWrongSet = {};
+    for (var nw = 0; nw < wrong.length; nw++) nextWrongSet[wrong[nw]] = true;
+
+    // Apply diffs for right/wrong
     for (var i = 1; i < dom.slots.length; i++) {
       var el = dom.slots[i];
-      el.classList.remove(
-        constants.CLASSES.right,
-        constants.CLASSES.wrong,
-        constants.CLASSES.cursor
-      );
+      var codeIndex = i - 1;
+      var hadRight = !!prevRightSet[codeIndex];
+      var hasRight = !!nextRightSet[codeIndex];
+      if (hadRight !== hasRight) {
+        if (hasRight) el.classList.add(constants.CLASSES.right);
+        else el.classList.remove(constants.CLASSES.right);
+      }
+      var hadWrong = !!prevWrongSet[codeIndex];
+      var hasWrong = !!nextWrongSet[codeIndex];
+      if (hadWrong !== hasWrong) {
+        if (hasWrong) el.classList.add(constants.CLASSES.wrong);
+        else el.classList.remove(constants.CLASSES.wrong);
+      }
+      // Cursor will be handled separately
+      el.classList.remove(constants.CLASSES.cursor);
     }
 
-    // Apply right and wrong
-    for (var r = 0; r < right.length; r++) {
-      var ri = right[r] + 1;
-      if (dom.slots[ri]) dom.slots[ri].classList.add(constants.CLASSES.right);
-    }
-    for (var w = 0; w < wrong.length; w++) {
-      var wi = wrong[w] + 1;
-      if (dom.slots[wi]) dom.slots[wi].classList.add(constants.CLASSES.wrong);
+    // Cursor diff
+    var prevCursor = prevState.cursorIndex;
+    if (prevCursor !== cursorIndex) {
+      if (dom.slots[prevCursor])
+        dom.slots[prevCursor].classList.remove(constants.CLASSES.cursor);
+      if (dom.slots[cursorIndex])
+        dom.slots[cursorIndex].classList.add(constants.CLASSES.cursor);
+    } else if (dom.slots[cursorIndex]) {
+      // Re-apply if same to ensure visibility
+      dom.slots[cursorIndex].classList.add(constants.CLASSES.cursor);
     }
 
-    // Cursor
-    var ci = cursorIndex;
-    if (dom.slots[ci]) dom.slots[ci].classList.add(constants.CLASSES.cursor);
+    // Save for next diff
+    prevState.right = right.slice();
+    prevState.wrong = wrong.slice();
+    prevState.cursorIndex = cursorIndex;
+    prevState.radicalWrong = radicalWrong;
   }
 
   root.CJL.questBarView = {

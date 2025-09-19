@@ -8,6 +8,7 @@
   var originalLabels = null;
   var listenersBound = false;
   var pressedKeys = {};
+  var pressTimers = {};
 
   function ensureDomCache() {
     if (dom) return dom;
@@ -50,14 +51,17 @@
     );
     if (toggleLayoutBtn) {
       toggleLayoutBtn.textContent = isEnglishLayout ? "倉頡鍵盤" : "英文鍵盤";
+      toggleLayoutBtn.setAttribute("aria-pressed", String(isEnglishLayout));
     }
   }
 
   function applyKeyStates(args) {
     ensureDomCache();
     var CL = constants.CLASSES;
+    var TIMINGS = constants.TIMINGS || {};
     var hintKey = args && args.hintKey;
     var disabledKeys = (args && args.disabledKeys) || {};
+    var pressedKey = args && args.pressedKey;
 
     for (var alpha in dom.keyByAlpha) {
       if (!Object.prototype.hasOwnProperty.call(dom.keyByAlpha, alpha))
@@ -69,6 +73,20 @@
 
     if (hintKey && dom.keyByAlpha[hintKey])
       dom.keyByAlpha[hintKey].classList.add(CL.hint);
+
+    // Timer-based press state for visual feedback when updates come from controller
+    if (pressedKey && dom.keyByAlpha[pressedKey]) {
+      var node = dom.keyByAlpha[pressedKey];
+      node.classList.add(CL.press);
+      if (pressTimers[pressedKey]) clearTimeout(pressTimers[pressedKey]);
+      pressTimers[pressedKey] = setTimeout(
+        function () {
+          node.classList.remove(CL.press);
+          pressTimers[pressedKey] = null;
+        },
+        typeof TIMINGS.pressMs === "number" ? TIMINGS.pressMs : 150
+      );
+    }
   }
 
   function alphaFromEvent(event) {
