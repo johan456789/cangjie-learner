@@ -142,14 +142,3 @@ export function getOriginalLabels() {
   ensureDomCache();
   return Object.assign({}, originalLabels || {});
 }
-
-// Backward-compatibility shim
-if (typeof window !== "undefined") {
-  window.CJL = window.CJL || {};
-  window.CJL.keyboardView = {
-    renderKeyboardLabels: renderKeyboardLabels,
-    applyKeyStates: applyKeyStates,
-    getOriginalLabels: getOriginalLabels,
-    bindKeyHoldHandlers: bindKeyHoldHandlers,
-  };
-}

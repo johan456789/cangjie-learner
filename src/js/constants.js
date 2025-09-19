@@ -1,5 +1,4 @@
-// Global constants and selectors for Cangjie Learner (no side effects)
-// Converted to ES module with backward-compat shim
+// Global constants and selectors for Cangjie Learner (ES module)
 
 // Class names used across views
 export const CLASSES = {
@@ -49,15 +48,3 @@ RADICAL_POOLS.all = [
   ...RADICAL_POOLS.shape,
   "難x",
 ];
-
-// Backward-compatibility shim for legacy controller
-if (typeof window !== "undefined") {
-  window.CJL = window.CJL || {};
-  window.CJL.constants = {
-    CLASSES: CLASSES,
-    SELECTORS: SELECTORS,
-    INVALID_KEY_REGEX: INVALID_KEY_REGEX,
-    TIMINGS: TIMINGS,
-    RADICAL_POOLS: RADICAL_POOLS,
-  };
-}

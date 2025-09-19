@@ -132,15 +132,3 @@ export function setMode(state, args) {
     return { state: next, activePool: [] };
   }
 }
-
-// Backward-compatibility shim
-if (typeof window !== "undefined") {
-  window.CJL = window.CJL || {};
-  window.CJL.questState = {
-    initializeState: initializeState,
-    pickRandomCharacter: pickRandomCharacter,
-    compareInput: compareInput,
-    computeIndicators: computeIndicators,
-    setMode: setMode,
-  };
-}

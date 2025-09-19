@@ -117,12 +117,3 @@ export function applyQuestIndicators(data) {
   prevState.cursorIndex = cursorIndex;
   prevState.radicalWrong = radicalWrong;
 }
-
-// Backward-compatibility shim
-if (typeof window !== "undefined") {
-  window.CJL = window.CJL || {};
-  window.CJL.questBarView = {
-    renderQuestCharacter: renderQuestCharacter,
-    applyQuestIndicators: applyQuestIndicators,
-  };
-}
