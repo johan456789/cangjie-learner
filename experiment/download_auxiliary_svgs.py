@@ -18,7 +18,7 @@ import concurrent.futures
 import json
 import os
 import sys
-from typing import Dict, Iterable, List, Optional, Set, Tuple, Union
+from typing import Dict, List, Optional, Set, Tuple, Union
 
 import requests
 import wikitextparser as wtp
@@ -64,9 +64,9 @@ def extract_svgs_from_wikitext(text: str) -> List[str]:
 def extract_filenames_from_json(data: Dict[str, object]) -> List[str]:
     filenames: List[str] = []
 
-    def add_from_list(items: Iterable[str]) -> None:
-        for item in items:
-            filenames.extend(extract_svgs_from_wikitext(item))
+    def add_filename(name: Optional[str]) -> None:
+        if name and name.strip():
+            filenames.append(name.strip())
 
     for key, bucket in data.items():
         if not isinstance(bucket, dict):
@@ -77,14 +77,24 @@ def extract_filenames_from_json(data: Dict[str, object]) -> List[str]:
         for row in rows:
             if not isinstance(row, dict):
                 continue
-            add_from_list(row.get("fuzhu_zixing", []) or [])
-            add_from_list(row.get("zili", []) or [])
-            # also capture from shuo_ming
+            # New schema: row["fuzhu_zixing"] is a list of groups {file, zili: [{file,label}]}
+            groups = row.get("fuzhu_zixing", []) or []
+            if isinstance(groups, list):
+                for grp in groups:
+                    if not isinstance(grp, dict):
+                        continue
+                    add_filename(grp.get("file"))
+                    zili_list = grp.get("zili", []) or []
+                    if isinstance(zili_list, list):
+                        for z in zili_list:
+                            if isinstance(z, dict):
+                                add_filename(z.get("file"))
+            # also capture from shuo_ming (wikitext)
             shuo = row.get("shuo_ming", "") or ""
             if isinstance(shuo, str):
                 filenames.extend(extract_svgs_from_wikitext(shuo))
     # normalize whitespace
-    normalized = [name.strip() for name in filenames if name.strip()]
+    normalized = [name.strip() for name in filenames if name and name.strip()]
     return normalized
 
 
