@@ -82,7 +82,9 @@ const questCheck = (function () {
  * Ensures the input bar has focus for keyboard input
  */
 function focusOnKeyboard() {
-  const input = document.getElementById("inputBar");
+  const input = document.querySelector(
+    window.CJL?.constants?.SELECTORS.inputBar ?? "#inputBar"
+  );
   if (!input) return;
   if (document.activeElement !== input) input.focus();
 }
@@ -90,22 +92,24 @@ function focusOnKeyboard() {
 /**
  * Input event handler for the main input bar - processes Cangjie input
  */
-document.getElementById("inputBar").oninput = function () {
-  let string = this.value;
-  const INVALID =
-    (window.CJL &&
-      window.CJL.constants &&
-      window.CJL.constants.INVALID_KEY_REGEX) ||
-    /[^a-y]/;
-  if (INVALID.test(string)) {
-    this.value = "";
-    string = "";
-  }
+{
+  const _inputEl = document.querySelector(
+    window.CJL?.constants?.SELECTORS.inputBar ?? "#inputBar"
+  );
+  if (_inputEl)
+    _inputEl.oninput = function () {
+      let string = this.value;
+      const INVALID = window.CJL?.constants?.INVALID_KEY_REGEX ?? /[^a-y]/;
+      if (INVALID.test(string)) {
+        this.value = "";
+        string = "";
+      }
 
-  const isCompleted = questCheck.check(string);
-  const inRadical = questCheck.isRadical ? questCheck.isRadical() : false;
-  if (inRadical || isCompleted) this.value = "";
-};
+      const isCompleted = questCheck.check(string);
+      const inRadical = questCheck.isRadical ? questCheck.isRadical() : false;
+      if (inRadical || isCompleted) this.value = "";
+    };
+}
 
 focusOnKeyboard();
 
@@ -113,19 +117,24 @@ focusOnKeyboard();
  * Initialization for mode and category dropdown selectors
  */
 (function () {
-  let modeSelect = document.getElementById("modeSelect");
-  let categorySelect = document.getElementById("categorySelect");
+  const SELECTORS = window.CJL?.constants?.SELECTORS ?? {};
+  let modeSelect = document.querySelector(
+    SELECTORS.modeSelect || "#modeSelect"
+  );
+  let categorySelect = document.querySelector(
+    SELECTORS.categorySelect || "#categorySelect"
+  );
   if (!modeSelect || !categorySelect) return;
 
   /**
    * Applies the selected mode and category to the quiz system
    */
   function applyMode() {
-    const isRoot = modeSelect.value === "radical";
-    categorySelect.disabled = !isRoot;
+    const isRadicalModeSelected = modeSelect.value === "radical";
+    categorySelect.disabled = !isRadicalModeSelected;
     const cat = categorySelect.value || "philosophy";
-    if (questCheck.setMode) questCheck.setMode(isRoot, cat);
-    const input = document.getElementById("inputBar");
+    if (questCheck.setMode) questCheck.setMode(isRadicalModeSelected, cat);
+    const input = document.querySelector(SELECTORS.inputBar || "#inputBar");
     if (input) input.value = "";
     focusOnKeyboard();
   }
@@ -139,10 +148,19 @@ focusOnKeyboard();
  * DOMContentLoaded event handler - initializes UI controls and event listeners
  */
 document.addEventListener("DOMContentLoaded", () => {
-  const toggleVisibilityBtn = document.getElementById("toggleVisibilityBtn");
-  const keyboardMap = document.getElementById("keyboardMap");
-  const toggleLayoutBtn = document.getElementById("toggleLayout");
-  const inputBar = document.getElementById("inputBar");
+  const SELECTORS = window.CJL?.constants?.SELECTORS ?? {};
+  const CLASSES = window.CJL?.constants?.CLASSES ?? {};
+  const TIMINGS = window.CJL?.constants?.TIMINGS ?? {};
+  const toggleVisibilityBtn = document.querySelector(
+    SELECTORS.toggleVisibilityBtn || "#toggleVisibilityBtn"
+  );
+  const keyboardMap = document.querySelector(
+    SELECTORS.keyboardMap || "#keyboardMap"
+  );
+  const toggleLayoutBtn = document.querySelector(
+    SELECTORS.toggleLayout || "#toggleLayout"
+  );
+  const inputBar = document.querySelector(SELECTORS.inputBar || "#inputBar");
 
   // Layout toggle state moved from inline HTML <script>
   let isEnglishLayout = false;
@@ -184,7 +202,9 @@ document.addEventListener("DOMContentLoaded", () => {
      * Synchronizes the visibility button text and layout button state with keyboard visibility
      */
     const syncVisibilityState = () => {
-      const isHidden = keyboardMap.classList.contains("hidden");
+      const isHidden = keyboardMap.classList.contains(
+        CLASSES.hidden || "hidden"
+      );
       toggleVisibilityBtn.textContent = isHidden ? "顯示鍵盤" : "隱藏鍵盤";
       if (toggleLayoutBtn) toggleLayoutBtn.disabled = isHidden;
     };
@@ -193,7 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
     syncVisibilityState();
 
     toggleVisibilityBtn.addEventListener("click", () => {
-      keyboardMap.classList.toggle("hidden");
+      keyboardMap.classList.toggle(CLASSES.hidden || "hidden");
       syncVisibilityState();
       focusOnKeyboard();
     });
@@ -216,7 +236,7 @@ document.addEventListener("DOMContentLoaded", () => {
      */
     function showOverlayIfStillBlurred() {
       const isFocused = document.activeElement === inputBar;
-      keyboardMap.classList.toggle("no-focus", !isFocused);
+      keyboardMap.classList.toggle(CLASSES.noFocus || "no-focus", !isFocused);
     }
 
     /**
@@ -227,10 +247,15 @@ document.addEventListener("DOMContentLoaded", () => {
         clearTimeout(overlayShowTimer);
         overlayShowTimer = null;
       }
-      overlayShowTimer = setTimeout(function () {
-        overlayShowTimer = null;
-        showOverlayIfStillBlurred();
-      }, 200);
+      overlayShowTimer = setTimeout(
+        function () {
+          overlayShowTimer = null;
+          showOverlayIfStillBlurred();
+        },
+        typeof TIMINGS.overlayDelayMs === "number"
+          ? TIMINGS.overlayDelayMs
+          : 200
+      );
     }
 
     if (inputBar) {
@@ -239,7 +264,7 @@ document.addEventListener("DOMContentLoaded", () => {
           clearTimeout(overlayShowTimer);
           overlayShowTimer = null;
         }
-        keyboardMap.classList.remove("no-focus");
+        keyboardMap.classList.remove(CLASSES.noFocus || "no-focus");
       });
       inputBar.addEventListener("blur", scheduleOverlayShow);
     }
@@ -252,7 +277,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       // Hide overlay while interacting with any control
       if (document.activeElement && document.activeElement !== inputBar) {
-        keyboardMap.classList.remove("no-focus");
+        keyboardMap.classList.remove(CLASSES.noFocus || "no-focus");
       }
     });
 
@@ -262,7 +287,7 @@ document.addEventListener("DOMContentLoaded", () => {
         overlayShowTimer = null;
       }
       focusOnKeyboard();
-      keyboardMap.classList.remove("no-focus");
+      keyboardMap.classList.remove(CLASSES.noFocus || "no-focus");
     });
 
     // initialize overlay state

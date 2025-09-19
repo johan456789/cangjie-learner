@@ -45,7 +45,9 @@
       var label = isEnglishLayout ? alpha.toUpperCase() : labels[alpha];
       if (typeof label === "string") node.textContent = label;
     }
-    var toggleLayoutBtn = document.getElementById("toggleLayout");
+    var toggleLayoutBtn = document.querySelector(
+      constants.SELECTORS.toggleLayout
+    );
     if (toggleLayoutBtn) {
       toggleLayoutBtn.textContent = isEnglishLayout ? "倉頡鍵盤" : "英文鍵盤";
     }

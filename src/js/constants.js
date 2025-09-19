@@ -24,10 +24,18 @@
     characterList: "#character",
     modeSelect: "#modeSelect",
     categorySelect: "#categorySelect",
+    toggleLayout: "#toggleLayout",
+    toggleVisibilityBtn: "#toggleVisibilityBtn",
   };
 
   // Valid key regex (only a..y)
   var INVALID_KEY_REGEX = /[^a-y]/;
+
+  // Timings (ms)
+  var TIMINGS = {
+    pressMs: 150,
+    overlayDelayMs: 200,
+  };
 
   // Radical pools (kept identical to original logic)
   var RADICAL_POOLS = {
@@ -47,6 +55,7 @@
     CLASSES: CLASSES,
     SELECTORS: SELECTORS,
     INVALID_KEY_REGEX: INVALID_KEY_REGEX,
+    TIMINGS: TIMINGS,
     RADICAL_POOLS: RADICAL_POOLS,
   };
 })();
