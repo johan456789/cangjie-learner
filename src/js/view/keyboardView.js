@@ -1,32 +1,32 @@
 // Keyboard view: caches DOM and applies labels/states. No business logic.
 (function () {
-  var root = typeof window !== "undefined" ? window : globalThis;
+  const root = typeof window !== "undefined" ? window : globalThis;
   if (!root.CJL) root.CJL = {};
-  var constants = root.CJL.constants || { CLASSES: {}, SELECTORS: {} };
+  const constants = root.CJL.constants || { CLASSES: {}, SELECTORS: {} };
 
-  var dom = null;
-  var originalLabels = null;
-  var listenersBound = false;
-  var pressedKeys = {};
-  var pressTimers = {};
+  let dom = null;
+  let originalLabels = null;
+  let listenersBound = false;
+  const pressedKeys = {};
+  const pressTimers = {};
 
   function ensureDomCache() {
     if (dom) return dom;
-    var keyboardEl = document.querySelector(constants.SELECTORS.keyboardMap);
-    var keyNodes = keyboardEl
+    const keyboardEl = document.querySelector(constants.SELECTORS.keyboardMap);
+    const keyNodes = keyboardEl
       ? keyboardEl.querySelectorAll('span[id^="key-"]')
       : [];
-    var keyByAlpha = {};
-    for (var i = 0; i < keyNodes.length; i++) {
-      var node = keyNodes[i];
-      var alpha = (node.id || "").slice(4);
+    const keyByAlpha = {};
+    for (let i = 0; i < keyNodes.length; i++) {
+      const node = keyNodes[i];
+      const alpha = (node.id || "").slice(4);
       keyByAlpha[alpha] = node;
     }
     dom = { keyboardEl: keyboardEl, keyByAlpha: keyByAlpha };
     if (!originalLabels) {
       originalLabels = {};
-      for (var a in keyByAlpha) {
-        if (!Object.prototype.hasOwnProperty.call(keyByAlpha, a)) {
+      for (const a in keyByAlpha) {
+        if (!Object.hasOwn(keyByAlpha, a)) {
           continue;
         }
         originalLabels[a] = keyByAlpha[a].textContent;
@@ -37,16 +37,15 @@
 
   function renderKeyboardLabels(args) {
     ensureDomCache();
-    var isEnglishLayout = !!(args && args.isEnglishLayout);
-    var labels = (args && args.originalLabels) || originalLabels || {};
-    for (var alpha in dom.keyByAlpha) {
-      if (!Object.prototype.hasOwnProperty.call(dom.keyByAlpha, alpha))
-        continue;
-      var node = dom.keyByAlpha[alpha];
-      var label = isEnglishLayout ? alpha.toUpperCase() : labels[alpha];
+    const isEnglishLayout = !!(args && args.isEnglishLayout);
+    const labels = (args && args.originalLabels) || originalLabels || {};
+    for (const alpha in dom.keyByAlpha) {
+      if (!Object.hasOwn(dom.keyByAlpha, alpha)) continue;
+      const node = dom.keyByAlpha[alpha];
+      const label = isEnglishLayout ? alpha.toUpperCase() : labels[alpha];
       if (typeof label === "string") node.textContent = label;
     }
-    var toggleLayoutBtn = document.querySelector(
+    const toggleLayoutBtn = document.querySelector(
       constants.SELECTORS.toggleLayout
     );
     if (toggleLayoutBtn) {
@@ -57,16 +56,15 @@
 
   function applyKeyStates(args) {
     ensureDomCache();
-    var CL = constants.CLASSES;
-    var TIMINGS = constants.TIMINGS || {};
-    var hintKey = args && args.hintKey;
-    var disabledKeys = (args && args.disabledKeys) || {};
-    var pressedKey = args && args.pressedKey;
+    const CL = constants.CLASSES;
+    const TIMINGS = constants.TIMINGS || {};
+    const hintKey = args && args.hintKey;
+    const disabledKeys = (args && args.disabledKeys) || {};
+    const pressedKey = args && args.pressedKey;
 
-    for (var alpha in dom.keyByAlpha) {
-      if (!Object.prototype.hasOwnProperty.call(dom.keyByAlpha, alpha))
-        continue;
-      var node = dom.keyByAlpha[alpha];
+    for (const alpha in dom.keyByAlpha) {
+      if (!Object.hasOwn(dom.keyByAlpha, alpha)) continue;
+      const node = dom.keyByAlpha[alpha];
       node.classList.remove(CL.hint, CL.disabled);
       if (disabledKeys[alpha]) node.classList.add(CL.disabled);
     }
@@ -76,7 +74,7 @@
 
     // Timer-based press state for visual feedback when updates come from controller
     if (pressedKey && dom.keyByAlpha[pressedKey]) {
-      var node = dom.keyByAlpha[pressedKey];
+      const node = dom.keyByAlpha[pressedKey];
       node.classList.add(CL.press);
       if (pressTimers[pressedKey]) clearTimeout(pressTimers[pressedKey]);
       pressTimers[pressedKey] = setTimeout(
@@ -91,7 +89,7 @@
 
   function alphaFromEvent(event) {
     if (!event || !event.key) return null;
-    var keyName = event.key.toLowerCase();
+    const keyName = event.key.toLowerCase();
     // limit to a-z
     if (keyName.length === 1 && keyName >= "a" && keyName <= "z")
       return keyName;
@@ -100,9 +98,9 @@
 
   function clearAllPressed() {
     ensureDomCache();
-    var CL = constants.CLASSES;
-    for (var alpha in pressedKeys) {
-      if (!Object.prototype.hasOwnProperty.call(pressedKeys, alpha)) continue;
+    const CL = constants.CLASSES;
+    for (const alpha in pressedKeys) {
+      if (!Object.hasOwn(pressedKeys, alpha)) continue;
       if (pressedKeys[alpha] && dom.keyByAlpha[alpha])
         dom.keyByAlpha[alpha].classList.remove(CL.press);
       pressedKeys[alpha] = false;
@@ -112,16 +110,16 @@
   function bindKeyHoldHandlers() {
     if (listenersBound) return;
     ensureDomCache();
-    var CL = constants.CLASSES;
+    const CL = constants.CLASSES;
 
     document.addEventListener(
       "keydown",
       function (event) {
-        var alpha = alphaFromEvent(event);
+        const alpha = alphaFromEvent(event);
         if (!alpha) return;
         if (pressedKeys[alpha]) return; // already pressed (handle auto-repeat)
         pressedKeys[alpha] = true;
-        var node = dom.keyByAlpha[alpha];
+        const node = dom.keyByAlpha[alpha];
         if (node) node.classList.add(CL.press);
       },
       true
@@ -130,11 +128,11 @@
     document.addEventListener(
       "keyup",
       function (event) {
-        var alpha = alphaFromEvent(event);
+        const alpha = alphaFromEvent(event);
         if (!alpha) return;
         if (!pressedKeys[alpha]) return;
         pressedKeys[alpha] = false;
-        var node = dom.keyByAlpha[alpha];
+        const node = dom.keyByAlpha[alpha];
         if (node) node.classList.remove(CL.press);
       },
       true

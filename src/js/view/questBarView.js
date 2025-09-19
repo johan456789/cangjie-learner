@@ -1,11 +1,11 @@
 // Quest bar view: renders radical + mapped labels and applies indicators
 (function () {
-  var root = typeof window !== "undefined" ? window : globalThis;
+  const root = typeof window !== "undefined" ? window : globalThis;
   if (!root.CJL) root.CJL = {};
-  var constants = root.CJL.constants || { CLASSES: {}, SELECTORS: {} };
+  const constants = root.CJL.constants || { CLASSES: {}, SELECTORS: {} };
 
-  var dom = null;
-  var prevState = {
+  let dom = null;
+  const prevState = {
     right: [],
     wrong: [],
     cursorIndex: null,
@@ -13,8 +13,8 @@
   };
   function ensureDomCache() {
     if (dom) return dom;
-    var container = document.querySelector(constants.SELECTORS.questAlphabet);
-    var children = container ? container.children : [];
+    const container = document.querySelector(constants.SELECTORS.questAlphabet);
+    const children = container ? container.children : [];
     dom = { container: container, slots: children };
     return dom;
   }
@@ -25,15 +25,19 @@
    */
   function renderQuestCharacter(args) {
     ensureDomCache();
-    var radical = (args && args.radical) || "";
-    var mappedLabels = (args && args.mappedLabels) || [];
-    var isRadicalMode = !!(args && args.isRadicalMode);
+    const radical = (args && args.radical) || "";
+    const mappedLabels = (args && args.mappedLabels) || [];
+    const isRadicalMode = !!(args && args.isRadicalMode);
 
     if (!dom.container || !dom.slots || dom.slots.length === 0) return;
-    if (dom.slots[0]) dom.slots[0].textContent = radical;
+    if (dom.slots[0]) {
+      dom.slots[0].textContent = radical;
+      // Always clear radical-wrong state when a new character is rendered
+      dom.slots[0].classList.remove(constants.CLASSES.radicalWrong);
+    }
 
-    for (var i = 1; i < dom.slots.length; i++) {
-      var el = dom.slots[i];
+    for (let i = 1; i < dom.slots.length; i++) {
+      const el = dom.slots[i];
       el.classList.remove(
         constants.CLASSES.right,
         constants.CLASSES.wrong,
@@ -55,13 +59,13 @@
    */
   function applyQuestIndicators(data) {
     ensureDomCache();
-    var right = (data && data.right) || [];
-    var wrong = (data && data.wrong) || [];
-    var cursorIndex = data && data.cursorIndex;
-    var radicalWrong = !!(data && data.radicalWrong);
+    const right = (data && data.right) || [];
+    const wrong = (data && data.wrong) || [];
+    const cursorIndex = data && data.cursorIndex;
+    const radicalWrong = !!(data && data.radicalWrong);
 
     // Radical wrong diff
-    var first = dom.slots && dom.slots[0];
+    const first = dom.slots && dom.slots[0];
     if (first) {
       if (prevState.radicalWrong && !radicalWrong)
         first.classList.remove(constants.CLASSES.radicalWrong);
@@ -70,29 +74,29 @@
     }
 
     // Build sets for prev and next
-    var prevRightSet = {};
-    for (var pr = 0; pr < prevState.right.length; pr++)
+    const prevRightSet = {};
+    for (let pr = 0; pr < prevState.right.length; pr++)
       prevRightSet[prevState.right[pr]] = true;
-    var prevWrongSet = {};
-    for (var pw = 0; pw < prevState.wrong.length; pw++)
+    const prevWrongSet = {};
+    for (let pw = 0; pw < prevState.wrong.length; pw++)
       prevWrongSet[prevState.wrong[pw]] = true;
-    var nextRightSet = {};
-    for (var nr = 0; nr < right.length; nr++) nextRightSet[right[nr]] = true;
-    var nextWrongSet = {};
-    for (var nw = 0; nw < wrong.length; nw++) nextWrongSet[wrong[nw]] = true;
+    const nextRightSet = {};
+    for (let nr = 0; nr < right.length; nr++) nextRightSet[right[nr]] = true;
+    const nextWrongSet = {};
+    for (let nw = 0; nw < wrong.length; nw++) nextWrongSet[wrong[nw]] = true;
 
     // Apply diffs for right/wrong
-    for (var i = 1; i < dom.slots.length; i++) {
-      var el = dom.slots[i];
-      var codeIndex = i - 1;
-      var hadRight = !!prevRightSet[codeIndex];
-      var hasRight = !!nextRightSet[codeIndex];
+    for (let i = 1; i < dom.slots.length; i++) {
+      const el = dom.slots[i];
+      const codeIndex = i - 1;
+      const hadRight = !!prevRightSet[codeIndex];
+      const hasRight = !!nextRightSet[codeIndex];
       if (hadRight !== hasRight) {
         if (hasRight) el.classList.add(constants.CLASSES.right);
         else el.classList.remove(constants.CLASSES.right);
       }
-      var hadWrong = !!prevWrongSet[codeIndex];
-      var hasWrong = !!nextWrongSet[codeIndex];
+      const hadWrong = !!prevWrongSet[codeIndex];
+      const hasWrong = !!nextWrongSet[codeIndex];
       if (hadWrong !== hasWrong) {
         if (hasWrong) el.classList.add(constants.CLASSES.wrong);
         else el.classList.remove(constants.CLASSES.wrong);
@@ -102,7 +106,7 @@
     }
 
     // Cursor diff
-    var prevCursor = prevState.cursorIndex;
+    const prevCursor = prevState.cursorIndex;
     if (prevCursor !== cursorIndex) {
       if (dom.slots[prevCursor])
         dom.slots[prevCursor].classList.remove(constants.CLASSES.cursor);

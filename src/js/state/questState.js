@@ -1,6 +1,6 @@
 // Pure quest state and logic (no DOM). All functions are side-effect free.
 (function () {
-  var root = typeof window !== "undefined" ? window : globalThis;
+  const root = typeof window !== "undefined" ? window : globalThis;
   if (!root.CJL) root.CJL = {};
 
   /**
@@ -11,8 +11,8 @@
    * @returns {Object} state
    */
   function initializeState(args) {
-    var defaultCharacterArray = (args && args.defaultCharacterArray) || [];
-    var radicalPools = (args && args.radicalPools) || {};
+    const defaultCharacterArray = (args && args.defaultCharacterArray) || [];
+    const radicalPools = (args && args.radicalPools) || {};
     return {
       defaultCharacterArray: defaultCharacterArray.slice(),
       characterArray: defaultCharacterArray.slice(),
@@ -30,10 +30,10 @@
    * @returns {{state: Object, character: string}}
    */
   function pickRandomCharacter(state) {
-    var start = 1;
-    var end = state.characterArray.length - 2;
-    var count = end - start + 1;
-    var idx;
+    const start = 1;
+    const end = state.characterArray.length - 2;
+    const count = end - start + 1;
+    let idx;
     if (count <= 0) return { state: state, character: state.characterArray[0] };
     if (
       state.isRadicalMode &&
@@ -46,8 +46,8 @@
     } else {
       idx = Math.floor(Math.random() * count) + start;
     }
-    var character = state.characterArray[idx];
-    var next = Object.assign({}, state, { lastPickedCharacter: character });
+    const character = state.characterArray[idx];
+    const next = Object.assign({}, state, { lastPickedCharacter: character });
     return { state: next, character: character };
   }
 
@@ -58,8 +58,8 @@
    * @returns {number}
    */
   function compareInput(state, input) {
-    var code = state.nowCharacter;
-    for (var i = 0, l = code.length; i < l; i++) {
+    const code = state.nowCharacter;
+    for (let i = 0, l = code.length; i < l; i++) {
       if (input.charAt(i) !== code.charAt(i)) return i;
     }
     return code.length;
@@ -72,28 +72,28 @@
    * @returns {{right:number[], wrong:number[], cursorIndex:number, hintKey:string|null, radicalWrong:boolean}}
    */
   function computeIndicators(state, input) {
-    var code = state.nowCharacter;
-    var index = compareInput(state, input);
-    var right = [];
-    var wrong = [];
+    const code = state.nowCharacter;
+    const index = compareInput(state, input);
+    const right = [];
+    const wrong = [];
     // Cursor behavior:
     // - Normal mode: cursor moves to one position after current input.
     //   If input exceeds code length, do NOT clamp to the last slot, since that would
     //   visually override the wrong indicator. Instead, signal "no cursor" with -1.
     // - Radical mode: keep cursor at the first slot (like original behavior).
-    var cursorIndex;
+    let cursorIndex;
     if (state.isRadicalMode) {
       cursorIndex = Math.min(1, code.length);
     } else {
-      var desired = (input ? input.length : 0) + 1;
+      const desired = (input ? input.length : 0) + 1;
       cursorIndex = desired > code.length ? -1 : desired;
     }
-    var hintKey = null;
-    var radicalWrong = false;
+    let hintKey = null;
+    let radicalWrong = false;
 
     if (!state.isRadicalMode) {
-      for (var i = 0; i < index; i++) right.push(i);
-      for (var j = index; j < input.length && j < code.length; j++)
+      for (let i = 0; i < index; i++) right.push(i);
+      for (let j = index; j < input.length && j < code.length; j++)
         wrong.push(j);
       hintKey = code.charAt(index) || null;
     } else {
@@ -124,15 +124,16 @@
    * @returns {{state:Object, activePool:string[]}}
    */
   function setMode(state, args) {
-    var isRadicalMode = !!(args && args.isRadicalMode);
-    var categoryKey = (args && args.categoryKey) || "philosophy";
-    var next = Object.assign({}, state, {
+    const isRadicalMode = !!(args && args.isRadicalMode);
+    const categoryKey = (args && args.categoryKey) || "philosophy";
+    const next = Object.assign({}, state, {
       isRadicalMode: isRadicalMode,
       activeCategoryKey: categoryKey,
       lastPickedCharacter: null,
     });
     if (isRadicalMode) {
-      var pool = (state.radicalPools && state.radicalPools[categoryKey]) || [];
+      const pool =
+        (state.radicalPools && state.radicalPools[categoryKey]) || [];
       next.characterArray = [""].concat(pool).concat([""]);
       return { state: next, activePool: pool.slice() };
     } else {
