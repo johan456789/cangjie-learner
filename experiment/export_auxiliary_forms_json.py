@@ -13,12 +13,12 @@ into a structured JSON file per the requested schema.
 Output schema (example):
 {
   "A": {
-    "倉頡字母": "日",
+    "cangjie_char": "日",
     "rows": [
       {
-        "輔助字形": ["[[Image:foo.svg|30px|中文名]]", "[[Image:bar.svg|30px|別名]]"],
-        "字例": ["[[Image:baz.svg|30px|範例]]"],
-        "說明": "<raw wikitext>"
+        "fuzhu_zixing": ["[[Image:foo.svg|30px|中文名]]", "[[Image:bar.svg|30px|別名]]"],
+        "zili": ["[[Image:baz.svg|30px|範例]]"],
+        "shuo_ming": "<raw wikitext>"
       }
     ]
   },
@@ -216,14 +216,14 @@ def build_output_structure(mat: List[List[str]]) -> Dict[str, Dict[str, object]]
         if key not in result:
             cangjie_char = CANGJIE_KEY_TO_CHAR.get(key)
             result[key] = {
-                "倉頡字母": cangjie_char,
+                "cangjie_char": cangjie_char,
                 "rows": [],
             }
         result[key]["rows"].append(
             {
-                "輔助字形": aux_files,
-                "字例": zili_files,
-                "說明": shuo_ming,
+                "fuzhu_zixing": aux_files,
+                "zili": zili_files,
+                "shuo_ming": shuo_ming,
             }
         )
 
@@ -282,7 +282,7 @@ def main(argv: List[str]) -> int:
             json.dumps(
                 {
                     sample_key: {
-                        "倉頡字母": output[sample_key]["倉頡字母"],
+                        "cangjie_char": output[sample_key]["cangjie_char"],
                         "rows": sample_rows,
                     }
                 },
