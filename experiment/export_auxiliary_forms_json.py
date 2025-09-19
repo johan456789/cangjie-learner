@@ -13,12 +13,25 @@ into a structured JSON file per the requested schema.
 Output schema (example):
 {
   "A": {
-    "倉頡字母": "日",
+    "cangjie_char": "日",
     "rows": [
       {
-        "輔助字形": ["[[Image:foo.svg|30px|中文名]]", "[[Image:bar.svg|30px|別名]]"],
-        "字例": ["[[Image:baz.svg|30px|範例]]"],
-        "說明": "<raw wikitext>"
+        "fuzhu_zixing": [
+          {
+            "file": "cjrm-a0.svg",
+            "zili": [
+              {"file": "cjem-a0-1.svg", "label": "明"},
+              {"file": "cjem-a0-2.svg", "label": "早"}
+            ]
+          },
+          {
+            "file": "cjrm-a1.svg",
+            "zili": [
+              {"file": "cjem-a1-1.svg", "label": "書"}
+            ]
+          }
+        ],
+        "shuo_ming": "<raw wikitext>"
       }
     ]
   },
@@ -149,6 +162,92 @@ def extract_image_links(cell_wikitext: str) -> List[str]:
     return results
 
 
+def _extract_label_from_file_link(full_wikitext: str) -> Optional[str]:
+    # Extract the last non-empty, non-dimension parameter as label
+    try:
+        inner = full_wikitext.strip()[2:-2]  # strip [[ ]]
+    except Exception:
+        return None
+    try:
+        after_colon = inner.split(":", 1)[-1]
+    except Exception:
+        after_colon = inner
+    parts = [p.strip() for p in after_colon.split("|")]
+    # Skip filename (parts[0]); evaluate remaining params
+    params = [p for p in parts[1:] if p]
+    candidates: List[str] = []
+    for p in params:
+        if re.match(r"^\d+\s*px$", p, re.IGNORECASE):
+            continue
+        if "=" in p:
+            continue
+        candidates.append(p)
+    return candidates[-1] if candidates else None
+
+
+def sanitize_label(label: Optional[str]) -> str:
+    """Remove MediaWiki variant markers like -{...}- and trim whitespace."""
+    if not label:
+        return ""
+    text = str(label)
+    # Replace all occurrences of -{ ... }- with inner content
+    text = re.sub(r"-\{\s*(.*?)\s*\}-", r"\1", text)
+    return text.strip()
+
+
+def extract_files_with_labels(cell_wikitext: str) -> List[Tuple[str, Optional[str]]]:
+    """Return list of (filename, optional_label) from a cell's wikitext."""
+    if not cell_wikitext:
+        return []
+    seen: set = set()
+    results: List[Tuple[str, Optional[str]]] = []
+    for m in FILE_LINK_RE.finditer(cell_wikitext):
+        full = m.group(0)
+        filename = (m.group(1) or "").strip()
+        if not filename:
+            continue
+        key = filename.lower()
+        if key in seen:
+            continue
+        seen.add(key)
+        label = sanitize_label(_extract_label_from_file_link(full))
+        results.append((filename, label))
+    return results
+
+
+def _extract_group_token(filename: str) -> Optional[str]:
+    """Extract grouping token like 'a0' from filenames such as 'cjrm-a0.svg' or 'cjem-a0-1.svg'."""
+    m = re.search(r"-([a-z]\d+)(?:-|\.svg$)", filename, re.IGNORECASE)
+    return m.group(1).lower() if m else None
+
+
+def group_zili_by_fuzhu(fuzhu_files: List[str], zili_items: List[Tuple[str, Optional[str]]]) -> List[Dict[str, object]]:
+    """Group zili items by matching token with each fuzhu file, preserving order.
+
+    Returns list like [{"file": fuzhu_file, "zili": [{"file": z_file, "label": label}, ...]}, ...]
+    """
+    # Build token -> list of zili dicts
+    token_to_zili: Dict[str, List[Dict[str, str]]] = {}
+    for z_file, z_label in zili_items:
+        token = _extract_group_token(z_file)
+        if not token:
+            continue
+        token_to_zili.setdefault(token, []).append({
+            "file": z_file,
+            "label": (z_label or ""),
+        })
+
+    grouped: List[Dict[str, object]] = []
+    for f_file in fuzhu_files:
+        token = _extract_group_token(f_file)
+        z_list = token_to_zili.get(token or "", [])
+        grouped.append({
+            "file": f_file,
+            "zili": z_list,
+        })
+    return grouped
+
+
 def locate_columns(header_row: List[str]) -> Tuple[int, Optional[int], Optional[int], Optional[int]]:
     # Return (label_idx, aux_idx, zili_idx, shuo_idx)
     header_norm = [normalize_header(h) for h in header_row]
@@ -199,33 +298,36 @@ def build_output_structure(mat: List[List[str]]) -> Dict[str, Dict[str, object]]
             prev_label = label
             continue
 
-        aux_files: List[str] = (
-            extract_image_links(row[aux_idx])
+        f_files_with_labels: List[Tuple[str, Optional[str]]] = (
+            extract_files_with_labels(row[aux_idx])
             if aux_idx is not None and aux_idx < len(row)
             else []
         )
-        zili_files: List[str] = (
-            extract_image_links(row[zili_idx])
+        # Only filenames for fuzhu list
+        fuzhu_files: List[str] = [fname for fname, _ in f_files_with_labels]
+
+        zili_with_labels: List[Tuple[str, Optional[str]]] = (
+            extract_files_with_labels(row[zili_idx])
             if zili_idx is not None and zili_idx < len(row)
             else []
         )
         shuo_ming: str = (row[shuo_idx] if shuo_idx is not None and shuo_idx < len(row) else "").strip()
+
+        # Build grouped structure
+        grouped = group_zili_by_fuzhu(fuzhu_files, zili_with_labels)
 
         # Initialize bucket for this key
         key = label
         if key not in result:
             cangjie_char = CANGJIE_KEY_TO_CHAR.get(key)
             result[key] = {
-                "倉頡字母": cangjie_char,
+                "cangjie_char": cangjie_char,
                 "rows": [],
             }
-        result[key]["rows"].append(
-            {
-                "輔助字形": aux_files,
-                "字例": zili_files,
-                "說明": shuo_ming,
-            }
-        )
+        result[key]["rows"].append({
+            "fuzhu_zixing": grouped,
+            "shuo_ming": shuo_ming,
+        })
 
         prev_label = label
 
@@ -282,7 +384,7 @@ def main(argv: List[str]) -> int:
             json.dumps(
                 {
                     sample_key: {
-                        "倉頡字母": output[sample_key]["倉頡字母"],
+                        "cangjie_char": output[sample_key]["cangjie_char"],
                         "rows": sample_rows,
                     }
                 },
