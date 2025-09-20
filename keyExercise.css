@@ -27,6 +27,14 @@ div#questAlphabet span.questCharacter {
 	margin-right: 1ex;
 }
 
+/* When aux mode renders an <img> inside questCharacter, constrain size */
+div#questAlphabet span.questCharacter img {
+	max-height: 1.3em;
+	width: auto;
+	display: block;
+	margin: 0 auto;
+}
+
 div#questAlphabet span.radical-wrong {
 	background-color: rgba(229, 57, 53, 0.5);
 }
@@ -73,16 +81,24 @@ div#keyboardMap span.finger-pinkie {
 	background-color: #D7E6FF;
 }
 
-div#keyboardMap span.hint,
-div#keyboardMap span.hint.foreFinger {
+#keyboardMap span.hint,
+#keyboardMap span.hint.finger-left-index,
+#keyboardMap span.hint.finger-right-index,
+#keyboardMap span.hint.finger-middle,
+#keyboardMap span.hint.finger-ring,
+#keyboardMap span.hint.finger-pinkie {
 	color: white;
 	background-color: black;
 }
 
-div#keyboardMap span.press,
-div#keyboardMap span.press.foreFinger {
+#keyboardMap span.press,
+#keyboardMap span.press.finger-left-index,
+#keyboardMap span.press.finger-right-index,
+#keyboardMap span.press.finger-middle,
+#keyboardMap span.press.finger-ring,
+#keyboardMap span.press.finger-pinkie {
 	color: white;
-	background-color: #444;
+	background-color: black;
 }
 
 /* Dimmed state for non-active keys (e.g., in radical mode) */
@@ -93,7 +109,14 @@ div#keyboardMap span.disabled {
 	cursor: default;
 }
 
-div#chat {
+/* Hide aux content when aria-hidden=true while preserving panel height */
+#auxPanel .fuzhu-strip[aria-hidden="true"],
+#auxPanel .explanation[aria-hidden="true"] {
+	visibility: hidden;
+	pointer-events: none;
+}
+
+#chat {
 	background-color: #DDD;
 	float: left;
 	height: 100%;
@@ -174,4 +197,44 @@ hr {
 
 #keyboardMap.no-focus .focus-overlay {
 	display: flex;
+}
+
+/* Aux panel: fixed height to avoid layout shift */
+#auxPanel {
+	margin: 0.5em auto 0.75em auto;
+	min-height: 5.5em;
+	max-width: 48rem;
+	text-align: center;
+}
+
+#auxPanel .fuzhu-strip {
+	display: flex;
+	gap: 0.5em;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 0.5em;
+}
+
+#auxPanel .fuzhu-strip .fuzhu-item {
+	display: inline-flex;
+	align-items: center;
+}
+
+#auxPanel .fuzhu-strip img {
+	height: 1.25em;
+	width: auto;
+	display: block;
+}
+
+#auxPanel .fuzhu-strip .fuzhu-item.current {
+	outline: 2px solid #1976D2;
+	outline-offset: 2px;
+	border-radius: 2px;
+}
+
+#auxPanel .explanation {
+	font-size: 0.9em;
+	color: #333;
+	line-height: 1.4;
 }

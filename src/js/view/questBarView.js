@@ -19,19 +19,34 @@ function ensureDomCache() {
 
 /**
  * renderQuestCharacter
- * @param {{radical:string, mappedLabels:string[], isRadicalMode:boolean}} args
+ * @param {{radical:string, mappedLabels:string[], isRadicalMode:boolean, isAuxMode?:boolean, auxZiliFile?:string, auxBasePath?:string}} args
  */
 export function renderQuestCharacter(args) {
   ensureDomCache();
   const radical = (args && args.radical) || "";
   const mappedLabels = (args && args.mappedLabels) || [];
   const isRadicalMode = !!(args && args.isRadicalMode);
+  const isAuxMode = !!(args && args.isAuxMode);
+  const auxZiliFile = args && args.auxZiliFile;
+  const auxBasePath = (args && args.auxBasePath) || "";
 
   if (!dom.container || !dom.slots || dom.slots.length === 0) return;
   if (dom.slots[0]) {
-    dom.slots[0].textContent = radical;
+    const slot = dom.slots[0];
+    // Clear existing content
+    while (slot.firstChild) slot.removeChild(slot.firstChild);
+    if (isAuxMode && typeof auxZiliFile === "string" && auxZiliFile) {
+      const img = document.createElement("img");
+      img.alt = auxZiliFile;
+      img.decoding = "async";
+      img.src = auxBasePath + auxZiliFile;
+      slot.appendChild(img);
+    } else {
+      // Non-aux: render radical text glyph
+      slot.appendChild(document.createTextNode(radical));
+    }
     // Always clear radical-wrong state when a new character is rendered
-    dom.slots[0].classList.remove(CLASSES.radicalWrong);
+    slot.classList.remove(CLASSES.radicalWrong);
   }
 
   for (let i = 1; i < dom.slots.length; i++) {
