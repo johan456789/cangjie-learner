@@ -25,7 +25,11 @@ import {
   renderQuestCharacter,
   applyQuestIndicators,
 } from "../view/questBarView.js";
-import { renderAuxPanel, applyAuxDetails } from "../view/auxiliaryView.js";
+import {
+  renderAuxPanel,
+  applyAuxDetails,
+  setAuxPanelVisible,
+} from "../view/auxiliaryView.js";
 
 const constants = {
   CLASSES: CLASSES,
@@ -66,7 +70,6 @@ const app = {
   state: null,
   originalLabels: null,
   isEnglishLayout: false,
-  mode: "char", // "char" | "radical" | "aux"
   aux: {
     data: null, // loaded JSON
     letterToRows: null,
@@ -91,6 +94,8 @@ export function init() {
   // Prepare aux panel DOM early to avoid layout jank later
   try {
     renderAuxPanel();
+    // Hidden by default; only visible in aux mode
+    setAuxPanelVisible(false);
   } catch (e) {}
 
   // First pick & render
@@ -104,7 +109,7 @@ export function init() {
   questBarView.renderQuestCharacter({
     radical: radical,
     mappedLabels: mapped,
-    isRadicalMode: app.state.isRadicalMode,
+    isRadicalMode: app.state.mode !== "char",
   });
 
   updateIndicators("");
@@ -140,7 +145,7 @@ function updateIndicators(input) {
         ? performance.now()
         : 0;
     questBarView.applyQuestIndicators(data);
-    if (app.mode === "aux") {
+    if (app.state.mode === "aux") {
       const current = app.aux.current;
       if (current) {
         applyAuxDetails({
@@ -170,7 +175,7 @@ function updateIndicators(input) {
 
 function computeDisabledKeys(state) {
   const disabled = {};
-  if (!(state.isRadicalMode || app.mode === "aux")) return disabled;
+  if (state.mode === "char") return disabled;
   const pool = state.radicalPools[state.activeCategoryKey] || [];
   const allowed = {};
   for (let i = 0; i < pool.length; i++) {
@@ -191,7 +196,7 @@ export const controller = {
     const index = stateApi.compareInput(app.state, input);
     const completed = index >= app.state.nowCharacter.length;
     if (completed) {
-      if (app.mode === "aux") {
+      if (app.state.mode === "aux") {
         // Immediately pick a new aux zili
         selectAndRenderNextAux();
         input = "";
@@ -204,7 +209,7 @@ export const controller = {
         questBarView.renderQuestCharacter({
           radical: radical,
           mappedLabels: mapLabels(app.state.nowCharacter, app.originalLabels),
-          isRadicalMode: app.state.isRadicalMode,
+          isRadicalMode: app.state.mode !== "char",
         });
         input = "";
       }
@@ -214,9 +219,8 @@ export const controller = {
     return completed;
   },
   setMode: function (isRadicalMode, categoryKey) {
-    app.mode = isRadicalMode ? "radical" : "char";
     const res = stateApi.setMode(app.state, {
-      isRadicalMode: isRadicalMode,
+      mode: isRadicalMode ? "radical" : "char",
       categoryKey: categoryKey,
     });
     app.state = res.state;
@@ -229,17 +233,23 @@ export const controller = {
     questBarView.renderQuestCharacter({
       radical: characterString.charAt(0),
       mappedLabels: mapLabels(app.state.nowCharacter, app.originalLabels),
-      isRadicalMode: app.state.isRadicalMode,
+      isRadicalMode: app.state.mode !== "char",
     });
 
     // Update keyboard disabled keys and clear hint when entering radical mode
     updateIndicators("");
+    try {
+      setAuxPanelVisible(false);
+    } catch (e) {}
   },
   setAuxMode: async function (categoryKey) {
-    app.mode = "aux";
     await ensureAuxDataLoaded();
-    // In aux mode, reuse radical-like indicator behavior
-    app.state.isRadicalMode = true;
+    // In aux mode, set unified mode to 'aux'
+    const res = stateApi.setMode(app.state, {
+      mode: "aux",
+      categoryKey: categoryKey,
+    });
+    app.state = res.state;
     app.state.activeCategoryKey =
       categoryKey || app.state.activeCategoryKey || "philosophy";
     selectAndRenderNextAux();
@@ -251,11 +261,12 @@ export const controller = {
         currentFuzhuIndex: app.aux.current ? app.aux.current.fuzhuIndex : -1,
         shuoMingHtml: app.aux.current ? app.aux.current.shuoMingHtml : "",
       });
+      setAuxPanelVisible(true);
     } catch (e) {}
     updateIndicators("");
   },
   isRadical: function () {
-    return !!app.state && app.state.isRadicalMode;
+    return !!app.state && app.state.mode !== "char";
   },
   toggleLayout: function () {
     app.isEnglishLayout = !app.isEnglishLayout;
@@ -292,7 +303,7 @@ export function wireEvents() {
         string = "";
       }
       const completed = controller.check(string);
-      if (app.mode === "aux" || app.state.isRadicalMode || completed)
+      if (app.state.mode === "aux" || app.state.mode !== "char" || completed)
         this.value = "";
     });
   }
@@ -308,6 +319,9 @@ export function wireEvents() {
     } else {
       controller.setMode(!!isRadical, cat);
     }
+    try {
+      setAuxPanelVisible(isAux);
+    } catch (e) {}
     if (inputEl) {
       inputEl.value = "";
       inputEl.focus();

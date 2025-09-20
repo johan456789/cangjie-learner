@@ -21,6 +21,17 @@ export function renderAuxPanel() {
 }
 
 /**
+ * setAuxPanelVisible
+ * Ensure the aux panel does not take layout space when hidden.
+ * @param {boolean} show
+ */
+export function setAuxPanelVisible(show) {
+  ensureDom();
+  if (!dom || !dom.panel) return;
+  dom.panel.style.display = show ? "block" : "none";
+}
+
+/**
  * applyAuxDetails
  * @param {{show:boolean, fuzhuFiles:string[], currentFuzhuIndex:number, shuoMingHtml:string}} args
  */

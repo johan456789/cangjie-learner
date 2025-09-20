@@ -15,7 +15,8 @@ export function initializeState(args) {
     characterArray: defaultCharacterArray.slice(),
     radicalPools: radicalPools,
     nowCharacter: "",
-    isRadicalMode: false,
+    // Unified mode: 'char' | 'radical' | 'aux'
+    mode: "char",
     lastPickedCharacter: null,
     activeCategoryKey: "philosophy",
   };
@@ -32,7 +33,11 @@ export function pickRandomCharacter(state) {
   const count = end - start + 1;
   let idx;
   if (count <= 0) return { state: state, character: state.characterArray[0] };
-  if (state.isRadicalMode && count > 1 && state.lastPickedCharacter !== null) {
+  if (
+    state.mode !== "char" &&
+    count > 1 &&
+    state.lastPickedCharacter !== null
+  ) {
     do {
       idx = Math.floor(Math.random() * count) + start;
     } while (state.characterArray[idx] === state.lastPickedCharacter);
@@ -75,7 +80,7 @@ export function computeIndicators(state, input) {
   //   visually override the wrong indicator. Instead, signal "no cursor" with -1.
   // - Radical mode: keep cursor at the first slot (like original behavior).
   let cursorIndex;
-  if (state.isRadicalMode) {
+  if (state.mode !== "char") {
     cursorIndex = Math.min(1, code.length);
   } else {
     const desired = (input ? input.length : 0) + 1;
@@ -84,7 +89,7 @@ export function computeIndicators(state, input) {
   let hintKey = null;
   let radicalWrong = false;
 
-  if (!state.isRadicalMode) {
+  if (state.mode === "char") {
     for (let i = 0; i < index; i++) right.push(i);
     for (let j = index; j < input.length && j < code.length; j++) wrong.push(j);
     hintKey = code.charAt(index) || null;
@@ -116,18 +121,23 @@ export function computeIndicators(state, input) {
  * @returns {{state:Object, activePool:string[]}}
  */
 export function setMode(state, args) {
-  const isRadicalMode = !!(args && args.isRadicalMode);
+  const mode =
+    (args && args.mode) || (args && args.isRadicalMode ? "radical" : "char");
   const categoryKey = (args && args.categoryKey) || "philosophy";
   const next = Object.assign({}, state, {
-    isRadicalMode: isRadicalMode,
+    mode: mode,
     activeCategoryKey: categoryKey,
     lastPickedCharacter: null,
   });
-  if (isRadicalMode) {
+  if (mode === "radical") {
     const pool = (state.radicalPools && state.radicalPools[categoryKey]) || [];
     next.characterArray = [""].concat(pool).concat([""]);
     return { state: next, activePool: pool.slice() };
+  } else if (mode === "char") {
+    next.characterArray = state.defaultCharacterArray.slice();
+    return { state: next, activePool: [] };
   } else {
+    // 'aux' mode: state machine for characters is driven by controller; keep array untouched
     next.characterArray = state.defaultCharacterArray.slice();
     return { state: next, activePool: [] };
   }

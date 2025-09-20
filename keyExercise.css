@@ -18,13 +18,17 @@ div#questAlphabet span {
 }
 
 div#questAlphabet span.questCharacter {
-	display: inline-block;
+	display: inline-flex !important;
+	justify-content: center;
+	align-items: center;
 	width: 1.5em;
 	height: 1.5em;
+	line-height: 1;
 	font-weight: 700;
 	border: solid 0.1ex;
-	text-align: center;
-	margin-right: 1ex;
+	margin-right: 0;
+	vertical-align: middle;
+	box-sizing: border-box;
 }
 
 /* When aux mode renders an <img> inside questCharacter, constrain size */
