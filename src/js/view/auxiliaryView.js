@@ -32,6 +32,70 @@ export function setAuxPanelVisible(show) {
 }
 
 /**
+ * Convert a subset of MediaWiki wikitext embedded in shuo_ming into DOM nodes.
+ * - Replaces [[Image:*.svg|22px]] (and localized File namespaces) with inline <img>
+ * - Strips <ref>...</ref> blocks (and self-closing variants)
+ *
+ * @param {HTMLElement} container
+ * @param {string} wikitext
+ * @param {string} basePath
+ */
+function renderShuoMingWikitext(container, wikitext, basePath) {
+  if (!container) return;
+  const text = typeof wikitext === "string" ? wikitext : "";
+
+  // Strip <ref> ... </ref> (including attributes) and self-closing <ref/>
+  const withoutRefs = text
+    .replace(/<ref[^>]*>[\s\S]*?<\/ref>/gi, "")
+    .replace(/<ref[^>]*\/>/gi, "");
+
+  // Build a fragment by scanning for [[File:...]] style inclusions
+  const frag = document.createDocumentFragment();
+  const fileNamespaces = "File|Image|檔案|文件|圖像|圖片";
+  const re = new RegExp(
+    "\\[\\[\\s*(?:(?:" +
+      fileNamespaces +
+      "))\\s*:\\s*([^|\\]]+)\\s*(?:\\|([^\\]]*))?\\]\\]",
+    "gi"
+  );
+
+  let lastIndex = 0;
+  let match;
+  while ((match = re.exec(withoutRefs))) {
+    const preceding = withoutRefs.slice(lastIndex, match.index);
+    if (preceding) frag.appendChild(document.createTextNode(preceding));
+
+    const fileName = (match[1] || "").trim();
+    const options = (match[2] || "").trim();
+
+    const img = document.createElement("img");
+    img.className = "inline-svg";
+    img.alt = fileName || "svg";
+    img.decoding = "async";
+    img.referrerPolicy = "no-referrer";
+    img.src = (basePath || "") + fileName;
+
+    // Try to read a size like 22px from options; default to 1em height
+    let heightPx = null;
+    const sizeMatch = /([0-9]{1,3})\s*px/i.exec(options);
+    if (sizeMatch) {
+      heightPx = parseInt(sizeMatch[1], 10);
+    }
+    if (heightPx && Number.isFinite(heightPx))
+      img.style.height = heightPx + "px";
+
+    frag.appendChild(img);
+    lastIndex = re.lastIndex;
+  }
+  const tail = withoutRefs.slice(lastIndex);
+  if (tail) frag.appendChild(document.createTextNode(tail));
+
+  // Replace container content safely
+  container.textContent = "";
+  container.appendChild(frag);
+}
+
+/**
  * applyAuxDetails
  * @param {{show:boolean, fuzhuFiles:string[], currentFuzhuIndex:number, shuoMingHtml:string}} args
  */
@@ -61,7 +125,7 @@ export function applyAuxDetails(args) {
   }
 
   if (dom.explanation) {
-    dom.explanation.innerHTML = html;
+    renderShuoMingWikitext(dom.explanation, html, AUX_BASE_PATH);
   }
 
   // Toggle visibility cues without layout shift

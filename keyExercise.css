@@ -242,3 +242,11 @@ hr {
 	color: #333;
 	line-height: 1.4;
 }
+
+/* Inline svg images inside explanation should sit nicely with text */
+#auxPanel .explanation img.inline-svg {
+	height: 1em;
+	width: auto;
+	vertical-align: middle;
+	margin: 0 0.2em;
+}
