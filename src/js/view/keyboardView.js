@@ -6,7 +6,6 @@ let dom = null;
 let originalLabels = null;
 let listenersBound = false;
 const pressedKeys = {};
-const pressTimers = {};
 
 function ensureDomCache() {
   if (dom) return dom;
@@ -54,7 +53,6 @@ export function applyKeyStates(args) {
   ensureDomCache();
   const hintKey = args && args.hintKey;
   const disabledKeys = (args && args.disabledKeys) || {};
-  const pressedKey = args && args.pressedKey;
 
   for (const alpha in dom.keyByAlpha) {
     if (!Object.hasOwn(dom.keyByAlpha, alpha)) continue;
@@ -65,20 +63,6 @@ export function applyKeyStates(args) {
 
   if (hintKey && dom.keyByAlpha[hintKey])
     dom.keyByAlpha[hintKey].classList.add(CLASSES.hint);
-
-  // Timer-based press state for visual feedback when updates come from controller
-  if (pressedKey && dom.keyByAlpha[pressedKey]) {
-    const node = dom.keyByAlpha[pressedKey];
-    node.classList.add(CLASSES.press);
-    if (pressTimers[pressedKey]) clearTimeout(pressTimers[pressedKey]);
-    pressTimers[pressedKey] = setTimeout(
-      function () {
-        node.classList.remove(CLASSES.press);
-        pressTimers[pressedKey] = null;
-      },
-      typeof TIMINGS.pressMs === "number" ? TIMINGS.pressMs : 150
-    );
-  }
 }
 
 function alphaFromEvent(event) {

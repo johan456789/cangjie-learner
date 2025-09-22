@@ -17,6 +17,7 @@ export const CLASSES = {
 export const SELECTORS = {
   keyboardMap: "#keyboardMap",
   questAlphabet: "#questAlphabet",
+  auxPanel: "#auxPanel",
   inputBar: "#inputBar",
   characterList: "#character",
   modeSelect: "#modeSelect",
@@ -33,6 +34,10 @@ export const TIMINGS = {
   pressMs: 150,
   overlayDelayMs: 200,
 };
+
+// Aux data locations
+export const AUX_BASE_PATH = "experiment/輔助字形/";
+export const AUX_JSON_PATH = "experiment/auxiliary_forms.json";
 
 // Radical pools (kept identical to original logic)
 export const RADICAL_POOLS = {
