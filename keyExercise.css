@@ -1,3 +1,11 @@
+:root {
+	--key-color-yellow: #F7E79A;
+	--key-color-cyan: #bee9f4;
+	--key-color-green: #c6ead6;
+	--key-color-red: #F7D1D9;
+	--key-color-blue: #cacfef;
+}
+
 body,
 html {
 	height: 100%;
@@ -70,24 +78,24 @@ div#keyboardMap {
 /* Finger color groups */
 /* Left index uses a warm yellow; right index uses a cool cyan. */
 div#keyboardMap span.finger-left-index {
-	background-color: #F7E79A;
+	background-color: var(--key-color-yellow);
 }
 
 div#keyboardMap span.finger-right-index {
-	background-color: #CFEFF7;
+	background-color: var(--key-color-red);
 }
 
 /* Shared colors for both hands: middle, ring, pinkie */
 div#keyboardMap span.finger-middle {
-	background-color: #DCEFE4;
+	background-color: var(--key-color-green);
 }
 
 div#keyboardMap span.finger-ring {
-	background-color: #F7D1D9;
+	background-color: var(--key-color-cyan);
 }
 
 div#keyboardMap span.finger-pinkie {
-	background-color: #D7E6FF;
+	background-color: var(--key-color-blue);
 }
 
 #keyboardMap span.hint,
