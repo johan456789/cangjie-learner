@@ -6,6 +6,7 @@ html {
 body {
 	padding: 1em;
 	text-align: center;
+	min-width: 600px;
 }
 
 div#questAlphabet {
@@ -52,6 +53,10 @@ div#keyboardMap {
 
 #keyboardMap div {
 	margin: 0.5ex;
+	max-width: 100%;
+	white-space: nowrap;
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
 }
 
 #keyboardMap span {
