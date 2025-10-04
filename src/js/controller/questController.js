@@ -32,7 +32,8 @@ import {
 } from "../view/auxiliaryView.js";
 import {
   registerCharacters as registerQuestCharacters,
-  adjustWeight as adjustQuestWeight,
+  adjustByOutcome,
+  weightedPickAvoidRepeat,
   pickWeightedCharacter,
 } from "../state/questWeights.js";
 
@@ -80,10 +81,31 @@ const app = {
     letterToRows: null,
     current: null, // selection detail
   },
+  // Track radical-mode round state for per-round weight adjustment
+  radicalRound: null,
 };
 
 let debugEnabled = false;
 const rafState = { scheduled: false, lastInput: "" };
+
+function applyRoundAdjustment(params) {
+  const mode = params && params.mode;
+  const entityId = params && params.entityId;
+  const completed = !!(params && params.completed);
+  const input = (params && params.input) || "";
+  const compareIndex = Number(params && params.compareIndex) || 0;
+  const roundState = params && params.roundState;
+  if (!mode || !entityId || !roundState) return;
+  if (roundState.roundAdjusted) return;
+  if (input && compareIndex < input.length) {
+    adjustByOutcome(mode, entityId, "wrong");
+    roundState.wrongCounted = true;
+    roundState.roundAdjusted = true;
+  } else if (completed && !roundState.wrongCounted) {
+    adjustByOutcome(mode, entityId, "right");
+    roundState.roundAdjusted = true;
+  }
+}
 
 export function init() {
   const defaults = readDefaultCharacters();
@@ -201,24 +223,48 @@ export const controller = {
     const mode = app.state.mode;
     const index = stateApi.compareInput(app.state, input);
     const completed = index >= app.state.nowCharacter.length;
+    if (mode === "radical") {
+      if (
+        !app.radicalRound ||
+        app.radicalRound.letter !== app.state.nowCharacter
+      ) {
+        app.radicalRound = {
+          letter: app.state.nowCharacter,
+          wrongCounted: false,
+          roundAdjusted: false,
+        };
+      }
+      applyRoundAdjustment({
+        mode: "radical",
+        entityId: app.state.nowCharacter,
+        completed: completed,
+        input: input,
+        compareIndex: index,
+        roundState: app.radicalRound,
+      });
+    }
     if (mode === "aux") {
       const current = app.aux.current || null;
       const currentZili = current && current.ziliFile;
-      if (current && currentZili && !current.roundAdjusted) {
-        if (input && index < input.length) {
-          adjustQuestWeight("aux", currentZili, 5);
-          current.wrongCounted = true;
-          current.roundAdjusted = true;
-        } else if (completed && !current.wrongCounted) {
-          adjustQuestWeight("aux", currentZili, -2);
-          current.roundAdjusted = true;
-        }
+      if (current && currentZili) {
+        applyRoundAdjustment({
+          mode: "aux",
+          entityId: currentZili,
+          completed: completed,
+          input: input,
+          compareIndex: index,
+          roundState: current,
+        });
       }
     }
     if (completed) {
       if (mode === "aux") {
         // Immediately pick a new aux zili
         selectAndRenderNextAux();
+        input = "";
+      } else if (mode === "radical") {
+        // Weighted pick for radical mode
+        selectAndRenderNextRadical();
         input = "";
       } else {
         const pick = stateApi.pickRandomCharacter(app.state);
@@ -245,16 +291,30 @@ export const controller = {
     });
     app.state = res.state;
 
-    // Re-pick and render
-    const pick = stateApi.pickRandomCharacter(app.state);
-    app.state = pick.state;
-    const characterString = pick.character;
-    app.state.nowCharacter = characterString.slice(1);
-    questBarView.renderQuestCharacter({
-      radical: characterString.charAt(0),
-      mappedLabels: mapLabels(app.state.nowCharacter, app.originalLabels),
-      isRadicalMode: app.state.mode !== "char",
-    });
+    if (app.state.mode === "radical") {
+      // Register category letters so totals are accurate, then weighted pick
+      const pool = constants.RADICAL_POOLS[app.state.activeCategoryKey] || [];
+      try {
+        const letters = [];
+        for (let i = 0; i < pool.length; i++) {
+          const entry = pool[i];
+          letters.push(entry.charAt(entry.length - 1));
+        }
+        if (letters.length) registerQuestCharacters("radical", letters);
+      } catch (e) {}
+      selectAndRenderNextRadical();
+    } else {
+      // Re-pick and render (char mode)
+      const pick = stateApi.pickRandomCharacter(app.state);
+      app.state = pick.state;
+      const characterString = pick.character;
+      app.state.nowCharacter = characterString.slice(1);
+      questBarView.renderQuestCharacter({
+        radical: characterString.charAt(0),
+        mappedLabels: mapLabels(app.state.nowCharacter, app.originalLabels),
+        isRadicalMode: app.state.mode !== "char",
+      });
+    }
 
     // Update keyboard disabled keys and clear hint when entering radical mode
     updateIndicators("");
@@ -272,6 +332,15 @@ export const controller = {
     app.state = res.state;
     app.state.activeCategoryKey =
       categoryKey || app.state.activeCategoryKey || "philosophy";
+    // Register candidates for this category once per switch
+    try {
+      const candidates = collectAllowedZiliFilesForCategory(
+        app.state.activeCategoryKey
+      );
+      if (candidates && candidates.length) {
+        registerQuestCharacters("aux", candidates);
+      }
+    } catch (e) {}
     selectAndRenderNextAux();
     // Ensure panel stays hidden until first wrong input
     try {
@@ -438,27 +507,44 @@ async function ensureAuxDataLoaded() {
   const json = await res.json();
   app.aux.data = json || {};
   app.aux.letterToRows = buildLetterToRows(json);
-  // Register all zili files so totals are accurate for the mode
-  try {
-    const allZili = [];
-    const map = app.aux.letterToRows || {};
-    for (const letter in map) {
-      if (!Object.hasOwn(map, letter)) continue;
-      const rows = (map[letter] && map[letter].rows) || [];
-      for (let i = 0; i < rows.length; i++) {
-        const fz = (rows[i] && rows[i].fuzhu_zixing) || [];
-        for (let j = 0; j < fz.length; j++) {
-          const zarr = (fz[j] && fz[j].zili) || [];
-          for (let k = 0; k < zarr.length; k++) {
-            const file = zarr[k] && zarr[k].file;
-            if (file) allZili.push(String(file));
-          }
-        }
-      }
-    }
-    if (allZili.length) registerQuestCharacters("aux", allZili);
-  } catch (e) {}
   return app.aux.data;
+}
+
+// ===== Radical weighting helpers =====
+
+function selectAndRenderNextRadical() {
+  const categoryKey = app.state.activeCategoryKey || "philosophy";
+  const pool = constants.RADICAL_POOLS[categoryKey] || [];
+  if (!pool || pool.length === 0) return;
+  const letters = [];
+  for (let i = 0; i < pool.length; i++) {
+    const entry = pool[i];
+    letters.push(entry.charAt(entry.length - 1));
+  }
+  if (letters.length === 0) return;
+  const lastLetter =
+    app.state.mode === "radical" ? app.state.nowCharacter : null;
+  const letter = weightedPickAvoidRepeat("radical", letters, lastLetter);
+  // Find the radical glyph for the chosen letter
+  let radicalChar = "";
+  for (let i = 0; i < pool.length; i++) {
+    const entry = pool[i];
+    if (entry.charAt(entry.length - 1) === letter) {
+      radicalChar = entry.charAt(0);
+      break;
+    }
+  }
+  app.state.nowCharacter = letter;
+  app.radicalRound = {
+    letter: letter,
+    wrongCounted: false,
+    roundAdjusted: false,
+  };
+  questBarView.renderQuestCharacter({
+    radical: radicalChar,
+    mappedLabels: mapLabels(app.state.nowCharacter, app.originalLabels),
+    isRadicalMode: true,
+  });
 }
 
 function buildLetterToRows(data) {
@@ -605,12 +691,12 @@ function findAuxDetailByZili(ziliFile) {
 function selectAndRenderNextAux() {
   const categoryKey = app.state.activeCategoryKey || "philosophy";
   const lastLetter = app.aux.current && app.aux.current.letter;
+  const fullCandidates = collectAllowedZiliFilesForCategory(categoryKey);
+  if (!fullCandidates || fullCandidates.length === 0) return;
   let candidates = collectAllowedZiliFilesForCategory(categoryKey, lastLetter);
-  if (!candidates || candidates.length === 0) {
-    candidates = collectAllowedZiliFilesForCategory(categoryKey);
-  }
-  if (!candidates || candidates.length === 0) return;
-  let pickZili = pickWeightedCharacter("aux", candidates);
+  if (!candidates || candidates.length === 0) candidates = fullCandidates;
+  const lastZili = app.aux.current && app.aux.current.ziliFile;
+  const pickZili = weightedPickAvoidRepeat("aux", candidates, lastZili);
   const detail = findAuxDetailByZili(pickZili);
   if (!detail) return;
   app.aux.current = detail;

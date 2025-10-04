@@ -199,6 +199,38 @@ export function adjustWeight(mode, character, delta) {
   return next;
 }
 
+// Policy helpers centralized here to avoid scattering magic numbers
+export const DEFAULTS = {
+  defaultWeight: DEFAULT_WEIGHT,
+  minWeight: MIN_WEIGHT,
+  wrongDelta: 5,
+  rightDelta: -2,
+};
+
+export function adjustByOutcome(mode, character, outcome) {
+  const isWrong = outcome === "wrong";
+  const delta = isWrong ? DEFAULTS.wrongDelta : DEFAULTS.rightDelta;
+  return adjustWeight(mode, character, delta);
+}
+
+// Helper to avoid immediate repeats while preserving weighted randomness
+export function weightedPickAvoidRepeat(mode, candidates, last) {
+  const list = Array.isArray(candidates) ? candidates : [];
+  if (list.length === 0) return null;
+  if (list.length > 1 && last) {
+    const filtered = [];
+    const seen = Object.create(null);
+    for (let i = 0; i < list.length; i++) {
+      const item = list[i];
+      if (!item || seen[item]) continue;
+      seen[item] = true;
+      if (item !== last) filtered.push(item);
+    }
+    if (filtered.length > 0) return pickWeightedCharacter(mode, filtered);
+  }
+  return pickWeightedCharacter(mode, list);
+}
+
 export function pickWeightedCharacter(mode, characters) {
   if (!mode) return null;
   const list = Array.isArray(characters) ? characters : [];
@@ -211,8 +243,6 @@ export function pickWeightedCharacter(mode, characters) {
     ordered.push(char);
   }
   if (ordered.length === 0) return null;
-
-  registerCharacters(mode, ordered);
 
   let total = 0;
   const weights = new Array(ordered.length);
