@@ -30,6 +30,11 @@ import {
   applyAuxDetails,
   setAuxPanelVisible,
 } from "../view/auxiliaryView.js";
+import {
+  registerCharacters as registerQuestCharacters,
+  adjustWeight as adjustQuestWeight,
+  pickWeightedCharacter,
+} from "../state/questWeights.js";
 
 const constants = {
   CLASSES: CLASSES,
@@ -193,10 +198,25 @@ function computeDisabledKeys(state) {
 // Public API mirroring old questCheck
 export const controller = {
   check: function (input) {
+    const mode = app.state.mode;
     const index = stateApi.compareInput(app.state, input);
     const completed = index >= app.state.nowCharacter.length;
+    if (mode === "aux") {
+      const current = app.aux.current || null;
+      const currentZili = current && current.ziliFile;
+      if (current && currentZili && !current.roundAdjusted) {
+        if (input && index < input.length) {
+          adjustQuestWeight("aux", currentZili, 5);
+          current.wrongCounted = true;
+          current.roundAdjusted = true;
+        } else if (completed && !current.wrongCounted) {
+          adjustQuestWeight("aux", currentZili, -2);
+          current.roundAdjusted = true;
+        }
+      }
+    }
     if (completed) {
-      if (app.state.mode === "aux") {
+      if (mode === "aux") {
         // Immediately pick a new aux zili
         selectAndRenderNextAux();
         input = "";
@@ -418,6 +438,26 @@ async function ensureAuxDataLoaded() {
   const json = await res.json();
   app.aux.data = json || {};
   app.aux.letterToRows = buildLetterToRows(json);
+  // Register all zili files so totals are accurate for the mode
+  try {
+    const allZili = [];
+    const map = app.aux.letterToRows || {};
+    for (const letter in map) {
+      if (!Object.hasOwn(map, letter)) continue;
+      const rows = (map[letter] && map[letter].rows) || [];
+      for (let i = 0; i < rows.length; i++) {
+        const fz = (rows[i] && rows[i].fuzhu_zixing) || [];
+        for (let j = 0; j < fz.length; j++) {
+          const zarr = (fz[j] && fz[j].zili) || [];
+          for (let k = 0; k < zarr.length; k++) {
+            const file = zarr[k] && zarr[k].file;
+            if (file) allZili.push(String(file));
+          }
+        }
+      }
+    }
+    if (allZili.length) registerQuestCharacters("aux", allZili);
+  } catch (e) {}
   return app.aux.data;
 }
 
@@ -436,28 +476,21 @@ function buildLetterToRows(data) {
 
 function selectAuxLetterFromCategory(categoryKey) {
   const pool = constants.RADICAL_POOLS[categoryKey] || [];
-  const allowedLetters = [];
+  const candidates = [];
   for (let i = 0; i < pool.length; i++) {
     const entry = pool[i];
     const letter = entry.charAt(entry.length - 1);
     if (app.aux.letterToRows && app.aux.letterToRows[letter]) {
-      allowedLetters.push(letter);
+      candidates.push(letter);
     }
   }
-  if (allowedLetters.length === 0) return null;
-  // Avoid immediate same letter repeat if possible
-  let pickLetter;
+  if (candidates.length === 0) return null;
   const last = app.aux.current && app.aux.current.letter;
-  if (allowedLetters.length > 1 && last) {
-    do {
-      pickLetter =
-        allowedLetters[Math.floor(Math.random() * allowedLetters.length)];
-    } while (pickLetter === last);
-  } else {
-    pickLetter =
-      allowedLetters[Math.floor(Math.random() * allowedLetters.length)];
+  let next = pickWeightedCharacter("aux", candidates);
+  if (candidates.length > 1 && last && next === last) {
+    next = pickWeightedCharacter("aux", candidates);
   }
-  return pickLetter;
+  return next;
 }
 
 function selectAuxQuestionForLetter(letter) {
@@ -505,16 +538,86 @@ function selectAuxQuestionForLetter(letter) {
   };
 }
 
+function collectAllowedZiliFilesForCategory(categoryKey, excludeLetter) {
+  const pool = constants.RADICAL_POOLS[categoryKey] || [];
+  const files = [];
+  const seen = Object.create(null);
+  for (let i = 0; i < pool.length; i++) {
+    const entry = pool[i];
+    const letter = entry.charAt(entry.length - 1);
+    if (excludeLetter && letter === excludeLetter) continue;
+    const def = app.aux.letterToRows && app.aux.letterToRows[letter];
+    if (!def) continue;
+    const rows = def.rows || [];
+    for (let r = 0; r < rows.length; r++) {
+      const fuzhus =
+        rows[r] && rows[r].fuzhu_zixing ? rows[r].fuzhu_zixing : [];
+      for (let f = 0; f < fuzhus.length; f++) {
+        const zarr = (fuzhus[f] && fuzhus[f].zili) || [];
+        for (let z = 0; z < zarr.length; z++) {
+          const file = zarr[z] && zarr[z].file;
+          if (file && !seen[file]) {
+            seen[file] = true;
+            files.push(String(file));
+          }
+        }
+      }
+    }
+  }
+  return files;
+}
+
+function findAuxDetailByZili(ziliFile) {
+  const map = app.aux.letterToRows || {};
+  for (const letter in map) {
+    if (!Object.hasOwn(map, letter)) continue;
+    const def = map[letter] || {};
+    const rows = def.rows || [];
+    for (let r = 0; r < rows.length; r++) {
+      const row = rows[r];
+      const fuzhus = row && row.fuzhu_zixing ? row.fuzhu_zixing : [];
+      for (let f = 0; f < fuzhus.length; f++) {
+        const zarr = (fuzhus[f] && fuzhus[f].zili) || [];
+        for (let z = 0; z < zarr.length; z++) {
+          const zfile = zarr[z] && zarr[z].file;
+          if (zfile === ziliFile) {
+            const fuzhuFiles = fuzhus.map(function (fx) {
+              return fx.file;
+            });
+            return {
+              letter: letter,
+              radicalChar: def.cangjieChar,
+              rowIndex: r,
+              fuzhuIndex: f,
+              ziliIndex: z,
+              ziliFile: ziliFile,
+              fuzhuFiles: fuzhuFiles,
+              shuoMingHtml: row.shuo_ming || "",
+            };
+          }
+        }
+      }
+    }
+  }
+  return null;
+}
+
 function selectAndRenderNextAux() {
-  const letter = selectAuxLetterFromCategory(
-    app.state.activeCategoryKey || "philosophy"
-  );
-  if (!letter) return;
-  const detail = selectAuxQuestionForLetter(letter);
+  const categoryKey = app.state.activeCategoryKey || "philosophy";
+  const lastLetter = app.aux.current && app.aux.current.letter;
+  let candidates = collectAllowedZiliFilesForCategory(categoryKey, lastLetter);
+  if (!candidates || candidates.length === 0) {
+    candidates = collectAllowedZiliFilesForCategory(categoryKey);
+  }
+  if (!candidates || candidates.length === 0) return;
+  let pickZili = pickWeightedCharacter("aux", candidates);
+  const detail = findAuxDetailByZili(pickZili);
   if (!detail) return;
   app.aux.current = detail;
+  app.aux.current.wrongCounted = false;
+  app.aux.current.roundAdjusted = false;
   // For indicator logic, set code to the single letter
-  app.state.nowCharacter = letter;
+  app.state.nowCharacter = detail.letter;
   // Render zili SVG only in the quest box (no radical text)
   const mapped = mapLabels(app.state.nowCharacter, app.originalLabels);
   questBarView.renderQuestCharacter({
