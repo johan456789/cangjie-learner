@@ -35,6 +35,12 @@ export const TIMINGS = {
   overlayDelayMs: 200,
 };
 
+// Local storage keys / prefixes
+export const STORAGE_KEYS = {
+  totalWeightSuffix: "totalWeight",
+  characterListSuffix: "characters",
+};
+
 // Aux data locations
 export const AUX_BASE_PATH = "experiment/輔助字形/";
 export const AUX_JSON_PATH = "experiment/auxiliary_forms.json";

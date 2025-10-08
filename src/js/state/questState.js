@@ -33,11 +33,7 @@ export function pickRandomCharacter(state) {
   const count = end - start + 1;
   let idx;
   if (count <= 0) return { state: state, character: state.characterArray[0] };
-  if (
-    state.mode !== "char" &&
-    count > 1 &&
-    state.lastPickedCharacter !== null
-  ) {
+  if (count > 1 && state.lastPickedCharacter !== null) {
     do {
       idx = Math.floor(Math.random() * count) + start;
     } while (state.characterArray[idx] === state.lastPickedCharacter);
