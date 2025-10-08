@@ -2,12 +2,29 @@ import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   test: {
-    include: ["tests/**/*.test.js"],
-    environment: "node",
-    reporters: "default",
-  },
-  // Enable browser mode if desired (no provider configured here)
-  browser: {
-    enabled: true,
+    projects: [
+      {
+        test: {
+          name: "unit",
+          include: ["tests/**/*.test.js"],
+          exclude: ["tests/browser/**/*.test.js"],
+          environment: "node",
+          reporters: "default",
+        },
+      },
+      {
+        test: {
+          name: "browser",
+          include: ["tests/browser/**/*.test.js"],
+          browser: {
+            enabled: true,
+            provider: "playwright",
+            name: "chromium",
+            instances: [{ browser: "chromium" }],
+          },
+          reporters: "default",
+        },
+      },
+    ],
   },
 });

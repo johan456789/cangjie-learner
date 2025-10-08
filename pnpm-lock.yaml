@@ -10,7 +10,10 @@ importers:
     devDependencies:
       '@vitest/browser':
         specifier: ^2.1.9
-        version: 2.1.9(vite@5.4.20)(vitest@2.1.9)
+        version: 2.1.9(playwright@1.56.0)(vite@5.4.20)(vitest@2.1.9)
+      playwright:
+        specifier: ^1.48.2
+        version: 1.56.0
       vite:
         specifier: ^5.4.20
         version: 5.4.20
@@ -489,6 +492,11 @@ packages:
     resolution: {integrity: sha512-JhFGDVJ7tmDJItKhYgJCGLOWjuK9vPxiXoUFLwLDc99NlmklilbiQJwoctZtt13+xMw91MCk/REan6MWHqDjyA==}
     engines: {node: '>=12.0.0'}
 
+  fsevents@2.3.2:
+    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
+    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
+    os: [darwin]
+
   fsevents@2.3.3:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
@@ -566,6 +574,16 @@ packages:
 
   picocolors@1.1.1:
     resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
+
+  playwright-core@1.56.0:
+    resolution: {integrity: sha512-1SXl7pMfemAMSDn5rkPeZljxOCYAmQnYLBTExuh6E8USHXGSX3dx6lYZN/xPpTz1vimXmPA9CDnILvmJaB8aSQ==}
+    engines: {node: '>=18'}
+    hasBin: true
+
+  playwright@1.56.0:
+    resolution: {integrity: sha512-X5Q1b8lOdWIE4KAoHpW3SE8HvUB+ZZsUoN64ZhjnN8dOb1UpujxBtENGiZFE+9F/yhzJwYa+ca3u43FeLbboHA==}
+    engines: {node: '>=18'}
+    hasBin: true
 
   postcss@8.5.6:
     resolution: {integrity: sha512-3Ybi1tAuwAP9s0r1UQ2J4n5Y0G05bJkpUIO0/bI9MhwmD70S5aTWbXGBwxHrelT+XM1k6dM0pk+SwNkpTRN7Pg==}
@@ -980,7 +998,7 @@ snapshots:
 
   '@types/statuses@2.0.6': {}
 
-  '@vitest/browser@2.1.9(vite@5.4.20)(vitest@2.1.9)':
+  '@vitest/browser@2.1.9(playwright@1.56.0)(vite@5.4.20)(vitest@2.1.9)':
     dependencies:
       '@testing-library/dom': 10.4.1
       '@testing-library/user-event': 14.6.1(@testing-library/dom@10.4.1)
@@ -992,6 +1010,8 @@ snapshots:
       tinyrainbow: 1.2.0
       vitest: 2.1.9(@vitest/browser@2.1.9)(msw@2.11.4)
       ws: 8.18.3
+    optionalDependencies:
+      playwright: 1.56.0
     transitivePeerDependencies:
       - '@types/node'
       - bufferutil
@@ -1130,6 +1150,9 @@ snapshots:
 
   expect-type@1.2.2: {}
 
+  fsevents@2.3.2:
+    optional: true
+
   fsevents@2.3.3:
     optional: true
 
@@ -1193,6 +1216,14 @@ snapshots:
   pathval@2.0.1: {}
 
   picocolors@1.1.1: {}
+
+  playwright-core@1.56.0: {}
+
+  playwright@1.56.0:
+    dependencies:
+      playwright-core: 1.56.0
+    optionalDependencies:
+      fsevents: 2.3.2
 
   postcss@8.5.6:
     dependencies:
@@ -1345,7 +1376,7 @@ snapshots:
       vite-node: 2.1.9
       why-is-node-running: 2.3.0
     optionalDependencies:
-      '@vitest/browser': 2.1.9(vite@5.4.20)(vitest@2.1.9)
+      '@vitest/browser': 2.1.9(playwright@1.56.0)(vite@5.4.20)(vitest@2.1.9)
     transitivePeerDependencies:
       - less
       - lightningcss
