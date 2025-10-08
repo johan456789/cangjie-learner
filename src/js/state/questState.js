@@ -3,7 +3,7 @@
 /**
  * initializeState
  * @param {Object} args
- * @param {string[]} args.defaultCharacterArray - full list including sentinels
+ * @param {string[]} args.defaultCharacterArray - full list
  * @param {Object} args.radicalPools - pools keyed by category
  * @returns {Object} state
  */
@@ -28,19 +28,20 @@ export function initializeState(args) {
  * @returns {{state: Object, character: string}}
  */
 export function pickRandomCharacter(state) {
-  const start = 1;
-  const end = state.characterArray.length - 2;
-  const count = end - start + 1;
-  let idx;
-  if (count <= 0) return { state: state, character: state.characterArray[0] };
-  if (count > 1 && state.lastPickedCharacter !== null) {
-    do {
-      idx = Math.floor(Math.random() * count) + start;
-    } while (state.characterArray[idx] === state.lastPickedCharacter);
-  } else {
-    idx = Math.floor(Math.random() * count) + start;
+  const items = state.characterArray;
+  const total = items.length;
+  if (total <= 0) {
+    return { state: state, character: "" };
   }
-  const character = state.characterArray[idx];
+
+  let idx = Math.floor(Math.random() * total);
+  if (total > 1 && state.lastPickedCharacter !== null) {
+    if (items[idx] === state.lastPickedCharacter) {
+      idx = (idx + 1 + Math.floor(Math.random() * (total - 1))) % total;
+    }
+  }
+
+  const character = items[idx];
   const next = Object.assign({}, state, { lastPickedCharacter: character });
   return { state: next, character: character };
 }
@@ -127,7 +128,7 @@ export function setMode(state, args) {
   });
   if (mode === "radical") {
     const pool = (state.radicalPools && state.radicalPools[categoryKey]) || [];
-    next.characterArray = [""].concat(pool).concat([""]);
+    next.characterArray = pool.slice();
     return { state: next, activePool: pool.slice() };
   } else if (mode === "char") {
     next.characterArray = state.defaultCharacterArray.slice();

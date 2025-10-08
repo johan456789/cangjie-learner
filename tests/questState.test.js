@@ -8,7 +8,7 @@ import {
 } from "../src/js/state/questState.js";
 
 describe("questState (pure state)", () => {
-  const defaultCharacterArray = ["", "abc", "xyz", "foo", ""];
+  const defaultCharacterArray = ["abc", "xyz", "foo"];
   const radicalPools = {
     philosophy: ["a", "b", "c"],
     animals: ["d", "e"],
@@ -33,20 +33,17 @@ describe("questState (pure state)", () => {
     for (let i = 0; i < 20; i++) {
       const { state: next, character } = pickRandomCharacter(state);
       state = next;
-      expect(defaultCharacterArray.slice(1, -1)).toContain(character);
+      expect(defaultCharacterArray).toContain(character);
       seen.add(character);
     }
-    expect(defaultCharacterArray.slice(1, -1)).toContain(
-      state.lastPickedCharacter
-    );
+    expect(defaultCharacterArray).toContain(state.lastPickedCharacter);
 
     // Avoid immediate repeat when possible
     state.lastPickedCharacter = "abc";
-    // First attempt would target index of 'abc' (i.e., start), second attempt a different index
     const spy = vi
       .spyOn(Math, "random")
-      .mockReturnValueOnce(0) // idx = start -> 'abc'
-      .mockReturnValueOnce(0.9); // idx != start -> different
+      .mockReturnValueOnce(0) // first index -> 'abc'
+      .mockReturnValueOnce(0.9); // pick another
     const { character: picked2 } = pickRandomCharacter(state);
     expect(picked2).not.toBe("abc");
     spy.mockRestore();
@@ -131,7 +128,7 @@ describe("questState (pure state)", () => {
   });
 
   describe("setMode transitions", () => {
-    it("char → radical updates array to [''].concat(pool).concat(['']) and resets lastPickedCharacter", () => {
+    it("char → radical updates array to pool copy and resets lastPickedCharacter", () => {
       const { state: next, activePool } = setMode(state, {
         isRadicalMode: true,
         categoryKey: "philosophy",
@@ -139,7 +136,7 @@ describe("questState (pure state)", () => {
       expect(next.mode).toBe("radical");
       expect(next.activeCategoryKey).toBe("philosophy");
       expect(next.lastPickedCharacter).toBeNull();
-      expect(next.characterArray).toEqual(["", ...radicalPools.philosophy, ""]);
+      expect(next.characterArray).toEqual(radicalPools.philosophy);
       expect(activePool).toEqual(radicalPools.philosophy);
     });
 
