@@ -1,0 +1,17 @@
+{
+  "name": "cangjie-learner",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui",
+    "test:browser": "vitest browser"
+  },
+  "devDependencies": {
+    "@vitest/browser": "^2.1.9",
+    "vite": "^5.4.20",
+    "vitest": "^2.1.9"
+  }
+}
