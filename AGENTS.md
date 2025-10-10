@@ -34,8 +34,8 @@ The project uses ES modules, which require serving over HTTP (not `file://` prot
 ### Starting the Development Server
 
 ```sh
-cd /Users/johan/Downloads/cangjie-learner
-python3 -m http.server 5520
+cd cangjie-learner
+python -m http.server 5520
 ```
 
 ### Accessing the Application
@@ -51,3 +51,33 @@ After loading the page, verify these interactions work:
 - **Category Selection**: In radical mode, change category → radical pool updates
 - **Typing Input**: In "單字" mode, type letters → see visual feedback (right/wrong/cursor indicators)
 - **Keyboard Hints**: Type partial input → matching key should highlight with hint class
+
+## Testing
+
+The project uses Vitest for unit testing. Tests are located in the `tests/` directory.
+
+### Running Tests
+
+To run all tests once:
+
+```sh
+pnpm test
+```
+
+To run tests in watch mode (re-runs on file changes):
+
+```sh
+pnpm run test:watch
+```
+
+To run tests with a UI:
+
+```sh
+pnpm run test:ui
+```
+
+To run tests in browser mode:
+
+```sh
+pnpm run test:browser
+```
