@@ -34,8 +34,8 @@ The project uses ES modules, which require serving over HTTP (not `file://` prot
 ### Starting the Development Server
 
 ```sh
-cd /Users/johan/Downloads/cangjie-learner
-python3 -m http.server 5520
+cd cangjie-learner
+python -m http.server 5520
 ```
 
 ### Accessing the Application
