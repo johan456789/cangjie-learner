@@ -7,7 +7,9 @@ import {
   RADICAL_POOLS,
   AUX_JSON_PATH,
   AUX_BASE_PATH,
+  SIMILAR_FORMS_JSON_PATH,
 } from "../constants.js";
+import { findSimilarFormsComparison } from "../state/similarForms.js";
 import {
   initializeState,
   pickRandomCharacter,
@@ -80,6 +82,7 @@ const app = {
     data: null, // loaded JSON
     letterToRows: null,
     current: null, // selection detail
+    similarFormGroups: [], // 相近字形辨析 groups (loaded JSON)
   },
   // Track radical-mode round state for per-round weight adjustment
   radicalRound: null,
@@ -180,6 +183,9 @@ function updateIndicators(input) {
           fuzhuFiles: current.fuzhuFiles || [],
           currentFuzhuIndex: current.fuzhuIndex,
           shuoMingHtml: current.shuoMingHtml || "",
+          similarForms: data.radicalWrong
+            ? buildSimilarFormRows(current, rafState.lastInput)
+            : [],
         });
       }
     }
@@ -512,7 +518,44 @@ async function ensureAuxDataLoaded() {
   const json = await res.json();
   app.aux.data = json || {};
   app.aux.letterToRows = buildLetterToRows(json);
+  app.aux.similarFormGroups = await loadSimilarFormGroups();
   return app.aux.data;
+}
+
+// 相近字形辨析 is a supplementary hint: aux mode still works without it
+async function loadSimilarFormGroups() {
+  try {
+    const res = await fetch(SIMILAR_FORMS_JSON_PATH, { cache: "force-cache" });
+    const groups = await res.json();
+    return Array.isArray(groups) ? groups : [];
+  } catch (e) {
+    return [];
+  }
+}
+
+/**
+ * Rows for the 相近字形辨析 comparison when the wrong key belongs to a
+ * look-alike of the current auxiliary form; empty when it does not.
+ */
+function buildSimilarFormRows(currentAux, input) {
+  const targetFile = (currentAux.fuzhuFiles || [])[currentAux.fuzhuIndex];
+  const typedKey = (input || "").charAt(0);
+  const comparison = findSimilarFormsComparison(
+    app.aux.similarFormGroups,
+    targetFile,
+    typedKey
+  );
+  if (!comparison) return [];
+  const toRow = (form, isTarget) => ({
+    shape: form.shape,
+    codeLabel: mapLabels(form.code, app.originalLabels).join(""),
+    shuoMing: form.shuo_ming,
+    isTarget: isTarget,
+  });
+  return [
+    toRow(comparison.target, true),
+    ...comparison.confusedForms.map((form) => toRow(form, false)),
+  ];
 }
 
 // ===== Radical weighting helpers =====

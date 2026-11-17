@@ -21,6 +21,7 @@ This is a static ES Modules web app; no Node build is required.
   - Open `http://localhost:5520/keyExercise.html`.
 
 - Optional: Python utilities (assets/data) are run with uv:
+  - `uv run experiment/export_similar_forms_json.py` (re-export 相近字形辨析)
   - `uv run experiment/download_auxiliary_svgs.py`
 
 Sanity checks after loading the page:
@@ -43,11 +44,13 @@ Top-level highlights:
   - `controller/questController.js`: Orchestrates state + views; mode switching; weighted selection; aux handling.
   - `state/questState.js`: Pure state machine for characters/radicals; indicator computation.
   - `state/questWeights.js`: LocalStorage-backed weighted selection with in-memory fallback.
+  - `state/similarForms.js`: Pure lookup of 相近字形辨析 (easily confused shapes) for a wrong key.
   - `view/keyboardView.js`: Keyboard rendering, pressed/disabled/hint states, layout toggle.
   - `view/questBarView.js`: Renders the quest (radical + slots) and applies indicators.
   - `view/auxiliaryView.js`: Renders auxiliary strip and explanation.
 - `experiment/`: Auxiliary glyph assets and scripts
   - `auxiliary_forms.json`: Mapping used by aux mode
+  - `similar_forms.json`: 相近字形辨析 groups (look-alike shapes and the notes that tell them apart)
   - `輔助字形/*.svg`: Visuals for aux/fuzhu/zili
   - Python utilities (`uv run ...`) to fetch/export assets
 
@@ -126,6 +129,7 @@ Top-level highlights:
   - Loads `experiment/auxiliary_forms.json`, maps current category’s letters to rows containing `fuzhu` (aux forms) and `zili` (sub-glyph files).
   - The quest’s first slot renders an SVG of the selected `zili`; code is still the letter (e.g., "m").
   - On wrong input, the aux panel shows the strip of related `fuzhu` and an explanation (`shuo_ming`) rendered with inline images.
+  - If the wrong key belongs to a shape that is easily confused with the current `fuzhu` (same group in `experiment/similar_forms.json`), the panel also shows 相近字形辨析: the correct shape and the look-alike(s), each with its distinguishing note. A combination such as 「竹山」 counts as a look-alike for any of its keys.
   - Weighted selection and one-adjustment-per-round apply to `zili` files.
 
 ## Terminology (glossary)

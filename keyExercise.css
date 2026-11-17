@@ -269,9 +269,89 @@ hr {
 }
 
 /* Inline svg images inside explanation should sit nicely with text */
-#auxPanel .explanation img.inline-svg {
+#auxPanel .explanation img.inline-svg,
+#auxPanel .similar-forms img.inline-svg {
 	height: 1em;
 	width: auto;
 	vertical-align: middle;
 	margin: 0 0.2em;
+}
+
+/* 相近字形辨析: shown only when a look-alike form's key was pressed */
+#auxPanel .similar-forms {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 0.5em;
+	margin-top: 0.75em;
+	text-align: left;
+}
+
+#auxPanel .similar-forms[aria-hidden="true"] {
+	display: none;
+}
+
+#auxPanel .similar-forms .similar-forms-title {
+	flex: 0 0 100%;
+	margin: 0;
+	font-size: 0.9em;
+	font-weight: bold;
+	text-align: center;
+	color: #333;
+}
+
+#auxPanel .similar-forms .similar-form {
+	flex: 1 1 13em;
+	max-width: 22em;
+	box-sizing: border-box;
+	display: grid;
+	grid-template-columns: 3em 1fr;
+	grid-template-areas:
+		"shape role"
+		"shape note";
+	grid-template-rows: auto 1fr;
+	column-gap: 0.75em;
+	row-gap: 0.25em;
+	padding: 0.6em 0.75em;
+	border: 2px solid #C62828;
+	border-radius: 6px;
+	background: #FDECEA;
+}
+
+#auxPanel .similar-forms .similar-form.similar-form-target {
+	border-color: #2E7D32;
+	background: #E8F5E9;
+}
+
+#auxPanel .similar-forms .similar-form-shape {
+	grid-area: shape;
+	align-self: start;
+	font-size: 2.5em;
+	line-height: 1;
+	text-align: center;
+}
+
+#auxPanel .similar-forms .similar-form-shape img {
+	display: block;
+	width: 1em;
+	height: 1em;
+	margin: 0 auto;
+}
+
+#auxPanel .similar-forms .similar-form-role {
+	grid-area: role;
+	font-size: 0.85em;
+	font-weight: bold;
+	color: #C62828;
+}
+
+#auxPanel .similar-forms .similar-form-target .similar-form-role {
+	color: #2E7D32;
+}
+
+#auxPanel .similar-forms .similar-form-note {
+	grid-area: note;
+	font-size: 0.85em;
+	line-height: 1.5;
+	color: #333;
 }

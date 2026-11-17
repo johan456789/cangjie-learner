@@ -11,6 +11,14 @@ export const CLASSES = {
   radicalWrong: "radical-wrong",
   hidden: "hidden",
   noFocus: "no-focus",
+  current: "current",
+  inlineSvg: "inline-svg",
+  similarForm: "similar-form",
+  similarFormTarget: "similar-form-target",
+  similarFormsTitle: "similar-forms-title",
+  similarFormShape: "similar-form-shape",
+  similarFormRole: "similar-form-role",
+  similarFormNote: "similar-form-note",
 };
 
 // DOM selectors used by views/controllers
@@ -18,6 +26,7 @@ export const SELECTORS = {
   keyboardMap: "#keyboardMap",
   questAlphabet: "#questAlphabet",
   auxPanel: "#auxPanel",
+  auxSimilarForms: ".similar-forms",
   inputBar: "#inputBar",
   characterList: "#character",
   modeSelect: "#modeSelect",
@@ -44,6 +53,14 @@ export const STORAGE_KEYS = {
 // Aux data locations
 export const AUX_BASE_PATH = "experiment/輔助字形/";
 export const AUX_JSON_PATH = "experiment/auxiliary_forms.json";
+export const SIMILAR_FORMS_JSON_PATH = "experiment/similar_forms.json";
+
+// UI text for 相近字形辨析 (shown when a similar-looking form's key is pressed)
+export const SIMILAR_FORMS_TEXT = {
+  title: "相近字形辨析",
+  targetRole: "正確答案",
+  confusedRole: "易混淆",
+};
 
 // Radical pools (kept identical to original logic)
 export const RADICAL_POOLS = {

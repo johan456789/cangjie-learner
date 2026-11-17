@@ -13,6 +13,7 @@ import {
   SELECTORS,
   TIMINGS,
   AUX_JSON_PATH,
+  SIMILAR_FORMS_JSON_PATH,
 } from "../../src/js/constants.js";
 
 function buildFullFixture() {
@@ -31,6 +32,7 @@ function buildFullFixture() {
     <section id="auxPanel" aria-live="polite">
       <div class="fuzhu-strip" aria-hidden="true"></div>
       <div class="explanation" aria-hidden="true"></div>
+      <div class="similar-forms" aria-hidden="true"></div>
     </section>
     <textarea id="inputBar" placeholder="請在此輸入英文字母"></textarea>
     <div id="menu">
@@ -233,10 +235,24 @@ suite("Integration Flows (User Scenarios)", () => {
         ],
       },
     };
+    const image = (file) => ({ type: "image", file });
+    const mockSimilarForms = [
+      {
+        forms: [
+          { shape: image("a.svg"), code: "a", shuo_ming: "note a" },
+          { shape: image("a2.svg"), code: "a", shuo_ming: "note a2" },
+          { shape: image("b.svg"), code: "b", shuo_ming: "note b" },
+        ],
+      },
+    ];
+    const jsonByPath = {
+      [AUX_JSON_PATH]: mockJson,
+      [SIMILAR_FORMS_JSON_PATH]: mockSimilarForms,
+    };
     globalThis.fetch = vi.fn(async (url) => {
-      expect(String(url)).toContain(AUX_JSON_PATH);
+      expect(Object.keys(jsonByPath)).toContain(String(url));
       return {
-        json: async () => mockJson,
+        json: async () => jsonByPath[String(url)],
       };
     });
 
@@ -255,13 +271,34 @@ suite("Integration Flows (User Scenarios)", () => {
     const explanation = panel.querySelector(".explanation");
     expect(strip.getAttribute("aria-hidden")).toBe("true");
     expect(explanation.getAttribute("aria-hidden")).toBe("true");
+    const similarForms = panel.querySelector(SELECTORS.auxSimilarForms);
+    expect(similarForms.getAttribute("aria-hidden")).toBe("true");
 
-    // After wrong input, details appear (category philosophy => correct letter is 'a', so use 'b')
+    // A wrong key that is not a look-alike shows details but no 相近字形辨析
     const input = focusInput();
-    input.value = "b"; // wrong
+    input.value = "c";
     input.dispatchEvent(new Event("input", { bubbles: true }));
     await waitFor(() => strip.getAttribute("aria-hidden") === "false");
     expect(explanation.getAttribute("aria-hidden")).toBe("false");
+    expect(similarForms.getAttribute("aria-hidden")).toBe("true");
+
+    // The key of a look-alike form ('b') shows both shapes with their notes
+    input.value = "b";
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+    await waitFor(() => similarForms.getAttribute("aria-hidden") === "false");
+    const rows = similarForms.querySelectorAll(`.${CLASSES.similarForm}`);
+    expect(rows.length).toBe(2);
+    expect(rows[0].classList.contains(CLASSES.similarFormTarget)).toBe(true);
+    expect(rows[0].textContent).toContain("原a");
+    expect(rows[1].querySelector("img").getAttribute("src")).toMatch(/b\.svg$/);
+    expect(rows[1].textContent).toContain("原b");
+    expect(rows[1].textContent).toContain("note b");
+
+    // The correct key moves on and clears the comparison
+    input.value = "a";
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+    await waitFor(() => similarForms.getAttribute("aria-hidden") === "true");
+    expect(similarForms.children.length).toBe(0);
   });
 
   it("Clicking the on-screen keyboard keeps the input focused", async () => {
