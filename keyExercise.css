@@ -53,14 +53,20 @@ div#questAlphabet span.radical-wrong {
 }
 
 div#keyboardMap {
-	font-size: 2.5em;
+	/* Keys are square like physical keycaps; pitch = one key plus one gap */
+	--key-size: 1.5em;
+	--key-gap: 0.25em;
+	--key-pitch: calc(var(--key-size) + var(--key-gap));
+	font-size: 2em;
 	text-align: left;
 	display: inline-block;
 	position: relative;
 }
 
 #keyboardMap div {
-	margin: 0.5ex;
+	display: flex;
+	gap: var(--key-gap);
+	margin: var(--key-gap);
 	max-width: 100%;
 	white-space: nowrap;
 	overflow-x: auto;
@@ -69,10 +75,15 @@ div#keyboardMap {
 
 #keyboardMap span {
 	background-color: grey;
-	display: inline-block;
+	display: flex;
+	flex: none;
+	justify-content: center;
+	align-items: center;
+	box-sizing: border-box;
 	border: black outset 0.2ex;
-	width: 1em;
-	text-align: center;
+	width: var(--key-size);
+	height: var(--key-size);
+	line-height: 1;
 }
 
 /* Finger color groups */
@@ -173,14 +184,15 @@ hr {
 	text-align: center;
 }
 
+/* Row stagger: each row shifts half a key pitch further right */
 #keyboardMap div:nth-child(2) {
 	position: relative;
-	left: 0.75em;
+	left: calc(var(--key-pitch) * 0.5);
 }
 
 #keyboardMap div:nth-child(3) {
 	position: relative;
-	left: 1.5em;
+	left: var(--key-pitch);
 }
 
 /* Emphasize home row index keys (F/J or 倉頡 火/十) */
@@ -207,7 +219,7 @@ hr {
 	justify-content: center;
 	text-align: center;
 	padding: 1em;
-	font-size: 0.5em;
+	font-size: 0.625em;
 	backdrop-filter: blur(2px);
 	cursor: pointer;
 }
