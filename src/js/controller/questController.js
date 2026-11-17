@@ -487,6 +487,11 @@ export function wireEvents() {
       });
       inputEl.addEventListener("blur", scheduleOverlayShow);
     }
+    // Clicking the on-screen keyboard must not steal focus from the input.
+    // Cancelling mousedown keeps the currently focused element focused.
+    keyboardEl.addEventListener("mousedown", function (event) {
+      event.preventDefault();
+    });
     overlay.addEventListener("click", function () {
       if (overlayShowTimer) {
         clearTimeout(overlayShowTimer);
