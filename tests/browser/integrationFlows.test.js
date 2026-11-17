@@ -263,4 +263,18 @@ suite("Integration Flows (User Scenarios)", () => {
     await waitFor(() => strip.getAttribute("aria-hidden") === "false");
     expect(explanation.getAttribute("aria-hidden")).toBe("false");
   });
+
+  it("Clicking the on-screen keyboard keeps the input focused", async () => {
+    const input = focusInput();
+    const keyboardEl = document.querySelector(SELECTORS.keyboardMap);
+    const mouseDownEvent = new MouseEvent("mousedown", {
+      bubbles: true,
+      cancelable: true,
+    });
+    document.querySelector("#key-a").dispatchEvent(mouseDownEvent);
+    expect(mouseDownEvent.defaultPrevented).toBe(true);
+    await new Promise((r) => setTimeout(r, TIMINGS.overlayDelayMs + 50));
+    expect(document.activeElement).toBe(input);
+    expect(keyboardEl.classList.contains(CLASSES.noFocus)).toBe(false);
+  });
 });
