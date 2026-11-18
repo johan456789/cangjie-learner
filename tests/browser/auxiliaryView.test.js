@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeAll, beforeEach } from "vitest";
 const suite = typeof document === "undefined" ? describe.skip : describe;
-import { SELECTORS } from "../../src/js/constants.js";
+import { SELECTORS, CLASSES, SIMILAR_FORMS_TEXT } from "../../src/js/constants.js";
 import {
   renderAuxPanel,
   setAuxPanelVisible,
@@ -13,6 +13,7 @@ function buildAuxFixture() {
     <div id="auxPanel">
       <div class="fuzhu-strip"></div>
       <div class="explanation"></div>
+      <div class="similar-forms"></div>
     </div>
   `;
   document.body.appendChild(container);
@@ -30,6 +31,11 @@ function resetAuxView() {
   if (explanation) {
     explanation.textContent = "";
     explanation.setAttribute("aria-hidden", "true");
+  }
+  const similarForms = panel.querySelector(SELECTORS.auxSimilarForms);
+  if (similarForms) {
+    similarForms.textContent = "";
+    similarForms.setAttribute("aria-hidden", "true");
   }
   panel.style.display = "";
 }
@@ -92,5 +98,67 @@ suite("auxiliaryView", () => {
     });
     expect(strip.getAttribute("aria-hidden")).toBe("true");
     expect(explanation.getAttribute("aria-hidden")).toBe("true");
+  });
+
+  it("applyAuxDetails renders 相近字形辨析 rows only while shown", () => {
+    const similarForms = document.querySelector(
+      `${SELECTORS.auxPanel} ${SELECTORS.auxSimilarForms}`
+    );
+    const rows = [
+      {
+        shape: { type: "image", file: "cjrm-j2.svg" },
+        codeLabel: "十",
+        shuoMing: "頂上有直點 [[Image:x.svg|18px]] <ref>ignore</ref>",
+        isTarget: true,
+      },
+      {
+        shape: { type: "text", text: "巳" },
+        codeLabel: "口山",
+        shuoMing: "頂上無點",
+        isTarget: false,
+      },
+    ];
+    const details = {
+      fuzhuFiles: [],
+      currentFuzhuIndex: -1,
+      shuoMingHtml: "",
+    };
+
+    applyAuxDetails({ ...details, show: true, similarForms: rows });
+    expect(similarForms.getAttribute("aria-hidden")).toBe("false");
+    expect(
+      similarForms.querySelector(`.${CLASSES.similarFormsTitle}`).textContent
+    ).toBe(SIMILAR_FORMS_TEXT.title);
+    const items = similarForms.querySelectorAll(`.${CLASSES.similarForm}`);
+    expect(items.length).toBe(2);
+
+    expect(items[0].classList.contains(CLASSES.similarFormTarget)).toBe(true);
+    expect(
+      items[0]
+        .querySelector(`.${CLASSES.similarFormShape} img`)
+        .getAttribute("src")
+    ).toMatch(/cjrm-j2\.svg$/);
+    expect(
+      items[0].querySelector(`.${CLASSES.similarFormRole}`).textContent
+    ).toBe(`${SIMILAR_FORMS_TEXT.targetRole}：十`);
+    const note = items[0].querySelector(`.${CLASSES.similarFormNote}`);
+    expect(note.querySelector(`img.${CLASSES.inlineSvg}`)).toBeTruthy();
+    expect(note.textContent).toContain("頂上有直點");
+    expect(note.textContent).not.toMatch(/ignore/);
+
+    expect(items[1].classList.contains(CLASSES.similarFormTarget)).toBe(false);
+    expect(
+      items[1].querySelector(`.${CLASSES.similarFormShape}`).textContent
+    ).toBe("巳");
+    expect(
+      items[1].querySelector(`.${CLASSES.similarFormRole}`).textContent
+    ).toBe(`${SIMILAR_FORMS_TEXT.confusedRole}：口山`);
+
+    // Rows are dropped when details are hidden or there is no comparison
+    applyAuxDetails({ ...details, show: false, similarForms: rows });
+    expect(similarForms.getAttribute("aria-hidden")).toBe("true");
+    expect(similarForms.children.length).toBe(0);
+    applyAuxDetails({ ...details, show: true });
+    expect(similarForms.getAttribute("aria-hidden")).toBe("true");
   });
 });

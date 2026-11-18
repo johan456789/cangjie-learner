@@ -1,0 +1,674 @@
+[
+  {
+    "forms": [
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-r0.svg"
+        },
+        "code": "r",
+        "shuo_ming": "「口」的主根，四邊形內不含任何東西。如：品、器、高。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-w1.svg"
+        },
+        "code": "w",
+        "shuo_ming": "讀「圍」，是「田」的輔助字形。撇除「日」形，四邊形內有任何筆畫皆屬之。如：困、罟、西、衰、毌。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-a0.svg"
+        },
+        "code": "a",
+        "shuo_ming": "四邊形內除了原來的一筆，沒有其他筆畫。如：汨、沓、音。"
+      }
+    ]
+  },
+  {
+    "forms": [
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-c9.svg"
+        },
+        "code": "c",
+        "shuo_ming": "「金」的輔助字形，多在整個字的中間，有時亦寫成「[[Image:cjrm-c3.svg|18px]]」，如：西、匹、傻、夌、俊。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjwm-hu.svg"
+        },
+        "code": "hu",
+        "shuo_ming": "通常在字的下半部，且佔整個字或整個部份的一半左右，如：兄、竟、兒、先、允，取碼「竹山」。但獨立成字時視爲兩豎並列，取「中山」。（參見下方「[[Image:cjrm-l2.svg|18px]]」與「[[Image:cjrm-h2.svg|18px]]」之說明。）"
+      }
+    ]
+  },
+  {
+    "forms": [
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-j2.svg"
+        },
+        "code": "j",
+        "shuo_ming": "「十」的輔助字形，頂上有直點。如：寇、空、挖。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-b11.svg"
+        },
+        "code": "b",
+        "shuo_ming": "「月」的輔助字形，頂上無點。如：冠、罕、探。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-n4.svg"
+        },
+        "code": "n",
+        "shuo_ming": "「弓」的輔助字形，首筆爲撇，起筆處明顯比「[[Image:cjrm-n2.svg|18px]]」高。如：欠、欺、你。"
+      }
+    ]
+  },
+  {
+    "forms": [
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-j0.svg"
+        },
+        "code": "j",
+        "shuo_ming": "「十」的主根，中間基本上是直豎，但寫行楷時可能稍微左斜，以連接下方字形，如：古、南、毌。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-j1.svg"
+        },
+        "code": "j",
+        "shuo_ming": "「十」在字形左方、下方、左下方、內部，為書法美觀而輕微變形，如：戎、訊、毋；或原作「十」，因寫在偏旁美化者，如：辣（字首原作「辛」）、邦（字首原作「丰」）；或左斜而下接折筆者，但仍屬「十」不屬「大」，如：亐、汚。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-k2.svg"
+        },
+        "code": "k",
+        "shuo_ming": "「大」的輔助字形，多用於右下方或右方連有字形者，如：右、有、者、九、力。"
+      }
+    ]
+  },
+  {
+    "forms": [
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-l2.svg"
+        },
+        "code": "l",
+        "shuo_ming": "「中」的輔助字形，由上而下，上方無其他筆畫相連，原則上是豎筆，但有時爲書法美觀而由直轉左撇，如：川、兆、冘；常二豎並列，有時也可寫作「[[Image:cjrm-l1.svg|18px]]」的筆畫亦屬之，如：非、亦、赤。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-h2.svg"
+        },
+        "code": "h",
+        "shuo_ming": "「竹」的輔助字形，由右上而左下，基本上不能寫作筆直的豎筆，其上部也常會與其他筆畫相連，如：侃、巟、充、兄、乃、几、戊、方。"
+      }
+    ]
+  },
+  {
+    "forms": [
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-i2.svg"
+        },
+        "code": "i",
+        "shuo_ming": "「戈」的輔助字形，頂上有直點，如：庭、府、廠。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-m2.svg"
+        },
+        "code": "m",
+        "shuo_ming": "「一」的輔助字形，首筆爲橫，頂上無點，如：原、歷、壓。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-h6.svg"
+        },
+        "code": "h",
+        "shuo_ming": "「竹」的輔助字形，首筆爲短撇，如：斤、派、盾。"
+      }
+    ]
+  },
+  {
+    "forms": [
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-m1.svg"
+        },
+        "code": "m",
+        "shuo_ming": "「一」的輔助字形，由左下往右上提者皆屬之，如：刁、冰、鲤。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-h5.svg"
+        },
+        "code": "h",
+        "shuo_ming": "「竹」的輔助字形，右上到左下的短撇，如：升、參、香。"
+      }
+    ]
+  },
+  {
+    "forms": [
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-u2.svg"
+        },
+        "code": "u",
+        "shuo_ming": "「山」的輔助字形，豎末右彎及上鉤，如：光、元、己。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-u5.svg"
+        },
+        "code": "u",
+        "shuo_ming": "「山」的輔助字形，本作「[[Image:cjrm-u2.svg|18px]]」，置左時常轉為屈鉤筆形，但仍屬「山」不屬「女」，如：輝（字首原作「光」）、頑（字首原作「元」）、改（字首原作「己」）。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-v7.svg"
+        },
+        "code": "v",
+        "shuo_ming": "「女」的輔助字形，這些「[[Image:cjrm-v7.svg|18px]]」形必須作鉤，不可寫作「[[Image:cjrm-u2.svg|18px]]」，如：氏、民、卬、仰、昂。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-v6.svg"
+        },
+        "code": "v",
+        "shuo_ming": "「女」的輔助字形，豎末右彎但無上鉤，如：亡、曷、甚。"
+      }
+    ]
+  },
+  {
+    "forms": [
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-o12.svg"
+        },
+        "code": "o",
+        "shuo_ming": "「人」的輔助字形，本作「[[Image:cjrm-o11.svg|18px]]」，置左時常轉為長點「[[Image:cjrm-o12.svg|18px]]」，但仍屬「人」不屬「戈」，如：規（字首原作「夫」）、鴩（字首原作「失」）、艱（字首原作「[[Image:cjwm-tlqo.svg|18px]]」）。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-i1.svg"
+        },
+        "code": "i",
+        "shuo_ming": "「戈」的輔助字形，無論置左置右，均作點，不能作捺，如：主、冰、永、梁、丸，這些字的「[[Image:cjrm-i1.svg|18px]]」筆不可寫作「[[Image:cjrm-o11.svg|18px]]」。"
+      }
+    ]
+  },
+  {
+    "forms": [
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-o0.svg"
+        },
+        "code": "o",
+        "shuo_ming": "「人」的輔助字形，右作捺，如：从、臥、认。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-o2.svg"
+        },
+        "code": "o",
+        "shuo_ming": "「人」的輔助字形，本作「[[Image:cjrm-o0.svg|18px]]」，結字避讓時末捺常轉為長點，但仍屬「人」，如：坐、巫、以。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjwm-hi.svg"
+        },
+        "code": "hi",
+        "shuo_ming": "「竹戈」（[[Image:cjrm-h2.svg|18px]][[Image:cjrm-i1.svg|18px]]）組合，左撇與上方橫畫相接，右作點。如：戍、幾。"
+      }
+    ]
+  },
+  {
+    "forms": [
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-s3.svg"
+        },
+        "code": "s",
+        "shuo_ming": "「尸」的輔助字形，如：刀、力、司。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-p15.svg"
+        },
+        "code": "p",
+        "shuo_ming": "「心」的輔助字形，首筆爲撇，如：勿、包、匈。"
+      }
+    ]
+  },
+  {
+    "forms": [
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-s5.svg"
+        },
+        "code": "s",
+        "shuo_ming": "「尸」的輔助字形，豕取碼「一尸竹人」（[[Image:cjrm-m3.svg|18px]][[Image:cjrm-s5.svg|18px]][[Image:cjrm-h2.svg|18px]][[Image:cjrm-o9.svg|18px]]），因爲頭碼「一」（字根「[[Image:cjrm-m3.svg|18px]]」）已包括撇。同理，豸爲「月尸竹竹」（[[Image:cjrm-b15.svg|18px]][[Image:cjrm-s5.svg|18px]][[Image:cjrm-h2.svg|18px]][[Image:cjrm-h2.svg|18px]]）、犭爲「大尸竹」（[[Image:cjrm-k6.svg|18px]][[Image:cjrm-s5.svg|18px]][[Image:cjrm-h2.svg|18px]]）。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-p16.svg"
+        },
+        "code": "p",
+        "shuo_ming": "「心」的輔助字形，[[Image:cjwm-tpho.svg|30px]]取碼「廿心竹人」（[[Image:cjrm-t13.svg|18px]][[Image:cjrm-p16.svg|18px]][[Image:cjrm-h2.svg|18px]][[Image:cjrm-o9.svg|18px]]），遂、隊的字身取碼「廿心人」（[[Image:cjrm-t13.svg|18px]][[Image:cjrm-p16.svg|18px]][[Image:cjrm-o9.svg|18px]]），因爲頭碼的「廿」（字根「[[Image:cjrm-t13.svg|18px]]」）不包括撇。"
+      }
+    ]
+  },
+  {
+    "forms": [
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-v2.svg"
+        },
+        "code": "v",
+        "shuo_ming": "「女」的輔助字形，是一連筆，如：巡、邕、粼。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-o9.svg"
+        },
+        "code": "o",
+        "shuo_ming": "「人」的輔助字形，是兩筆，末筆爲捺，常用於「豕」形尾碼，如：家、蕤、隊。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-o10.svg"
+        },
+        "code": "o",
+        "shuo_ming": "「人」的輔助字形，是兩筆，與前者極似，末筆爲點，如：飞、飛、兆。"
+      }
+    ]
+  },
+  {
+    "forms": [
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-y6.svg"
+        },
+        "code": "y",
+        "shuo_ming": "「卜」的輔助字形，爲二長點，多用於字尾，如：冬、於、斗。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjwm-im.svg"
+        },
+        "code": "im",
+        "shuo_ming": "「戈一」（[[Image:cjrm-i1.svg|18px]][[Image:cjrm-m6.svg|18px]]）組合，爲點提，多用於左方的「冫」偏旁，如：冷、冽、凍。也用於如：羽、弱、習等字。"
+      }
+    ]
+  },
+  {
+    "forms": [
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-l6.svg"
+        },
+        "code": "l",
+        "shuo_ming": "「中」的輔助字形，是「衣」偏旁的字典部首變形，末部有兩點，如：補、裇、衫。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjwm-inf.svg"
+        },
+        "code": "inf",
+        "shuo_ming": "「戈弓火」（[[Image:cjrm-i4.svg|18px]][[Image:cjrm-n2.svg|18px]][[Image:cjrm-f8.svg|18px]]）組合，是「示」偏旁的字典部首變形，末部只有一點，如：禮、福、祿。作字首或次字首時，取頭尾碼「戈火」。"
+      }
+    ]
+  },
+  {
+    "forms": [
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-n4.svg"
+        },
+        "code": "n",
+        "shuo_ming": "「弓」的輔助字形，通常位於整個字或整個部份的上方或左上方，如：陷、危、象。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-p15.svg"
+        },
+        "code": "p",
+        "shuo_ming": "「心」的輔助字形，在「[[Image:cjrm-s4.svg|18px]]」內半包着另一些筆畫或字塊，如：包、勿、匃。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjwm-hs.svg"
+        },
+        "code": "hs",
+        "shuo_ming": "「竹尸」（[[Image:cjrm-h2.svg|18px]][[Image:cjrm-s4.svg|18px]]）組合，通常位於整個字或整個部份的左下方，如：別、成、盛。"
+      }
+    ]
+  },
+  {
+    "forms": [
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-p17.svg"
+        },
+        "code": "p",
+        "shuo_ming": "「心」的輔助字形，兩筆，首筆爲撇，然後作「[[Image:cjrm-s4.svg|18px]]」，如：鸟、乌、枭的第一及第二筆。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjwm-vs.svg"
+        },
+        "code": "vs",
+        "shuo_ming": "「女尸」（[[Image:cjrm-v5.svg|18px]][[Image:cjrm-s4.svg|18px]]）組合，通常位於整個字或整個部份的下方，如：丐、丂，還有乌第三筆等。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjwm-ys.svg"
+        },
+        "code": "ys",
+        "shuo_ming": "「卜尸」（[[Image:cjrm-y1.svg|18px]][[Image:cjrm-s4.svg|18px]]）組合，通常位於整個字或整個部份的下方，如：与、舃、写。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjwm-ys2.svg"
+        },
+        "code": "ys",
+        "shuo_ming": "「卜尸」（[[Image:cjrm-y0.svg|18px]][[Image:cjrm-s4.svg|18px]]）組合，通常位於整個字或整個部份的下方，如：鸟、枭、袅的第三及第四筆。"
+      }
+    ]
+  },
+  {
+    "forms": [
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-t10.svg"
+        },
+        "code": "t",
+        "shuo_ming": "「廿」的輔助字形，左方是「[[Image:cjrm-v5.svg|18px]]」，右方是「[[Image:cjwm-lm.svg|18px]]」，如：聯、關。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjwm-llc.svg"
+        },
+        "code": "llc",
+        "shuo_ming": "「中中金」（[[Image:cjrm-l1.svg|18px]][[Image:cjrm-l1.svg|18px]][[Image:cjrm-c2.svg|18px]]）組合。「[[Image:cjwm-llcb.svg|18px]]」取碼「中中金月」，用作字首或次字首時，取頭尾碼「中月」，如[[Image:cjwm-lbmmo.svg|30px|𫎇（U+2B387)]]是「中月一一人」，[[Image:cjwm-albo.svg|30px|𣋡（U+232E1)]]是「日中月人」。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjwm-tm.svg"
+        },
+        "code": "tm",
+        "shuo_ming": "「廿一」（[[Image:cjrm-t10.svg|18px]][[Image:cjrm-m0.svg|18px]]）組合，如：虛、噓、虡。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "Cjwm-tc.svg"
+        },
+        "code": "tc",
+        "shuo_ming": "「廿金」（[[Image:cjrm-t12.svg|18px]][[Image:cjrm-c2.svg|18px]]）組合，如：虚、嘘、並、亚、壶。"
+      }
+    ]
+  },
+  {
+    "forms": [
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjwm-ok.svg"
+        },
+        "code": "ok",
+        "shuo_ming": "「人大」（[[Image:cjrm-o6.svg|18px]][[Image:cjrm-k4.svg|18px]]）組合，共四畫，用於部首屬「攵」的字，多爲在右的偏旁，如：收、故、務。或用於「攸」的變形，如：條、修。用在下方的例子有：變。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjwm-he.svg"
+        },
+        "code": "he",
+        "shuo_ming": "「竹水」（[[Image:cjrm-h2.svg|18px]][[Image:cjrm-e4.svg|18px]]）組合，共三畫，多爲在上、在左，如：夆、冬、处。有些字源上從「攵」的簡化字或俗筆字也改從此，如：务、条。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjwm-he2.svg"
+        },
+        "code": "he",
+        "shuo_ming": "「竹水」（[[Image:cjrm-h2.svg|18px]][[Image:cjrm-e4.svg|18px]]）組合，共三畫，台灣標準獨有，是由前項分化出來的形體，多在下，如：夏、愛、夔。但「變」寫作「攵」，屬「人大」組合。"
+      }
+    ]
+  },
+  {
+    "forms": [
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjwm-jb.svg"
+        },
+        "code": "jb",
+        "shuo_ming": "「十月」（[[Image:cjrm-j0.svg|18px]][[Image:cjrm-b7.svg|18px]]）組合，四筆，讀「（注音）ㄈㄨˊ，（漢拼）fú，（粵音）忽」，如：肺、沛、芾。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjwm-ylb.svg"
+        },
+        "code": "ylb",
+        "shuo_ming": "「卜中月」（[[Image:cjrm-y3.svg|18px]][[Image:cjrm-l1.svg|18px]][[Image:cjrm-b7.svg|18px]]）組合，五筆，讀「（注音）ㄕˋ，（漢拼）shì，（粵音）時以切」，如：鈰、柿、鬧。"
+      }
+    ]
+  },
+  {
+    "forms": [
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-k5.svg"
+        },
+        "code": "k",
+        "shuo_ming": "「大」的輔助字形，末尾無鉤，如：肴、駁、稀。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjwm-ks.svg"
+        },
+        "code": "ks",
+        "shuo_ming": "「大尸」（[[Image:cjrm-k6.svg|18px]][[Image:cjrm-s5.svg|18px]]）組合，如犭是「大尸竹」。由於「犭」部件通常用作字首或次字首，取頭尾碼「大竹」，因此有人誤會「[[Image:cjwm-ks.svg|18px]]」是「大」的輔助字形。"
+      }
+    ]
+  },
+  {
+    "forms": [
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-y3.svg"
+        },
+        "code": "y",
+        "shuo_ming": "「卜」的輔助字形，首筆爲點，如：丹、舟、母。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-y2.svg"
+        },
+        "code": "y",
+        "shuo_ming": "「卜」的輔助字形，首筆爲直點（不是豎），楷書裏也寫作側點，通常位於整個字或整個部份的上方，如：文、位、齊。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjwm-lm2.svg"
+        },
+        "code": "lm",
+        "shuo_ming": "「中一」（[[Image:cjrm-l1.svg|18px]][[Image:cjrm-m0.svg|18px]]）組合，首筆爲略長的豎，不可寫作點，如：円、止、卫。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-y4.svg"
+        },
+        "code": "y",
+        "shuo_ming": "「卜」的輔助字形，首筆爲橫點，楷書裏也寫作側點，通常位於整個字或整個部份的上方，如：言、音、帝。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjwm-mm.svg"
+        },
+        "code": "mm",
+        "shuo_ming": "「一一」組合，首筆爲略長的橫，不可寫作點，如：行、雲、些。"
+      }
+    ]
+  },
+  {
+    "forms": [
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-h4.svg"
+        },
+        "code": "h",
+        "shuo_ming": "「竹」的輔助字形。亦可寫作撇，尤其明體，楷書有時變形作「左點」，如：步的第六筆、賓的第六筆、涉的第九筆。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-i1.svg"
+        },
+        "code": "i",
+        "shuo_ming": "「戈」的輔助字形，不可寫作撇，如：刃、氷、冰。"
+      }
+    ]
+  },
+  {
+    "forms": [
+      {
+        "shape": {
+          "type": "text",
+          "text": "巳"
+        },
+        "code": "ru",
+        "shuo_ming": "「口山」（[[Image:cjrm-r0.svg|18px]][[Image:cjrm-u2.svg|18px]]）組合，如：汜、包、起。"
+      },
+      {
+        "shape": {
+          "type": "text",
+          "text": "已"
+        },
+        "code": "su",
+        "shuo_ming": "「尸山」（[[Image:cjrm-s2.svg|18px]][[Image:cjrm-u2.svg|18px]]）組合。"
+      },
+      {
+        "shape": {
+          "type": "text",
+          "text": "己"
+        },
+        "code": "su",
+        "shuo_ming": "「尸山」（[[Image:cjrm-s2.svg|18px]][[Image:cjrm-u2.svg|18px]]）組合，如：妃、改、忌。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjwm-su.svg"
+        },
+        "code": "su",
+        "shuo_ming": "「尸山」（[[Image:cjrm-s4.svg|18px]][[Image:cjrm-u2.svg|18px]]）組合，如：氾、卷、危。"
+      }
+    ]
+  },
+  {
+    "forms": [
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-c1.svg"
+        },
+        "code": "c",
+        "shuo_ming": "「金」的輔助字形，如：鏡、銅、銀。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "Cjwm-omp.svg"
+        },
+        "code": "omp",
+        "shuo_ming": "「人一心」（[[Image:cjrm-o6.svg|18px]][[Image:cjrm-m0.svg|18px]][[Image:cjrm-p12.svg|18px]]）組合，非輔助字形。作字首或次字首，取頭尾碼「人心」，如：镜、铜、银。"
+      }
+    ]
+  },
+  {
+    "forms": [
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjrm-i3.svg"
+        },
+        "code": "i",
+        "shuo_ming": "「戈」的輔助字形，如：台、去、云。"
+      },
+      {
+        "shape": {
+          "type": "image",
+          "file": "cjwm-ni.svg"
+        },
+        "code": "ni",
+        "shuo_ming": "「弓戈」（[[Image:cjrm-n2.svg|18px]][[Image:cjrm-i1.svg|18px]]）組合，與上方形狀相反，如：予、令、甬。"
+      }
+    ]
+  }
+]

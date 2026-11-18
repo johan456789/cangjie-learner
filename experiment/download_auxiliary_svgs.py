@@ -7,8 +7,8 @@
 # ]
 # ///
 """
-Download all SVGs referenced in experiment/auxiliary_forms.json using the MediaWiki API
-and save them to experiment/輔助字形.
+Download all SVGs referenced in experiment/auxiliary_forms.json and
+experiment/similar_forms.json using the MediaWiki API and save them to experiment/輔助字形.
 
 The JSON stores wikitext-style links like [[Image:cjrm-a0.svg|30px|...]]. We parse
 wikilinks with wikitextparser to extract file names, query API for direct URLs, and download.
@@ -18,6 +18,7 @@ import concurrent.futures
 import json
 import os
 import sys
+import time
 from typing import Dict, List, Optional, Set, Tuple, Union
 
 import requests
@@ -26,7 +27,9 @@ import wikitextparser as wtp
 API_URL = "https://zh.wikibooks.org/w/api.php"
 WORKDIR = os.path.dirname(__file__)
 JSON_PATH = os.path.join(WORKDIR, "auxiliary_forms.json")
+SIMILAR_FORMS_JSON_PATH = os.path.join(WORKDIR, "similar_forms.json")
 OUTPUT_DIR = os.path.join(WORKDIR, "輔助字形")
+MAX_ATTEMPTS = 5
 
 FILE_NAMESPACES = {"file", "image", "檔案", "文件", "圖像", "圖片"}
 
@@ -98,6 +101,31 @@ def extract_filenames_from_json(data: Dict[str, object]) -> List[str]:
     return normalized
 
 
+def extract_filenames_from_similar_forms(groups: List[dict]) -> List[str]:
+    """Collect shape images and inline images of the 相近字形辨析 groups."""
+    filenames: List[str] = []
+    for group in groups or []:
+        for form in group.get("forms", []) or []:
+            shape = form.get("shape") or {}
+            if shape.get("file"):
+                filenames.append(shape["file"].strip())
+            filenames.extend(extract_svgs_from_wikitext(form.get("shuo_ming", "") or ""))
+    return filenames
+
+
+def get_with_retry(session, url: str, **kwargs) -> requests.Response:
+    """GET that waits out HTTP 429 (rate limit) responses per Retry-After."""
+    for attempt in range(MAX_ATTEMPTS):
+        resp = session.get(url, headers=HEADERS, **kwargs)
+        if resp.status_code != 429 or attempt == MAX_ATTEMPTS - 1:
+            break
+        retry_after = resp.headers.get("Retry-After", "")
+        resp.close()
+        time.sleep(int(retry_after) + 1 if retry_after.isdigit() else 30)
+    resp.raise_for_status()
+    return resp
+
+
 def unique_preserving_order(names: List[str]) -> List[str]:
     seen: Set[str] = set()
     result: List[str] = []
@@ -131,8 +159,7 @@ def query_file_urls(batch: List[str]) -> Dict[str, Optional[str]]:
         "iiprop": "url",
     }
     try:
-        resp = requests.get(API_URL, params=params, headers=HEADERS, timeout=30)
-        resp.raise_for_status()
+        resp = get_with_retry(requests, API_URL, params=params, timeout=30)
     except Exception:
         return {name: None for name in batch}
     data = resp.json()
@@ -168,8 +195,7 @@ def download_file(session: requests.Session, name: str, url: str) -> Tuple[str, 
     if os.path.exists(out_path) and os.path.getsize(out_path) > 0:
         return (name, True, None)
     try:
-        with session.get(url, headers=HEADERS, timeout=60, stream=True) as r:
-            r.raise_for_status()
+        with get_with_retry(session, url, timeout=60, stream=True) as r:
             os.makedirs(os.path.dirname(out_path), exist_ok=True)
             with open(out_path, "wb") as f:
                 for chunk in r.iter_content(chunk_size=65536):
@@ -191,13 +217,21 @@ def main(argv: List[str]) -> int:
         return 1
 
     names_all = extract_filenames_from_json(data)
+    try:
+        with open(SIMILAR_FORMS_JSON_PATH, "r", encoding="utf-8") as f:
+            names_all.extend(extract_filenames_from_similar_forms(json.load(f)))
+    except FileNotFoundError:
+        print("No similar_forms.json; skipping 相近字形辨析 images", file=sys.stderr)
     names_unique = unique_preserving_order(names_all)
+    # Only ask the API about files that are not on disk yet
+    existing = {name.lower() for name in os.listdir(OUTPUT_DIR)}
+    names_missing = [n for n in names_unique if n.lower() not in existing]
 
     # Query in batches of 50
     batch_size = 50
     url_map: Dict[str, Optional[str]] = {}
-    for i in range(0, len(names_unique), batch_size):
-        batch = names_unique[i:i+batch_size]
+    for i in range(0, len(names_missing), batch_size):
+        batch = names_missing[i:i+batch_size]
         partial = query_file_urls(batch)
         url_map.update(partial)
 
@@ -228,7 +262,10 @@ def main(argv: List[str]) -> int:
                 fail += 1
                 print(f"Failed: {name}: {err}", file=sys.stderr)
 
-    print(f"Discovered {len(names_unique)} unique SVG references.")
+    print(
+        f"Discovered {len(names_unique)} unique SVG references "
+        f"({len(names_missing)} not downloaded yet)."
+    )
     print(f"Downloaded {ok} files to {OUTPUT_DIR}.")
     if missing:
         print(f"Missing (no URL): {len(missing)}")
